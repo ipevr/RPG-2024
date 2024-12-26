@@ -1,21 +1,24 @@
 ﻿using System;
+using RPG.Core;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.AI;
 
 namespace RPG.Saving
 {
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour
     {
-        [SerializeField] string uniqueIdentifier = "";
+        [SerializeField] private string uniqueIdentifier = "";
 
+#if UNITY_EDITOR
         private void Update()
         {
             if (Application.isPlaying || IsInPrefabMode()) return;
 
             SetUuidInScene();
         }
+#endif
 
         public string GetUniqueIdentifier()
         {
@@ -24,13 +27,16 @@ namespace RPG.Saving
 
         public object CaptureState()
         {
-            Debug.Log($"Capturing state for {GetUniqueIdentifier()}");
-            return null;
+            return new SerializableVector3(transform.position);
         }
 
         public void RestoreState(object state)
         {
-            Debug.Log($"Restoring state for {GetUniqueIdentifier()}");
+            if (state is not SerializableVector3 position) return;
+            GetComponent<ActionScheduler>().CancelCurrentAction();
+            GetComponent<NavMeshAgent>().enabled = false;
+            transform.position = position.ToVector3();
+            GetComponent<NavMeshAgent>().enabled = true;
         }
 
         private void SetUuidInScene()
@@ -38,7 +44,7 @@ namespace RPG.Saving
             var serializedObject = new SerializedObject(this);
             var property = serializedObject.FindProperty("uniqueIdentifier");
             if (!string.IsNullOrEmpty(property.stringValue)) return;
-            
+
             property.stringValue = Guid.NewGuid().ToString();
             serializedObject.ApplyModifiedProperties();
         }

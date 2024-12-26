@@ -12,25 +12,34 @@ namespace RPG.Saving
     {
         public void Save(string saveFile)
         {
+            SaveFile(saveFile, CaptureState());
+        }
+
+        public void Load(string saveFile)
+        {
+            RestoreState(LoadFile(saveFile));
+        }
+
+        private void SaveFile(string saveFile, object state)
+        {
             var path = GetPathFromSaveFile(saveFile);
             Debug.Log($"Saving to {path}");
             using var stream = File.Open(path, FileMode.Create);
             
             var formatter = new BinaryFormatter();
-            formatter.Serialize(stream, CaptureState());
+            formatter.Serialize(stream, state);
         }
 
-        public void Load(string saveFile)
+        private Dictionary<string, object> LoadFile(string saveFile)
         {
             var path = GetPathFromSaveFile(saveFile);
             using var stream = File.Open(path, FileMode.Open);
             
             var formatter = new BinaryFormatter();
-            var state = formatter.Deserialize(stream);
-            RestoreState(state);
+            return formatter.Deserialize(stream) as Dictionary<string, object>;
         }
 
-        private object CaptureState()
+        private Dictionary<string, object> CaptureState()
         {
             var state = new Dictionary<string, object>();
             var saveableEntities = FindObjectsByType<SaveableEntity>(FindObjectsSortMode.None);
@@ -41,13 +50,11 @@ namespace RPG.Saving
             return state;
         }
 
-        private void RestoreState(object state)
+        private void RestoreState(Dictionary<string, object> state)
         {
-            if (state is not Dictionary<string, object> stateDict) return;
-            
             foreach (var saveable in FindObjectsByType<SaveableEntity>(FindObjectsSortMode.None))
             {
-                saveable.RestoreState(stateDict[saveable.GetUniqueIdentifier()]);
+                saveable.RestoreState(state[saveable.GetUniqueIdentifier()]);
             }
         }
 
