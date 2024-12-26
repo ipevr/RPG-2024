@@ -8,10 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      propertyPath: healthPoints
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1014046337056415576, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
+    - target: {fileID: 3869725707801448184, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      propertyPath: maxSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224965348118223088, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      propertyPath: m_Speed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -92,6 +104,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
+  suspicionTime: 2
+  waypointTolerance: 1
+  waypointDwellTime: 2
+  patrolPath: {fileID: 0}
+  patrolSpeedFraction: 0.5
 --- !u!114 &2948169227195512928
 MonoBehaviour:
   m_ObjectHideFlags: 0

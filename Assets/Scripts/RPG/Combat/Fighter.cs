@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using RPG.Core;
 using RPG.Movement;
-using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
@@ -34,7 +33,7 @@ namespace RPG.Combat
             }
         }
 
-        public bool CanAttack(CombatTarget combatTarget)
+        public bool CanAttack(GameObject combatTarget)
         {
             if (!combatTarget) return false;
             
@@ -42,7 +41,7 @@ namespace RPG.Combat
             return targetToTest && !targetToTest.IsDead;
         }
 
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget.GetComponent<Health>();
@@ -52,6 +51,7 @@ namespace RPG.Combat
         {
             target = null;
             StopAttack();
+            GetComponent<Mover>().Cancel();
         }
 
         private void AttackBehaviour()
@@ -80,7 +80,7 @@ namespace RPG.Combat
 
         private void MoveToTarget()
         {
-            GetComponent<Mover>().MoveTo(target.transform.position);
+            GetComponent<Mover>().MoveTo(target.transform.position, 1f);
         }
 
         private bool IsInRange()

@@ -13,6 +13,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -86,3 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906cb28128374d3d8e9e3a56435c4902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoredLayers:
+    serializedVersion: 2
+    m_Bits: 12
+  normalSpeedFraction: 1

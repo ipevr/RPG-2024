@@ -11,11 +11,15 @@ namespace RPG.Core
             if (currentAction == action) return;
             if (currentAction != null)
             {
-                Debug.Log($"Stopping action: {currentAction}");
                 currentAction.Cancel();
             }
 
             currentAction = action;
+        }
+
+        public void CancelCurrentAction()
+        {
+            StartAction(null);
         }
 
     }
