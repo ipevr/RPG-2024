@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Core;
@@ -83,17 +84,16 @@ namespace RPG.Movement
             navMeshAgent.isStopped = true;
         }
 
-        public object CaptureState()
+        public JToken CaptureAsJToken()
         {
-            return new SerializableVector3(transform.position);
+            return transform.position.ToToken();
         }
 
-        public void RestoreState(object state)
+        public void RestoreFromJToken(JToken state)
         {
-            if (state is not SerializableVector3 position) return;
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
-            transform.position = position.ToVector3();
+            transform.position = state.ToVector3();
             GetComponent<NavMeshAgent>().enabled = true;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -27,26 +28,30 @@ namespace RPG.Saving
             return uniqueIdentifier;
         }
 
-        public object CaptureState()
+        public JToken CaptureAsJToken()
         {
-            var state = new Dictionary<string, object>();
+            var state = new JObject();
+            IDictionary<string, JToken> stateDict = state;
             foreach (var saveable in GetComponents<ISaveable>())
             {
-                state[saveable.GetType().ToString()] = saveable.CaptureState();
+                var token = saveable.CaptureAsJToken();
+                var component = saveable.GetType().ToString();
+                stateDict[component] = token;
             }
 
             return state;
         }
 
-        public void RestoreState(object state)
+        public void RestoreFromJToken(JToken token)
         {
-            var stateDict = state as Dictionary<string, object>;
+            var state = token.ToObject<JObject>();
+            IDictionary<string, JToken> stateDict = state;
             foreach (var saveable in GetComponents<ISaveable>())
             {
-                var typeString = saveable.GetType().ToString();
-                if (stateDict != null && stateDict.TryGetValue(typeString, out var value))
+                var component = saveable.GetType().ToString();
+                if (state != null && stateDict.TryGetValue(component, out var value))
                 {
-                    saveable.RestoreState(value);
+                    saveable.RestoreFromJToken(value);
                 }
             }
         }
@@ -68,6 +73,7 @@ namespace RPG.Saving
         private bool IsUnique(string candidate)
         {
             if (!GlobalLookup.ContainsKey(candidate)) return true;
+            
             if (GlobalLookup[candidate] == this) return true;
 
             if (GlobalLookup[candidate] == null)

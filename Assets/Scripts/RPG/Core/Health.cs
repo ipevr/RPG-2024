@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json.Linq;
+using UnityEngine;
 using UnityEngine.AI;
 using RPG.Saving;
 
@@ -47,12 +48,12 @@ namespace RPG.Core
 
         #region Interface Implementations
 
-        public object CaptureState()
+        public JToken CaptureAsJToken()
         {
             return healthPoints;
         }
 
-        public void RestoreState(object state)
+        public void RestoreFromJToken(JToken state)
         {
             healthPoints = (float)state;
             if (healthPoints <= 0)

@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json.Linq;
 using RPG.Saving;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -19,12 +20,12 @@ namespace RPG.Cinematics
         
         #region Interface Implementatation
 
-        public object CaptureState()
+        public JToken CaptureAsJToken()
         {
             return alreadyTriggered;
         }
 
-        public void RestoreState(object state)
+        public void RestoreFromJToken(JToken state)
         {
             alreadyTriggered = (bool)state;
         }

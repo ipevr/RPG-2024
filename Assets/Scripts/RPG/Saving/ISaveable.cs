@@ -1,8 +1,10 @@
-﻿namespace RPG.Saving
+﻿using Newtonsoft.Json.Linq;
+
+namespace RPG.Saving
 {
     public interface ISaveable
     {
-        object CaptureState();
-        void RestoreState(object state);
+        JToken CaptureAsJToken();
+        void RestoreFromJToken(JToken state);
     }
 }
