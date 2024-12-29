@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using RPG.Saving;
 
 namespace RPG.Core
 {
-    public class Health : MonoBehaviour
+    public class Health : MonoBehaviour, ISaveable
     {
         private static readonly int DieTriggerId = Animator.StringToHash("die");
+        private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
         
         [SerializeField] private float healthPoints = 100f;
 
@@ -17,20 +19,48 @@ namespace RPG.Core
             
             healthPoints = Mathf.Max(healthPoints - amount, 0);
 
-            if (healthPoints == 0)
+            if (healthPoints <= 0)
             {
-                Die();
+                DieNormal();
             }
             
-            Debug.Log(healthPoints);
+            Debug.Log($"Health of {gameObject.name}: {healthPoints}");
         }
 
-        private void Die()
+        private void Die(int dieTriggerId)
         {
             IsDead = true;
-            GetComponent<Animator>().SetTrigger(DieTriggerId);
+            GetComponent<Animator>().SetTrigger(dieTriggerId);
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
         }
+
+        private void DieNormal()
+        {
+            Die(DieTriggerId);
+        }
+
+        private void DieFast()
+        {
+            Die(DieFastTriggerId);
+        }
+
+        #region Interface Implementations
+
+        public object CaptureState()
+        {
+            return healthPoints;
+        }
+
+        public void RestoreState(object state)
+        {
+            healthPoints = (float)state;
+            if (healthPoints <= 0)
+            {
+                DieFast();
+            }
+        }
+
+        #endregion
     }
 }

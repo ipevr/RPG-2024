@@ -1,14 +1,16 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using RPG.Saving;
 
-namespace RPG.Saving
+namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
         [SerializeField] private InputAction saveAction;
         [SerializeField] private InputAction loadAction;
         [SerializeField] private string saveFileName = "save";
+        [SerializeField] private float fadeTime = 1f;
         
         private SavingSystem savingSystem;
 
@@ -29,6 +31,16 @@ namespace RPG.Saving
             loadAction.Disable();
         }
 
+        private IEnumerator Start()
+        {
+            var fader = FindFirstObjectByType<Fader>();
+            fader.FadeOutImmediate();
+            
+            yield return savingSystem.LoadLastScene(saveFileName);
+
+            yield return fader.FadeIn(fadeTime);
+        }
+
         private void Update()
         {
             HandleSaveAction();
@@ -36,11 +48,21 @@ namespace RPG.Saving
             HandleLoadAction();
         }
 
+        public void Load()
+        {
+            savingSystem.Load(saveFileName);
+        }
+
+        public void Save()
+        {
+            savingSystem.Save(saveFileName);
+        }
+
         private void HandleLoadAction()
         {
             if (loadAction.triggered)
             {
-                savingSystem.Load(saveFileName);
+                Load();
             }
         }
 
@@ -48,8 +70,9 @@ namespace RPG.Saving
         {
             if (saveAction.triggered)
             {
-                savingSystem.Save(saveFileName);
+                Save();
             }
         }
+
     }
 }

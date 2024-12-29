@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Linq;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -21,7 +19,7 @@ namespace RPG.SceneManagement
         [SerializeField] private float fadeOutTime = 1f;
         [SerializeField] private float fadeInTime = 2f;
         [SerializeField] private float fadeWaitTime = .5f;
-
+        
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
@@ -40,12 +38,20 @@ namespace RPG.SceneManagement
             DontDestroyOnLoad(gameObject);
 
             var fader = FindFirstObjectByType<Fader>();
-            
-            yield return StartCoroutine(fader.FadeOut(fadeOutTime));
-            yield return SceneManager.LoadSceneAsync(targetSceneIndex);
+            var savingWrapper = FindFirstObjectByType<SavingWrapper>();
 
+            yield return StartCoroutine(fader.FadeOut(fadeOutTime));
+            
+            UpdatePlayer(this);
+
+            savingWrapper.Save();
+            yield return SceneManager.LoadSceneAsync(targetSceneIndex);
+            savingWrapper.Load();
+            
             var targetPortal = GetTargetPortal();
             UpdatePlayer(targetPortal);
+
+            savingWrapper.Save();
             
             yield return new WaitForSeconds(fadeWaitTime);
             yield return StartCoroutine(fader.FadeIn(fadeInTime));
@@ -70,11 +76,11 @@ namespace RPG.SceneManagement
 
         private void UpdatePlayer(Portal portal)
         {
-            if (!portal) return;
-
             var player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<NavMeshAgent>().Warp(portal.playerSpawnPoint.position);
+            player.GetComponent<NavMeshAgent>().enabled = false;
+            player.transform.position = portal.playerSpawnPoint.position;
             player.transform.rotation = portal.playerSpawnPoint.rotation;
+            player.GetComponent<NavMeshAgent>().enabled = true;
         }
     }
 }

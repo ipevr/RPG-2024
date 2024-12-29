@@ -1795,6 +1795,7 @@ GameObject:
   - component: {fileID: 597279752}
   - component: {fileID: 597279753}
   - component: {fileID: 597279754}
+  - component: {fileID: 597279755}
   m_Layer: 2
   m_Name: Intro Sequence
   m_TagString: Untagged
@@ -1928,6 +1929,19 @@ MonoBehaviour:
       m_Action: Cancel Cinematic
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &597279755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597279748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43dda008135e44daaf5c8ff43ef2e9db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: a5ee399d-78cd-4f8c-8c65-9b1ca7dfb877
 --- !u!1001 &634102171
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2160,7 +2174,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 340283440844797169, guid: a7a685ecda8e19241814a7ea92f07731, type: 3}
       propertyPath: m_Name
-      value: Portal (1)
+      value: Level 0 Portal B
       objectReference: {fileID: 0}
     - target: {fileID: 3344068491801432869, guid: a7a685ecda8e19241814a7ea92f07731, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3258,7 +3272,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 340283440844797169, guid: a7a685ecda8e19241814a7ea92f07731, type: 3}
       propertyPath: m_Name
-      value: Portal (0)
+      value: Level 0 Portal A
       objectReference: {fileID: 0}
     - target: {fileID: 3344068491801432869, guid: a7a685ecda8e19241814a7ea92f07731, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4880,10 +4894,6 @@ PrefabInstance:
       propertyPath: healthPoints
       value: 200
       objectReference: {fileID: 0}
-    - target: {fileID: 2715627250783088158, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
-      propertyPath: uniqueIdentifier
-      value: 8e3e1103-35f5-4de8-a02c-fc3e9fe40745
-      objectReference: {fileID: 0}
     - target: {fileID: 3521298906917832281, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.7494779
@@ -4926,11 +4936,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5807480526112531223, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
       propertyPath: Composition.DeadZone.Size.x
-      value: 0.04
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5807480526112531223, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
       propertyPath: Composition.DeadZone.Size.y
-      value: 0.04
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7289705059933970701, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
       propertyPath: m_LocalPosition.x
