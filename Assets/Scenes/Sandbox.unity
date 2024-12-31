@@ -454,6 +454,7 @@ Transform:
   - {fileID: 1577269892}
   - {fileID: 219599605}
   - {fileID: 2036129252}
+  - {fileID: 1251581910}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &206899933
@@ -3421,6 +3422,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 471934, guid: dce1a891bc9f6744f8c11b28a4bf775d, type: 3}
   m_PrefabInstance: {fileID: 1419755813}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1251581910 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6623444018831628046, guid: eebae9f2d72a59047b173a1c40d96765, type: 3}
+  m_PrefabInstance: {fileID: 1633275951}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1255430155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4176,7 +4182,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 186234944}
     m_Modifications:
     - target: {fileID: 1976754263494596637, guid: eebae9f2d72a59047b173a1c40d96765, type: 3}
       propertyPath: uniqueIdentifier
@@ -4184,15 +4190,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6623444018831628046, guid: eebae9f2d72a59047b173a1c40d96765, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.051126
+      value: 22.281477
       objectReference: {fileID: 0}
     - target: {fileID: 6623444018831628046, guid: eebae9f2d72a59047b173a1c40d96765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0040278435
+      value: 0.501792
       objectReference: {fileID: 0}
     - target: {fileID: 6623444018831628046, guid: eebae9f2d72a59047b173a1c40d96765, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.24678
+      value: 24.815437
       objectReference: {fileID: 0}
     - target: {fileID: 6623444018831628046, guid: eebae9f2d72a59047b173a1c40d96765, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4224,7 +4230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9030491782939635148, guid: eebae9f2d72a59047b173a1c40d96765, type: 3}
       propertyPath: m_Name
-      value: Archer (1)
+      value: Archer (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5459,4 +5465,3 @@ SceneRoots:
   - {fileID: 1866350945}
   - {fileID: 186234944}
   - {fileID: 382905384}
-  - {fileID: 1633275951}
