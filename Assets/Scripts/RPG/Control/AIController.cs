@@ -120,7 +120,8 @@ namespace RPG.Control
         private bool IsInAttackRangeOfPlayer()
         {
             var playerDistance = Vector3.Distance(player.transform.position, transform.position);
-            return playerDistance < chaseDistance;
+            var weaponRange = fighter.GetEquippedWeapon().Range;
+            return playerDistance < chaseDistance || playerDistance < weaponRange;
         }
 
         // Called by Unity

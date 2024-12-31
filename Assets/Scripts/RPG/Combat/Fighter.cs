@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using RPG.Core;
 using RPG.Movement;
+using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
@@ -9,13 +10,23 @@ namespace RPG.Combat
         private static readonly int AttackTriggerId = Animator.StringToHash("attack");
         private static readonly int StopAttackId = Animator.StringToHash("stopAttack");
 
-        [SerializeField] private float weaponRange = 2f;
         [SerializeField] private float timeBetweenAttacks = 1f;
-        [SerializeField] private float weaponDamage = 10f;
+        [SerializeField] private Transform rightHandTransform = null;
+        [SerializeField] private Transform leftHandTransform = null;
+        [SerializeField] private Weapon defaultWeapon = null;
         
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
+        private Weapon currentWeapon;
+        private GameObject weaponGameObject;
         
+        #region Unity Callbacks
+
+        private void Start()
+        {
+            EquipWeapon(defaultWeapon);
+        }
+
         private void Update()
         {
             timeSinceLastAttack += Time.deltaTime;
@@ -33,6 +44,10 @@ namespace RPG.Combat
             }
         }
 
+        #endregion
+        
+        #region Public Methods
+        
         public bool CanAttack(GameObject combatTarget)
         {
             if (!combatTarget) return false;
@@ -47,13 +62,27 @@ namespace RPG.Combat
             target = combatTarget.GetComponent<Health>();
         }
 
-        public void Cancel()
+        public void EquipWeapon(Weapon weapon)
         {
-            target = null;
-            StopAttack();
-            GetComponent<Mover>().Cancel();
+            currentWeapon = weapon;
+
+            if (weaponGameObject)
+            {
+                Destroy(weaponGameObject);
+            }
+
+            weaponGameObject = currentWeapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
 
+        public Weapon GetEquippedWeapon()
+        {
+            return currentWeapon;
+        }
+        
+        #endregion
+
+        #region Private Methods
+        
         private void AttackBehaviour()
         {
             transform.LookAt(target.transform);
@@ -85,14 +114,44 @@ namespace RPG.Combat
 
         private bool IsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) <= weaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) <= currentWeapon.Range;
         }
 
-        // Animation Event
+        #endregion
+
+        #region Interface Implementations
+        
+        public void Cancel()
+        {
+            target = null;
+            StopAttack();
+            GetComponent<Mover>().Cancel();
+        }
+
+        #endregion
+        
+        #region Animation Events
+        
         private void Hit()
         {
             if (!target) return;
-            target.TakeDamage(weaponDamage);
+            if (currentWeapon.HasProjectile())
+            {
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            }
+            else
+            {
+                target.TakeDamage(currentWeapon.Damage);
+            }
         }
+        
+        private void Shoot()
+        {
+            Hit();
+        }
+
+        #endregion
+
+        
     }
 }
