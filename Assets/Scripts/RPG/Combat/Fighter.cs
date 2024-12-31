@@ -18,7 +18,6 @@ namespace RPG.Combat
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
         private Weapon currentWeapon;
-        private GameObject weaponGameObject;
         
         #region Unity Callbacks
 
@@ -65,20 +64,9 @@ namespace RPG.Combat
         public void EquipWeapon(Weapon weapon)
         {
             currentWeapon = weapon;
-
-            if (weaponGameObject)
-            {
-                Destroy(weaponGameObject);
-            }
-
-            weaponGameObject = currentWeapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
+            currentWeapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
 
-        public Weapon GetEquippedWeapon()
-        {
-            return currentWeapon;
-        }
-        
         #endregion
 
         #region Private Methods

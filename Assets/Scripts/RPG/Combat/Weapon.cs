@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RPG.Core;
+using Utils;
 
 namespace RPG.Combat
 {
@@ -13,21 +14,40 @@ namespace RPG.Combat
         [SerializeField] private float range = 2f;
         [SerializeField] private float damage = 5f;
 
+        private const string weaponTag = "Weapon";
+
         public float Range => range;
 
         public float Damage => damage;
 
-        public GameObject Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
-            if (equippedPrefab == null) return null;
-            var equippedWeapon = Instantiate(equippedPrefab, GetHandTransform(rightHand, leftHand));
+            DestroyOldWeapon(rightHand, leftHand);
+            
+            if (equippedPrefab != null)
+            {
+                var weapon = Instantiate(equippedPrefab, GetHandTransform(rightHand, leftHand));
+                weapon.tag = weaponTag;
+            }
 
             if (animatorOverride != null)
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
 
-            return equippedWeapon;
+        }
+
+        private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
+        {
+            var oldWeapon = rightHand.FindByTag(weaponTag);
+            if (!oldWeapon)
+            {
+                oldWeapon = leftHand.FindByTag(weaponTag);
+            }
+
+            if (!oldWeapon) return;
+            
+            Destroy(oldWeapon.gameObject);
         }
 
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)
