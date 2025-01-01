@@ -11,6 +11,7 @@ namespace RPG.Core
         private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
         
         [SerializeField] private float healthPoints = 100f;
+        [SerializeField] private AudioClip[] deathSounds;
 
         public bool IsDead { get; private set; }
 
@@ -31,6 +32,7 @@ namespace RPG.Core
         private void Die(int dieTriggerId)
         {
             IsDead = true;
+            PlaySound(deathSounds);
             GetComponent<Animator>().SetTrigger(dieTriggerId);
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
@@ -44,6 +46,13 @@ namespace RPG.Core
         private void DieFast()
         {
             Die(DieFastTriggerId);
+        }
+        
+        private AudioClip PlaySound(AudioClip[] clips)
+        {
+            var clipIndex = Random.Range(0, clips.Length);
+            GetComponent<AudioSource>().PlayOneShot(clips[clipIndex]);
+            return clips[clipIndex];
         }
 
         #region Interface Implementations

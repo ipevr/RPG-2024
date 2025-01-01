@@ -14,7 +14,7 @@ namespace RPG.Combat
         [SerializeField] private float range = 2f;
         [SerializeField] private float damage = 5f;
 
-        private const string weaponTag = "Weapon";
+        private const string WeaponTag = "Weapon";
 
         public float Range => range;
 
@@ -27,7 +27,7 @@ namespace RPG.Combat
             if (equippedPrefab != null)
             {
                 var weapon = Instantiate(equippedPrefab, GetHandTransform(rightHand, leftHand));
-                weapon.tag = weaponTag;
+                weapon.tag = WeaponTag;
             }
 
             if (animatorOverride != null)
@@ -39,14 +39,15 @@ namespace RPG.Combat
 
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
         {
-            var oldWeapon = rightHand.FindByTag(weaponTag);
+            var oldWeapon = rightHand.FindByTag(WeaponTag);
             if (!oldWeapon)
             {
-                oldWeapon = leftHand.FindByTag(weaponTag);
+                oldWeapon = leftHand.FindByTag(WeaponTag);
             }
 
             if (!oldWeapon) return;
-            
+
+            oldWeapon.tag = "DESTROYING";
             Destroy(oldWeapon.gameObject);
         }
 
