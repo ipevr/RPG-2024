@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Utils;
 using Random = UnityEngine.Random;
 
 namespace RPG.Combat
@@ -9,7 +10,7 @@ namespace RPG.Combat
 
         private void Start()
         {
-            var clip = hitClips[Random.Range(0, hitClips.Length)];
+            var clip = hitClips.GetRandomClip();
             GetComponent<AudioSource>().PlayOneShot(clip);
 
             var particleEffect = GetComponent<ParticleSystem>(); 

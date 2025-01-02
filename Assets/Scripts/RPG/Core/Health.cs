@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using RPG.Saving;
+using Utils;
 
 namespace RPG.Core
 {
@@ -32,7 +33,7 @@ namespace RPG.Core
         private void Die(int dieTriggerId)
         {
             IsDead = true;
-            PlaySound(deathSounds);
+            GetComponent<AudioSource>().PlayOneShot(deathSounds.GetRandomClip());
             GetComponent<Animator>().SetTrigger(dieTriggerId);
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
@@ -48,13 +49,6 @@ namespace RPG.Core
             Die(DieFastTriggerId);
         }
         
-        private AudioClip PlaySound(AudioClip[] clips)
-        {
-            var clipIndex = Random.Range(0, clips.Length);
-            GetComponent<AudioSource>().PlayOneShot(clips[clipIndex]);
-            return clips[clipIndex];
-        }
-
         #region Interface Implementations
 
         public JToken CaptureAsJToken()

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using RPG.Core;
-using UnityEngine.Serialization;
+using Utils;
 
 namespace RPG.Combat
 {
@@ -12,11 +12,10 @@ namespace RPG.Combat
         [SerializeField] private bool isFollowingTarget = false;
         [SerializeField] private AudioClip[] shootingSounds;
         [SerializeField] private HitEffect hitEffect = null;
+        [SerializeField] private GameObject[] destroyOnHit;
+        [SerializeField] private float lifetimeAfterHit = 2f;
+        [SerializeField] private float maxLifeTime = 10f;
         
-
-        private const float MaxDistance = 100;
-
-        private Vector3 startPosition;
         private Health target;
         private float damage;
 
@@ -24,11 +23,14 @@ namespace RPG.Combat
 
         private void Start()
         {
-            startPosition = transform.position;
             if (shootingSounds.Length <= 0) return;
             
-            var shootClip = GetClip(shootingSounds);
+            transform.LookAt(GetAimLocation());
+
+            var shootClip = shootingSounds.GetRandomClip();
             GetComponent<AudioSource>().PlayOneShot(shootClip);
+            
+            Destroy(gameObject, maxLifeTime);
         }
 
         private void Update()
@@ -39,12 +41,8 @@ namespace RPG.Combat
             {
                 transform.LookAt(GetAimLocation());
             }
+
             transform.Translate(Vector3.forward * (Time.deltaTime * speed));
-            
-            if (IsMaxDistanceExceeded())
-            {
-                Destroy(gameObject);
-            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -52,6 +50,7 @@ namespace RPG.Combat
             if (other.GetComponent<Health>() != target) return;
             if (target.IsDead) return; 
             
+            speed = 0;
             target.TakeDamage(damage);
 
             if (hitEffect)
@@ -59,7 +58,11 @@ namespace RPG.Combat
                 Instantiate(hitEffect.gameObject, transform.position, transform.rotation);
             }
 
-            Destroy(gameObject);
+            foreach (var toDestroy in destroyOnHit)
+            {
+                Destroy(toDestroy);
+            }
+            Destroy(gameObject, lifetimeAfterHit);
         }
 
         #endregion
@@ -70,7 +73,6 @@ namespace RPG.Combat
         {
             target = projectileTarget;
             damage = weaponDamage;
-            transform.LookAt(GetAimLocation());
         }
         
         #endregion
@@ -88,17 +90,6 @@ namespace RPG.Combat
             return target.transform.position + Vector3.up * (capsuleCollider.height * aimLocationFraction);
         }
         
-        private bool IsMaxDistanceExceeded()
-        {
-            return Vector3.Distance(transform.position, startPosition) > MaxDistance;
-        }
-
-        private AudioClip GetClip(AudioClip[] clips)
-        {
-            var clipIndex = Random.Range(0, clips.Length);
-            return clips[clipIndex];
-        }
-
         #endregion
     }
 }
