@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Utils;
-using Random = UnityEngine.Random;
 
 namespace RPG.Combat
 {

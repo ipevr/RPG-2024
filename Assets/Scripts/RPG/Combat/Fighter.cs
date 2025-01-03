@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using UnityEngine;
-using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
-using UnityEngine.Serialization;
+using RPG.Attributes;
+using RPG.Core;
 
 namespace RPG.Combat
 {

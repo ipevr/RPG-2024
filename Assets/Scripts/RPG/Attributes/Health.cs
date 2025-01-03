@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using RPG.Saving;
 using Utils;
+using RPG.Saving;
+using RPG.Stats;
+using RPG.Core;
 
-namespace RPG.Core
+namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
@@ -15,6 +17,11 @@ namespace RPG.Core
         [SerializeField] private AudioClip[] deathSounds;
 
         public bool IsDead { get; private set; }
+
+        private void Start()
+        {
+            healthPoints = GetComponent<BaseStats>().GetHealth();
+        }
 
         public void TakeDamage(float amount)
         {

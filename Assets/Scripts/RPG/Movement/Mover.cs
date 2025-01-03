@@ -1,8 +1,8 @@
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using RPG.Core;
 using RPG.Saving;
+using RPG.Core;
 
 namespace RPG.Movement
 {

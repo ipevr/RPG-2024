@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using RPG.Combat;
 using RPG.Movement;
+using RPG.Attributes;
 using RPG.Core;
-using UnityEngine.Serialization;
 
 namespace RPG.Control
 {
