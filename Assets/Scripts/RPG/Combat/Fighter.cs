@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json.Linq;
+using UnityEngine;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Saving;
 using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         private static readonly int AttackTriggerId = Animator.StringToHash("attack");
         private static readonly int StopAttackId = Animator.StringToHash("stopAttack");
@@ -23,6 +25,8 @@ namespace RPG.Combat
 
         private void Start()
         {
+            if (currentWeapon) return;
+            
             EquipWeapon(defaultWeapon);
         }
 
@@ -116,6 +120,18 @@ namespace RPG.Combat
             GetComponent<Mover>().Cancel();
         }
 
+        public JToken CaptureAsJToken()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreFromJToken(JToken state)
+        {
+            var weaponName = (string)state;
+            var weapon = Resources.Load<Weapon>(weaponName);
+            EquipWeapon(weapon);
+        }
+
         #endregion
         
         #region Animation Events
@@ -140,6 +156,6 @@ namespace RPG.Combat
 
         #endregion
 
-        
+
     }
 }
