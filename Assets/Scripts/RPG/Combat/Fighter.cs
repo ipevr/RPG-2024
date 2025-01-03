@@ -71,6 +71,11 @@ namespace RPG.Combat
             currentWeapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
 
+        public Health GetTarget()
+        {
+            return target;
+        }
+
         #endregion
 
         #region Private Methods
