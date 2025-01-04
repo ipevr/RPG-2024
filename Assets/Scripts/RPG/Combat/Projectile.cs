@@ -17,6 +17,7 @@ namespace RPG.Combat
         [SerializeField] private float maxLifeTime = 10f;
         
         private Health target;
+        private GameObject instigator;
         private float damage;
 
         #region Unity Callbacks
@@ -51,7 +52,7 @@ namespace RPG.Combat
             if (target.IsDead) return; 
             
             speed = 0;
-            target.TakeDamage(damage);
+            target.TakeDamage(instigator, damage);
 
             if (hitEffect)
             {
@@ -69,10 +70,11 @@ namespace RPG.Combat
         
         #region Public Methods
         
-        public void SetTarget(Health projectileTarget, float weaponDamage)
+        public void SetTarget(Health projectileTarget, GameObject projectileInstigator, float weaponDamage)
         {
             target = projectileTarget;
             damage = weaponDamage;
+            instigator = projectileInstigator;
         }
         
         #endregion

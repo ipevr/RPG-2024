@@ -18,12 +18,18 @@ namespace RPG.Attributes
 
         public bool IsDead { get; private set; }
 
+        #region Unity Callbacks
+
         private void Start()
         {
             healthPoints = GetComponent<BaseStats>().GetHealth();
         }
 
-        public void TakeDamage(float amount)
+        #endregion
+        
+        #region Public Methods
+
+        public void TakeDamage(GameObject instigator, float amount)
         {
             if (IsDead) return;
             
@@ -31,7 +37,8 @@ namespace RPG.Attributes
 
             if (healthPoints <= 0)
             {
-                DieNormal();
+                Die(DieTriggerId);
+                GainExperience(instigator);
             }
             
             Debug.Log($"Health of {gameObject.name}: {healthPoints}");
@@ -42,6 +49,10 @@ namespace RPG.Attributes
             return (healthPoints / GetComponent<BaseStats>().GetHealth()) * 100f;
         }
 
+        #endregion
+        
+        #region Private Methods
+
         private void Die(int dieTriggerId)
         {
             IsDead = true;
@@ -51,15 +62,16 @@ namespace RPG.Attributes
             GetComponent<NavMeshAgent>().enabled = false;
         }
 
-        private void DieNormal()
+        private void GainExperience(GameObject instigator)
         {
-            Die(DieTriggerId);
+            var experienceComponent = instigator.GetComponent<Experience>(); 
+            if (!experienceComponent) return;
+            
+            var experienceAmount = GetComponent<BaseStats>().GetExperienceReward();
+            experienceComponent.GainExperience(experienceAmount);
         }
 
-        private void DieFast()
-        {
-            Die(DieFastTriggerId);
-        }
+        #endregion
         
         #region Interface Implementations
 
@@ -73,7 +85,7 @@ namespace RPG.Attributes
             healthPoints = (float)state;
             if (healthPoints <= 0)
             {
-                DieFast();
+                Die(DieFastTriggerId);
             }
         }
 

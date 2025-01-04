@@ -20,6 +20,8 @@ namespace RPG.Combat
 
         public float Damage => damage;
 
+        #region Public Methods
+
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             DestroyOldWeapon(rightHand, leftHand);
@@ -41,6 +43,21 @@ namespace RPG.Combat
             }
         }
 
+        public bool HasProjectile()
+        {
+            return projectile != null;
+        }
+
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
+        {
+            var projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
+            projectileInstance.SetTarget(target, instigator, damage);
+        }
+
+        #endregion
+
+        #region Private Methods
+        
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
         {
             var oldWeapon = rightHand.FindByTag(WeaponTag);
@@ -60,16 +77,6 @@ namespace RPG.Combat
             return isRightHanded ? rightHand : leftHand;
         }
 
-        public bool HasProjectile()
-        {
-            return projectile != null;
-        }
-
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
-        {
-            var projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, damage);
-        }
-
+        #endregion
     }
 }
