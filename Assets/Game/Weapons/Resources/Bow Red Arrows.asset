@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd28030289db4802ab48e65d3a9de0d6, type: 3}
+  m_Name: Bow Red Arrows
+  m_EditorClassIdentifier: 
+  equippedPrefab: {fileID: 5634396543656808730, guid: 3accba2c040110e42a03b986dd15dbd6, type: 3}
+  animatorOverride: {fileID: 22100000, guid: c21283bcca230aa4382e92fccde8cc20, type: 2}
+  projectile: {fileID: 962342907467932999, guid: 49af1b9824d86554e88b568966952ed9, type: 3}
+  isRightHanded: 0
+  range: 10
+  damage: 10
