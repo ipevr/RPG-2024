@@ -9,44 +9,44 @@ namespace RPG.SceneManagement
     {
         [SerializeField] private InputAction saveAction;
         [SerializeField] private InputAction loadAction;
+        [SerializeField] private InputAction deleteAction;
         [SerializeField] private string saveFileName = "save";
         [SerializeField] private float fadeTime = 1f;
         
         private SavingSystem savingSystem;
 
+        #region Unity Callbacks
+
         private void Awake()
         {
             savingSystem = GetComponent<SavingSystem>();
+            StartCoroutine(LoadLastScene());
         }
 
         private void OnEnable()
         {
             saveAction.Enable();
             loadAction.Enable();
+            deleteAction.Enable();
         }
 
         private void OnDisable()
         {
             saveAction.Disable();
             loadAction.Disable();
-        }
-
-        private IEnumerator Start()
-        {
-            var fader = FindFirstObjectByType<Fader>();
-            fader.FadeOutImmediate();
-            
-            yield return savingSystem.LoadLastScene(saveFileName);
-
-            yield return fader.FadeIn(fadeTime);
+            deleteAction.Disable();
         }
 
         private void Update()
         {
             HandleSaveAction();
-
             HandleLoadAction();
+            HandleDeleteAction();
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void Load()
         {
@@ -56,6 +56,25 @@ namespace RPG.SceneManagement
         public void Save()
         {
             savingSystem.Save(saveFileName);
+        }
+
+        public void Delete()
+        {
+            savingSystem.Delete(saveFileName);
+        }
+
+        #endregion
+        
+        #region Private Methods
+
+        private IEnumerator LoadLastScene()
+        {
+            var fader = FindFirstObjectByType<Fader>();
+            fader.FadeOutImmediate();
+            
+            yield return savingSystem.LoadLastScene(saveFileName);
+
+            yield return fader.FadeIn(fadeTime);
         }
 
         private void HandleLoadAction()
@@ -74,5 +93,14 @@ namespace RPG.SceneManagement
             }
         }
 
+        private void HandleDeleteAction()
+        {
+            if (deleteAction.triggered)
+            {
+                Delete();
+            }
+        }
+
+        #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Stats
@@ -6,27 +7,54 @@ namespace RPG.Stats
     [CreateAssetMenu(fileName = "Progression", menuName = "RPG/Stats/New Progression", order = 0)]
     public class Progression : ScriptableObject
     {
-        [SerializeField] private ProgressionCharacterClass[] characterClasses;
+        [SerializeField] private ProgressionCharacter[] characterClasses;
         
         [Serializable]
-        private class ProgressionCharacterClass
+        private class ProgressionCharacter
         {
             public CharacterClass characterClass;
-            public float[] health;
-            public float[] damage;
+            public ProgressionStat[] stats;
+        }
+        
+        [Serializable]
+        private class ProgressionStat
+        {
+            public Stat stat;
+            public float[] levels;
         }
 
-        public float GetHealth(CharacterClass characterClass, int level)
+        private Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
+
+        public float GetStat(Stat stat, CharacterClass characterClass, int level)
         {
-            foreach (var progressionCharacterClass in characterClasses)
+            BuildLookup();
+
+            var levels = lookupTable[characterClass][stat];
+            return levels.Length < level ? levels[^1] : levels[level - 1];
+        }
+
+        public int GetNumberOfLevels(Stat stat, CharacterClass characterClass)
+        {
+            BuildLookup();
+
+            return lookupTable[characterClass][stat].Length;
+        }
+
+        private void BuildLookup()
+        {
+            if (lookupTable != null) return;
+            
+            lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
+            
+            foreach (var progressionCharacter in characterClasses)
             {
-                if (progressionCharacterClass.characterClass.Equals(characterClass))
+                lookupTable.Add(progressionCharacter.characterClass, new Dictionary<Stat, float[]>());
+                
+                foreach (var progressionStat in progressionCharacter.stats)
                 {
-                    return progressionCharacterClass.health[level - 1];
+                    lookupTable[progressionCharacter.characterClass].Add(progressionStat.stat, progressionStat.levels);
                 }
             }
-
-            return -1;
         }
     }
 }

@@ -91,5 +91,22 @@ MonoBehaviour:
       m_Action: Load
       m_Flags: 0
     m_Flags: 0
+  deleteAction:
+    m_Name: Delete
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: eab4f51c-70e9-43e3-a826-79945ee93daa
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e4ccaf78-2cee-4027-aaab-a5b81517eacf
+      m_Path: <Keyboard>/delete
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Delete
+      m_Flags: 0
+    m_Flags: 0
   saveFileName: saveFile
   fadeTime: 0.2

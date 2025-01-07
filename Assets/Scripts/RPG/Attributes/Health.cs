@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils;
@@ -13,16 +14,36 @@ namespace RPG.Attributes
         private static readonly int DieTriggerId = Animator.StringToHash("die");
         private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
         
-        [SerializeField] private float healthPoints = 100f;
         [SerializeField] private AudioClip[] deathSounds;
+
+        private float healthPoints = -1f;
+        private BaseStats baseStats;
 
         public bool IsDead { get; private set; }
 
         #region Unity Callbacks
 
+        private void Awake()
+        {
+            baseStats = GetComponent<BaseStats>();
+        }
+
         private void Start()
         {
-            healthPoints = GetComponent<BaseStats>().GetHealth();
+            if (healthPoints > -1) return;
+            
+            healthPoints = baseStats.GetStat(Stat.Health);
+            Debug.Log($"Health: Setting health points to {healthPoints}.");
+        }
+
+        private void OnEnable()
+        {
+            baseStats.OnLevelUp += HandleLevelUp;
+        }
+
+        private void OnDisable()
+        {
+            baseStats.OnLevelUp -= HandleLevelUp;
         }
 
         #endregion
@@ -35,31 +56,37 @@ namespace RPG.Attributes
             
             healthPoints = Mathf.Max(healthPoints - amount, 0);
 
-            if (healthPoints <= 0)
-            {
-                Die(DieTriggerId);
-                GainExperience(instigator);
-            }
+            if (healthPoints > 0) return;
             
-            Debug.Log($"Health of {gameObject.name}: {healthPoints}");
+            Die(DieTriggerId);
+            GainExperience(instigator);
         }
 
         public float GetPercentage()
         {
-            return (healthPoints / GetComponent<BaseStats>().GetHealth()) * 100f;
+            return (healthPoints / baseStats.GetStat(Stat.Health)) * 100f;
         }
 
         #endregion
         
         #region Private Methods
 
-        private void Die(int dieTriggerId)
+        private void HandleLevelUp()
+        {
+            Debug.Log("Health notified level up");
+            healthPoints = baseStats.GetStat(Stat.Health);
+            Debug.Log($"Setting health to {healthPoints}");
+        }
+
+        private void Die(int dieTriggerId, bool silent = false)
         {
             IsDead = true;
-            GetComponent<AudioSource>().PlayOneShot(deathSounds.GetRandomClip());
             GetComponent<Animator>().SetTrigger(dieTriggerId);
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
+            if (silent) return;
+            
+            GetComponent<AudioSource>().PlayOneShot(deathSounds.GetRandomClip());
         }
 
         private void GainExperience(GameObject instigator)
@@ -67,7 +94,7 @@ namespace RPG.Attributes
             var experienceComponent = instigator.GetComponent<Experience>(); 
             if (!experienceComponent) return;
             
-            var experienceAmount = GetComponent<BaseStats>().GetExperienceReward();
+            var experienceAmount = baseStats.GetStat(Stat.ExperienceReward);
             experienceComponent.GainExperience(experienceAmount);
         }
 
@@ -85,7 +112,7 @@ namespace RPG.Attributes
             healthPoints = (float)state;
             if (healthPoints <= 0)
             {
-                Die(DieFastTriggerId);
+                Die(DieFastTriggerId, true);
             }
         }
 

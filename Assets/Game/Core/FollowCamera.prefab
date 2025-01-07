@@ -181,6 +181,7 @@ GameObject:
   - component: {fileID: 5369334409359411747}
   - component: {fileID: 444510182873554932}
   - component: {fileID: 3082097413620952941}
+  - component: {fileID: 1424482271402252423}
   m_Layer: 0
   m_Name: FollowCamera
   m_TagString: Untagged
@@ -278,3 +279,51 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &1424482271402252423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7137185201077657606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ced326514874703a29d1584f9c4696b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomInAction:
+    m_Name: Zoom In
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b042911d-3223-4b50-a7bb-c7599d970345
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: ec1cdf73-7333-4f68-84e8-0f37933e9978
+      m_Path: <Mouse>/scroll/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Zoom In
+      m_Flags: 0
+    m_Flags: 0
+  zoomOutAction:
+    m_Name: Zoom Out
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3caf6217-905c-437b-aeb6-9cb1bb97779c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: c3a46290-82fc-441e-8815-4b9e3126108a
+      m_Path: <Mouse>/scroll/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Zoom Out
+      m_Flags: 0
+    m_Flags: 0
+  maxZoomIn: 2
+  maxZoomOut: 20

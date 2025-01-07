@@ -44,6 +44,15 @@ namespace RPG.Saving
             RestoreFromToken(state);
         }
 
+        public void Delete(string saveFile)
+        {
+            var path = GetPathFromSaveFile(saveFile);
+            if (!File.Exists(path)) return;
+            
+            Debug.Log($"Deleting save file {path}");
+            File.Delete(path);
+        }
+
         private void SaveFileAsJson(string saveFile, JObject state)
         {
             var path = GetPathFromSaveFile(saveFile);
