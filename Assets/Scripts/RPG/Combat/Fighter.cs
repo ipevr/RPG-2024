@@ -4,6 +4,7 @@ using RPG.Movement;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Core;
+using RPG.Stats;
 
 namespace RPG.Combat
 {
@@ -116,6 +117,23 @@ namespace RPG.Combat
 
         #endregion
 
+        #region Animation Events
+        
+        private void Hit()
+        {
+            if (!target) return;
+            
+            var baseDamage = GetComponent<BaseStats>().GetStat(Stat.BaseDamage);
+            currentWeapon.MakeDamage(rightHandTransform, leftHandTransform, target, gameObject, baseDamage);
+        }
+        
+        private void Shoot()
+        {
+            Hit();
+        }
+
+        #endregion
+
         #region Interface Implementations
         
         public void Cancel()
@@ -139,28 +157,6 @@ namespace RPG.Combat
 
         #endregion
         
-        #region Animation Events
-        
-        private void Hit()
-        {
-            if (!target) return;
-            if (currentWeapon.HasProjectile())
-            {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
-            }
-            else
-            {
-                target.TakeDamage(gameObject, currentWeapon.Damage);
-            }
-        }
-        
-        private void Shoot()
-        {
-            Hit();
-        }
-
-        #endregion
-
 
     }
 }

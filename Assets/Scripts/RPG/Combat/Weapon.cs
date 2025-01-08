@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using Utils;
 using RPG.Attributes;
+using RPG.Stats;
+using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
@@ -12,13 +14,11 @@ namespace RPG.Combat
         [SerializeField] private Projectile projectile = null;
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private float range = 2f;
-        [SerializeField] private float damage = 5f;
+        [SerializeField] private float weaponDamage = 5f;
 
         private const string WeaponTag = "Weapon";
 
         public float Range => range;
-
-        public float Damage => damage;
 
         #region Public Methods
 
@@ -26,38 +26,47 @@ namespace RPG.Combat
         {
             DestroyOldWeapon(rightHand, leftHand);
             
-            if (equippedPrefab != null)
+            if (equippedPrefab)
             {
                 var weapon = Instantiate(equippedPrefab, GetHandTransform(rightHand, leftHand));
                 weapon.tag = WeaponTag;
             }
 
             var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
-            if (animatorOverride != null)
+            if (animatorOverride)
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
-            else if (overrideController != null)
+            else if (overrideController)
             {
                 animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
             }
         }
 
-        public bool HasProjectile()
+        public void MakeDamage(Transform rightHand, Transform leftHand, Health target, GameObject instigator,
+            float baseDamage)
         {
-            return projectile != null;
-        }
-
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
-        {
-            var projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, instigator, damage);
+            var combinedDamage = baseDamage + weaponDamage;
+            if (projectile != null)
+            {
+                LaunchProjectile(rightHand, leftHand, target, instigator, combinedDamage);
+            }
+            else
+            {
+                target.TakeDamage(instigator, combinedDamage);
+            }
         }
 
         #endregion
 
         #region Private Methods
         
+        private void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float combinedDamage)
+        {
+            var projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
+            projectileInstance.SetTarget(target, instigator, combinedDamage);
+        }
+
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
         {
             var oldWeapon = rightHand.FindByTag(WeaponTag);

@@ -7,7 +7,7 @@ namespace RPG.Stats
 {
     public class Experience : MonoBehaviour, ISaveable
     {
-        public Action OnExperienceGained;
+        public event Action OnExperienceGained;
         
         public float ExperiencePoints { get; private set; }
 

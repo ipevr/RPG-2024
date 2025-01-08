@@ -16,7 +16,7 @@ namespace RPG.Stats
         private int currentLevel = 0;
         private Experience experience;
         
-        public Action OnLevelUp;
+        public event Action OnLevelUp;
 
         private void Awake()
         {

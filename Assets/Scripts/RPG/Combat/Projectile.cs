@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Utils;
 using RPG.Attributes;
+using RPG.Stats;
 
 namespace RPG.Combat
 {
@@ -51,6 +52,8 @@ namespace RPG.Combat
             if (other.GetComponent<Health>() != target) return;
             if (target.IsDead) return; 
             
+            Debug.Log($"Projectile hit {other.name}");
+            
             speed = 0;
             target.TakeDamage(instigator, damage);
 
@@ -70,10 +73,10 @@ namespace RPG.Combat
         
         #region Public Methods
         
-        public void SetTarget(Health projectileTarget, GameObject projectileInstigator, float weaponDamage)
+        public void SetTarget(Health projectileTarget, GameObject projectileInstigator, float calculatedDamage)
         {
             target = projectileTarget;
-            damage = weaponDamage;
+            damage = calculatedDamage;
             instigator = projectileInstigator;
         }
         

@@ -17,4 +17,4 @@ MonoBehaviour:
   projectile: {fileID: 962342907467932999, guid: 49af1b9824d86554e88b568966952ed9, type: 3}
   isRightHanded: 0
   range: 10
-  damage: 10
+  damage: 5

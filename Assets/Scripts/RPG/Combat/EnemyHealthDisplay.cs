@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using RPG.Attributes;
+using RPG.Stats;
+using UnityEngine;
 using TMPro;
 
 namespace RPG.Combat
@@ -17,7 +19,14 @@ namespace RPG.Combat
         private void Update()
         {
             var enemyHealth = fighterComponent.GetTarget();
-            healthValue.text = enemyHealth ? $"{enemyHealth.GetPercentage():0.0}%" : "N/A";
+
+            if (enemyHealth)
+            {
+                healthValue.text = $"{enemyHealth.GetHealthPoints()} / {enemyHealth.GetMaxHealthPoints()}";
+                return;
+            }
+
+            healthValue.text = "N/A";
         }
     }
 }

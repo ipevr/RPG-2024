@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RPG.Stats;
+using UnityEngine;
 using TMPro;
 
 namespace RPG.Attributes
@@ -16,7 +17,8 @@ namespace RPG.Attributes
 
         private void Update()
         {
-            healthValue.text = $"{healthComponent.GetPercentage():0.0}%";
+            // healthValue.text = $"{healthComponent.GetPercentage():0.0}%";
+            healthValue.text = $"{healthComponent.GetHealthPoints()} / {healthComponent.GetMaxHealthPoints()}";
         }
     }
 }

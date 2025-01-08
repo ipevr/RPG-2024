@@ -13,7 +13,8 @@ namespace RPG.Attributes
     {
         private static readonly int DieTriggerId = Animator.StringToHash("die");
         private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
-        
+
+        [SerializeField] private float levelUpRegenerationPercentage = 100;
         [SerializeField] private AudioClip[] deathSounds;
 
         private float healthPoints = -1f;
@@ -50,11 +51,12 @@ namespace RPG.Attributes
         
         #region Public Methods
 
-        public void TakeDamage(GameObject instigator, float amount)
+        public void TakeDamage(GameObject instigator, float damage)
         {
+            Debug.Log($"{gameObject.name} takes damage: {damage}.");
             if (IsDead) return;
             
-            healthPoints = Mathf.Max(healthPoints - amount, 0);
+            healthPoints = Mathf.Max(healthPoints - damage, 0);
 
             if (healthPoints > 0) return;
             
@@ -62,20 +64,23 @@ namespace RPG.Attributes
             GainExperience(instigator);
         }
 
+        public float GetHealthPoints() => healthPoints;
+        
+        public float GetMaxHealthPoints() => baseStats.GetStat(Stat.Health);
+
         public float GetPercentage()
         {
             return (healthPoints / baseStats.GetStat(Stat.Health)) * 100f;
         }
-
+        
         #endregion
         
         #region Private Methods
 
         private void HandleLevelUp()
         {
-            Debug.Log("Health notified level up");
-            healthPoints = baseStats.GetStat(Stat.Health);
-            Debug.Log($"Setting health to {healthPoints}");
+            var regenHealthPoints = baseStats.GetStat(Stat.Health) * (levelUpRegenerationPercentage / 100f); 
+            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
         }
 
         private void Die(int dieTriggerId, bool silent = false)
