@@ -80,6 +80,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8625242711679945309, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}
+      propertyPath: hitClips.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8625242711679945309, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}
+      propertyPath: 'hitClips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ac41cbd188585504fa2666630fe60595, type: 3}
+    - target: {fileID: 8625242711679945309, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}
+      propertyPath: 'hitClips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: be21f8341f3b3434da34750abf063191, type: 3}
+    - target: {fileID: 8625242711679945309, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}
+      propertyPath: 'hitClips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 22269970bdccf4449942913d8286071c, type: 3}
+    - target: {fileID: 8625242711679945309, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}
+      propertyPath: 'hitClips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 5783a5b3185a8e3409b112757deac98e, type: 3}
+    - target: {fileID: 8625242711679945309, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}
+      propertyPath: 'hitClips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f89dc9c6a7112cf40a2a4dff8b608e7c, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6935480873704074576, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}

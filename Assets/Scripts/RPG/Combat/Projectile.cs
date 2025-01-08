@@ -11,7 +11,6 @@ namespace RPG.Combat
         [Range(0f, 1f)]
         [SerializeField] private float aimLocationFraction = .8f;
         [SerializeField] private bool isFollowingTarget = false;
-        [SerializeField] private AudioClip[] shootingSounds;
         [SerializeField] private HitEffect hitEffect = null;
         [SerializeField] private GameObject[] destroyOnHit;
         [SerializeField] private float lifetimeAfterHit = 2f;
@@ -25,13 +24,8 @@ namespace RPG.Combat
 
         private void Start()
         {
-            if (shootingSounds.Length <= 0) return;
-            
             transform.LookAt(GetAimLocation());
 
-            var shootClip = shootingSounds.GetRandomClip();
-            GetComponent<AudioSource>().PlayOneShot(shootClip);
-            
             Destroy(gameObject, maxLifeTime);
         }
 

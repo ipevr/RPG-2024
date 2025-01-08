@@ -11,12 +11,14 @@ namespace RPG.Combat
     {
         [SerializeField] private GameObject equippedPrefab = null;
         [SerializeField] private AnimatorOverrideController animatorOverride = null;
+        [SerializeField] private AudioClip[] weaponSounds;
         [SerializeField] private Projectile projectile = null;
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private float range = 2f;
         [SerializeField] private float weaponDamage = 5f;
 
-        private const string WeaponTag = "Weapon";
+        private const string WeaponName = "Weapon";
+        private GameObject weapon = null;
 
         public float Range => range;
 
@@ -28,8 +30,8 @@ namespace RPG.Combat
             
             if (equippedPrefab)
             {
-                var weapon = Instantiate(equippedPrefab, GetHandTransform(rightHand, leftHand));
-                weapon.tag = WeaponTag;
+                weapon = Instantiate(equippedPrefab, GetHandTransform(rightHand, leftHand));
+                weapon.name = WeaponName;
             }
 
             var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
@@ -55,6 +57,8 @@ namespace RPG.Combat
             {
                 target.TakeDamage(instigator, combinedDamage);
             }
+
+            PlayWeaponSound();
         }
 
         #endregion
@@ -69,16 +73,23 @@ namespace RPG.Combat
 
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)
         {
-            var oldWeapon = rightHand.FindByTag(WeaponTag);
+            var oldWeapon = rightHand.Find(WeaponName);
             if (!oldWeapon)
             {
-                oldWeapon = leftHand.FindByTag(WeaponTag);
+                oldWeapon = leftHand.Find(WeaponName);
             }
 
             if (!oldWeapon) return;
 
-            oldWeapon.tag = "DESTROYING";
+            oldWeapon.name = "DESTROYING";
             Destroy(oldWeapon.gameObject);
+        }
+
+        private void PlayWeaponSound()
+        {
+            if (!weapon) return;
+            Debug.Log("Should play weapon sound");
+            weapon.GetComponent<AudioSource>().PlayOneShot(weaponSounds.GetRandomClip());
         }
 
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)

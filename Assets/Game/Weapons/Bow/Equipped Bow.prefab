@@ -124,7 +124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4184255365369857510, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
       propertyPath: m_Name
-      value: EquippedBow1
+      value: Equipped Bow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

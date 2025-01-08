@@ -78,7 +78,6 @@ namespace RPG.Stats
 
         private int CalculateLevel()
         {
-            Debug.Log("Calculating level");
             if (!experience) return startingLevel;
             
             var penultimateLevel = progression.GetNumberOfLevels(Stat.ExperienceToLevelUp, characterClass);

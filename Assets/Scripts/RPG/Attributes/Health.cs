@@ -34,7 +34,6 @@ namespace RPG.Attributes
             if (healthPoints > -1) return;
             
             healthPoints = baseStats.GetStat(Stat.Health);
-            Debug.Log($"Health: Setting health points to {healthPoints}.");
         }
 
         private void OnEnable()
