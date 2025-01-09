@@ -17,16 +17,14 @@ namespace RPG.Saving
         {
             var state = LoadJsonFromFile(saveFile);
             IDictionary<string, JToken> stateDict = state;
-            
+
+            var buildIndex = SceneManager.GetActiveScene().buildIndex;
             if (stateDict.ContainsKey("lastSceneBuildIndex"))
             {
-                var buildIndex = (int)state["lastSceneBuildIndex"];
-                if (SceneManager.GetActiveScene().buildIndex != buildIndex)
-                {
-                    yield return SceneManager.LoadSceneAsync(buildIndex);
-                }
+                buildIndex = (int)state["lastSceneBuildIndex"];
             }
 
+            yield return SceneManager.LoadSceneAsync(buildIndex);
             RestoreFromToken(state);
         }
         

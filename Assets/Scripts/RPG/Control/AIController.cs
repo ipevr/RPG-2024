@@ -3,6 +3,7 @@ using RPG.Combat;
 using RPG.Movement;
 using RPG.Attributes;
 using RPG.Core;
+using Utils;
 
 namespace RPG.Control
 {
@@ -21,10 +22,12 @@ namespace RPG.Control
         private Fighter fighter;
         private Health health;
 
-        private Vector3 guardPosition;
+        private LazyValue<Vector3> guardPosition;
         private int currentWaypointIndex = 0;
         private float timeSinceLastSawPlayer = Mathf.Infinity;
         private float timeSinceArrivedAtWaypoint = Mathf.Infinity;
+
+        #region Unity Event Functions
 
         private void Awake()
         {
@@ -32,11 +35,12 @@ namespace RPG.Control
             mover = GetComponent<Mover>();
             fighter = GetComponent<Fighter>();
             health = GetComponent<Health>();
+            guardPosition = new LazyValue<Vector3>(InitializeGuardPosition);
         }
 
         private void Start()
         {
-            guardPosition = transform.position;
+            guardPosition.ForceInit();
         }
 
         private void Update()
@@ -48,6 +52,15 @@ namespace RPG.Control
             UpdateTimers();
         }
 
+        #endregion
+        
+        #region Private Methods
+
+        private Vector3 InitializeGuardPosition()
+        {
+            return transform.position;
+        }
+        
         private void UpdateTimers()
         {
             timeSinceLastSawPlayer += Time.deltaTime;
@@ -83,7 +96,7 @@ namespace RPG.Control
 
         private void PatrolBehaviour()
         {
-            var nextPosition = guardPosition;
+            var nextPosition = guardPosition.value;
             
             if (patrolPath)
             {
@@ -122,11 +135,16 @@ namespace RPG.Control
             return playerDistance < chaseDistance;
         }
 
-        // Called by Unity
+        #endregion
+
+        #region Unity Callbacks
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }
+        
+        #endregion
     }
 }

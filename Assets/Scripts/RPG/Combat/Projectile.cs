@@ -20,7 +20,7 @@ namespace RPG.Combat
         private GameObject instigator;
         private float damage;
 
-        #region Unity Callbacks
+        #region Unity Event Functions
 
         private void Start()
         {

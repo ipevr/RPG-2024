@@ -17,23 +17,22 @@ namespace RPG.Attributes
         [SerializeField] private float levelUpRegenerationPercentage = 100;
         [SerializeField] private AudioClip[] deathSounds;
 
-        private float healthPoints = -1f;
+        private LazyValue<float> healthPoints;
         private BaseStats baseStats;
 
         public bool IsDead { get; private set; }
 
-        #region Unity Callbacks
+        #region Unity Event Functions
 
         private void Awake()
         {
             baseStats = GetComponent<BaseStats>();
+            healthPoints = new LazyValue<float>(GetInitialHealthPoints);
         }
 
         private void Start()
         {
-            if (healthPoints > -1) return;
-            
-            healthPoints = baseStats.GetStat(Stat.Health);
+            healthPoints.ForceInit();
         }
 
         private void OnEnable()
@@ -55,31 +54,36 @@ namespace RPG.Attributes
             Debug.Log($"{gameObject.name} takes damage: {damage}.");
             if (IsDead) return;
             
-            healthPoints = Mathf.Max(healthPoints - damage, 0);
+            healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
 
-            if (healthPoints > 0) return;
+            if (healthPoints.value > 0) return;
             
             Die(DieTriggerId);
             GainExperience(instigator);
         }
 
-        public float GetHealthPoints() => healthPoints;
+        public float GetHealthPoints() => healthPoints.value;
         
         public float GetMaxHealthPoints() => baseStats.GetStat(Stat.Health);
 
         public float GetPercentage()
         {
-            return (healthPoints / baseStats.GetStat(Stat.Health)) * 100f;
+            return (healthPoints.value / baseStats.GetStat(Stat.Health)) * 100f;
         }
         
         #endregion
         
         #region Private Methods
 
+        private float GetInitialHealthPoints()
+        {
+            return baseStats.GetStat(Stat.Health);
+        }
+
         private void HandleLevelUp()
         {
             var regenHealthPoints = baseStats.GetStat(Stat.Health) * (levelUpRegenerationPercentage / 100f); 
-            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
+            healthPoints.value = Mathf.Max(healthPoints.value, regenHealthPoints);
         }
 
         private void Die(int dieTriggerId, bool silent = false)
@@ -108,13 +112,13 @@ namespace RPG.Attributes
 
         public JToken CaptureAsJToken()
         {
-            return healthPoints;
+            return healthPoints.value;
         }
 
         public void RestoreFromJToken(JToken state)
         {
-            healthPoints = (float)state;
-            if (healthPoints <= 0)
+            healthPoints.value = (float)state;
+            if (healthPoints.value <= 0)
             {
                 Die(DieFastTriggerId, true);
             }

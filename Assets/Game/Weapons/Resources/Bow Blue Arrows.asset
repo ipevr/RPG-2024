@@ -14,7 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equippedPrefab: {fileID: 5634396543656808730, guid: 3accba2c040110e42a03b986dd15dbd6, type: 3}
   animatorOverride: {fileID: 22100000, guid: c21283bcca230aa4382e92fccde8cc20, type: 2}
+  weaponSounds:
+  - {fileID: 8300000, guid: a9eabed8a60448d428befd29f5ac464d, type: 3}
+  - {fileID: 8300000, guid: e931b73f30d3a614c895c27686a61110, type: 3}
+  - {fileID: 8300000, guid: f708f454e6194024c8edf08538653031, type: 3}
+  - {fileID: 8300000, guid: ba6c3105a0544b348894f0aa7c9a5cc2, type: 3}
+  - {fileID: 8300000, guid: ffd5f21cfc466ab4b800689a71f2bd0c, type: 3}
+  - {fileID: 8300000, guid: ecc58e8b12d09544185bbd61bf3b3f76, type: 3}
+  - {fileID: 8300000, guid: a6b66898c245a8249b5377517c07ae5d, type: 3}
+  - {fileID: 8300000, guid: 47bb1133b4cc9f640b788f635913cd34, type: 3}
   projectile: {fileID: 5485442064150642953, guid: 7c9718d7d541a3c44bb7e5caf19a895b, type: 3}
   isRightHanded: 0
   range: 10
-  damage: 2
+  weaponDamage: 2

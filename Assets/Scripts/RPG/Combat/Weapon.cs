@@ -16,12 +16,15 @@ namespace RPG.Combat
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private float range = 2f;
         [SerializeField] private float weaponDamage = 5f;
+        [SerializeField] private float weaponPercentageBonus = 0;
 
         private const string WeaponName = "Weapon";
         private GameObject weapon = null;
 
         public float Range => range;
-
+        public float WeaponDamage => weaponDamage;
+        public float WeaponPercentageBonus => weaponPercentageBonus;
+        
         #region Public Methods
 
         public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
@@ -46,16 +49,15 @@ namespace RPG.Combat
         }
 
         public void MakeDamage(Transform rightHand, Transform leftHand, Health target, GameObject instigator,
-            float baseDamage)
+            float damage)
         {
-            var combinedDamage = baseDamage + weaponDamage;
             if (projectile != null)
             {
-                LaunchProjectile(rightHand, leftHand, target, instigator, combinedDamage);
+                LaunchProjectile(rightHand, leftHand, target, instigator, damage);
             }
             else
             {
-                target.TakeDamage(instigator, combinedDamage);
+                target.TakeDamage(instigator, damage);
             }
 
             PlayWeaponSound();
@@ -65,10 +67,10 @@ namespace RPG.Combat
 
         #region Private Methods
         
-        private void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float combinedDamage)
+        private void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float damage)
         {
             var projectileInstance = Instantiate(projectile, GetHandTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, instigator, combinedDamage);
+            projectileInstance.SetTarget(target, instigator, damage);
         }
 
         private void DestroyOldWeapon(Transform rightHand, Transform leftHand)

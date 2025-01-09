@@ -14,7 +14,7 @@ namespace RPG.Movement
         
         private NavMeshAgent navMeshAgent;
 
-        #region Unity Callbacks
+        #region Unity Event Functions
 
         private void Awake()
         {
@@ -92,9 +92,9 @@ namespace RPG.Movement
         public void RestoreFromJToken(JToken state)
         {
             GetComponent<ActionScheduler>().CancelCurrentAction();
-            GetComponent<NavMeshAgent>().enabled = false;
+            navMeshAgent.enabled = false;
             transform.position = state.ToVector3();
-            GetComponent<NavMeshAgent>().enabled = true;
+            navMeshAgent.enabled = true;
         }
 
         #endregion

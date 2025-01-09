@@ -15,7 +15,7 @@ namespace RPG.SceneManagement
         
         private SavingSystem savingSystem;
 
-        #region Unity Callbacks
+        #region Unity Event Functions
 
         private void Awake()
         {
@@ -69,10 +69,10 @@ namespace RPG.SceneManagement
 
         private IEnumerator LoadLastScene()
         {
+            yield return savingSystem.LoadLastScene(saveFileName);
+ 
             var fader = FindFirstObjectByType<Fader>();
             fader.FadeOutImmediate();
-            
-            yield return savingSystem.LoadLastScene(saveFileName);
 
             yield return fader.FadeIn(fadeTime);
         }

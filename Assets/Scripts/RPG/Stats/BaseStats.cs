@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 namespace RPG.Stats
 {
@@ -12,20 +14,24 @@ namespace RPG.Stats
         [SerializeField] private ParticleSystem levelUpEffect;
         [SerializeField] private Transform levelUpEffectSpawnPoint;
         [SerializeField] private AudioClip levelUpSound;
+        [SerializeField] private bool shouldUseModifiers = false;
 
-        private int currentLevel = 0;
+        private LazyValue<int> currentLevel;
         private Experience experience;
         
         public event Action OnLevelUp;
 
+        #region Unity Event Functions
+
         private void Awake()
         {
             experience = GetComponent<Experience>();
+            currentLevel = new LazyValue<int>(CalculateLevel);
         }
 
         private void Start()
         {
-            currentLevel = CalculateLevel();
+            currentLevel.ForceInit();
         }
 
         private void OnEnable()
@@ -44,25 +50,67 @@ namespace RPG.Stats
             }
         }
 
+        #endregion
+        
+        #region Public Methods
+        
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, GetLevel());
+            var additionalPercentageFraction = 1 + GetPercentageModifiers(stat) / 100f;
+            return (GetBaseStat(stat) + GetAdditiveModifiers(stat)) * additionalPercentageFraction;
         }
 
         public int GetLevel()
         {
-            if (currentLevel < 1)
+            return currentLevel.value;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private float GetBaseStat(Stat stat)
+        {
+            return progression.GetStat(stat, characterClass, GetLevel());
+        }
+
+        private float GetAdditiveModifiers(Stat stat)
+        {
+            if (!shouldUseModifiers) return 0;
+            
+            var total = 0f;
+            foreach (var modifierProvider in GetComponents<IModifierProvider>())
             {
-                currentLevel = CalculateLevel();
+                foreach (var modifier in modifierProvider.GetAdditiveModifiers(stat))
+                {
+                    total += modifier;
+                }
             }
-            return currentLevel;
+            
+            return total;
+        }
+
+        private float GetPercentageModifiers(Stat stat)
+        {
+            if (!shouldUseModifiers) return 0;
+            
+            var total = 0f;
+            foreach (var modifierProvider in GetComponents<IModifierProvider>())
+            {
+                foreach (var modifier in modifierProvider.GetPercentageModifiers(stat))
+                {
+                    total += modifier;
+                }
+            }
+            
+            return total;
         }
 
         private void UpdateLevel()
         {
             var level = CalculateLevel();
 
-            if (level > currentLevel)
+            if (level > currentLevel.value)
             {
                 ProcessLevelUp(level);
             }
@@ -70,7 +118,7 @@ namespace RPG.Stats
 
         private void ProcessLevelUp(int level)
         {
-            currentLevel = level;
+            currentLevel.value = level;
             OnLevelUp?.Invoke();
             Instantiate(levelUpEffect, levelUpEffectSpawnPoint);
             GetComponent<AudioSource>().PlayOneShot(levelUpSound);
@@ -90,5 +138,7 @@ namespace RPG.Stats
 
             return penultimateLevel + 1;
         }
+        
+        #endregion
     }
 }
