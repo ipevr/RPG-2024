@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using Utils;
 using RPG.Attributes;
-using RPG.Stats;
-using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
@@ -19,7 +17,9 @@ namespace RPG.Combat
         [SerializeField] private float weaponPercentageBonus = 0;
 
         private const string WeaponName = "Weapon";
+        
         private GameObject weapon = null;
+        private AudioSource weaponAudioSource = null;
 
         public float Range => range;
         public float WeaponDamage => weaponDamage;
@@ -27,8 +27,9 @@ namespace RPG.Combat
         
         #region Public Methods
 
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator, AudioSource audioSource)
         {
+            weaponAudioSource = audioSource;
             DestroyOldWeapon(rightHand, leftHand);
             
             if (equippedPrefab)
@@ -89,9 +90,8 @@ namespace RPG.Combat
 
         private void PlayWeaponSound()
         {
-            if (!weapon) return;
-            Debug.Log("Should play weapon sound");
-            weapon.GetComponent<AudioSource>().PlayOneShot(weaponSounds.GetRandomClip());
+            if (!weaponAudioSource) return;
+            weaponAudioSource.PlayOneShot(weaponSounds.GetRandomClip());
         }
 
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)

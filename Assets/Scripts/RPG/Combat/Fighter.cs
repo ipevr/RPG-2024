@@ -95,7 +95,7 @@ namespace RPG.Combat
         
         private void AttachWeapon(Weapon weapon)
         {
-            weapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
+            weapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>(), GetComponent<AudioSource>());
         }
 
         private void AttackBehaviour()

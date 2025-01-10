@@ -6,6 +6,6 @@
         Grunt,
         Mage,
         Archer,
-        Boss
+        Knight
     }
 }
