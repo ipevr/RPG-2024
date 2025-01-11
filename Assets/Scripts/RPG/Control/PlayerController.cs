@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 using RPG.Movement;
 using RPG.Attributes;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
+using Utils;
 
 namespace RPG.Control
 {
@@ -21,6 +23,7 @@ namespace RPG.Control
         [SerializeField] private LayerMask ignoredLayers;
         [SerializeField] private float normalSpeedFraction = 1f;
         [SerializeField] private float navMeshProjectionDistance = .1f;
+        [FormerlySerializedAs("maxPathLength")] [SerializeField] private float maxNavPathLength = 10f;
         [SerializeField] private CursorMapping[] cursorMappings;
      
         private Health health;
@@ -67,6 +70,8 @@ namespace RPG.Control
             foreach (var hit in hits)
             {
                 var raycastables = hit.transform.GetComponents<IRaycastable>();
+                if (!PathIsValid(hit.transform.position)) return false;
+                
                 foreach (var raycastable in raycastables)
                 {
                     if (raycastable.HandleRaycast(this))
@@ -108,10 +113,19 @@ namespace RPG.Control
             
             var isOnNavMesh = NavMesh.SamplePosition(
                 hit.point, out var navMeshHit, navMeshProjectionDistance, NavMesh.AllAreas);
-            if (!isOnNavMesh) return false;
 
             target = navMeshHit.position;
-            return true;
+
+            return isOnNavMesh && PathIsValid(target);
+        }
+
+        private bool PathIsValid(Vector3 target)
+        {
+            var path = new NavMeshPath();
+            var pathExists = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
+            if (!pathExists || path.status != NavMeshPathStatus.PathComplete) return false;
+
+            return path.PathLength() <= maxNavPathLength;
         }
 
         private void SetCursor(CursorType cursorType)

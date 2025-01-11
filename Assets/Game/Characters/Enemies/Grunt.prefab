@@ -196,6 +196,7 @@ MonoBehaviour:
   waypointDwellTime: 2
   patrolPath: {fileID: 0}
   patrolSpeedFraction: 0.5
+  maxNavPathLength: 20
 --- !u!114 &2948169227195512928
 MonoBehaviour:
   m_ObjectHideFlags: 0
