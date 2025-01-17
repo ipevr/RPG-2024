@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using RPG.Control;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -39,13 +42,20 @@ namespace RPG.SceneManagement
 
             var fader = FindFirstObjectByType<Fader>();
             var savingWrapper = FindFirstObjectByType<SavingWrapper>();
+            var playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = false;
 
-            yield return StartCoroutine(fader.FadeOut(fadeOutTime));
+            yield return fader.FadeOut(fadeOutTime);
             
             UpdatePlayer(this);
 
             savingWrapper.Save();
+
             yield return SceneManager.LoadSceneAsync(targetSceneIndex);
+            
+            var newPlayerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
+            
             savingWrapper.Load();
             
             var targetPortal = GetTargetPortal();
@@ -54,8 +64,10 @@ namespace RPG.SceneManagement
             savingWrapper.Save();
             
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return StartCoroutine(fader.FadeIn(fadeInTime));
+            fader.FadeIn(fadeInTime);
 
+            newPlayerController.enabled = true;
+            
             Destroy(gameObject);
         }
 
@@ -82,5 +94,18 @@ namespace RPG.SceneManagement
             player.transform.rotation = portal.playerSpawnPoint.rotation;
             player.GetComponent<NavMeshAgent>().enabled = true;
         }
+        
+        private void DisablePlayerControl()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<PlayerController>().enabled = false;
+        }
+
+        private void EnablePlayerControl()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<PlayerController>().enabled = true;
+        }
+
     }
 }

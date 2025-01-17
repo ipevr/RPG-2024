@@ -11,7 +11,7 @@ namespace RPG.Core
             mainCamera = Camera.main;
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             transform.forward = mainCamera.transform.forward;
         }
