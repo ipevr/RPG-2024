@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using RPG.Movement;
-using RPG.Attributes;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
+using UnityEngine.EventSystems;
 using Utils;
+using RPG.Movement;
+using RPG.Attributes;
 
 namespace RPG.Control
 {
@@ -70,7 +70,10 @@ namespace RPG.Control
             foreach (var hit in hits)
             {
                 var raycastables = hit.transform.GetComponents<IRaycastable>();
-                if (!PathIsValid(hit.transform.position)) return false;
+                if (!PathIsValid(hit.transform.position))
+                {
+                    return false;
+                }
                 
                 foreach (var raycastable in raycastables)
                 {

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3581437979859870041}
   - component: {fileID: 337055273427322699}
   - component: {fileID: 15315595926659243}
+  - component: {fileID: 1881632866994782156}
   m_Layer: 0
   m_Name: Root Pickup
   m_TagString: Untagged
@@ -68,8 +69,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 36b939e9e86a99145acf7bdd3817826e, type: 2}
-  pickupClip: {fileID: 8300000, guid: 0d65bcd4c1aa61244ac8d36214d7fc2b, type: 3}
-  pickupSound: {fileID: 3668626033789742068, guid: cdc5c62d7e880ef409cccb414c8655b6, type: 3}
+  respawnTime: 5
+  onPickup:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1881632866994782156}
+        m_TargetAssemblyTypeName: RPG.Combat.PickupSoundPlayer, Assembly-CSharp
+        m_MethodName: PlayPickupSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1881632866994782156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838979186725471886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d9895ee4c3b4a638d5d4c09d50673fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupSounds:
+  - {fileID: 8300000, guid: 5cec362b341df0847a004d563cd37d2a, type: 3}
+  soundPlayerPrefab: {fileID: 553198237582259589, guid: 7d2c037f55e61754ea9f7951553c7b74, type: 3}
 --- !u!1 &4187741743361188836
 GameObject:
   m_ObjectHideFlags: 0

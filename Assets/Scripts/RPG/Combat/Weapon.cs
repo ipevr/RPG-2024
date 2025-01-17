@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using Utils;
 using RPG.Attributes;
 
 namespace RPG.Combat
@@ -19,7 +18,6 @@ namespace RPG.Combat
         private const string WeaponName = "Weapon";
         
         private GameObject weapon = null;
-        private AudioSource weaponAudioSource = null;
 
         public float Range => range;
         public float WeaponDamage => weaponDamage;
@@ -27,9 +25,8 @@ namespace RPG.Combat
         
         #region Public Methods
 
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator, AudioSource audioSource)
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
-            weaponAudioSource = audioSource;
             DestroyOldWeapon(rightHand, leftHand);
             
             if (equippedPrefab)
@@ -49,6 +46,11 @@ namespace RPG.Combat
             }
         }
 
+        public AudioClip[] GetWeaponSounds()
+        {
+            return weaponSounds;
+        }
+
         public void MakeDamage(Transform rightHand, Transform leftHand, Health target, GameObject instigator,
             float damage)
         {
@@ -60,8 +62,6 @@ namespace RPG.Combat
             {
                 target.TakeDamage(instigator, damage);
             }
-
-            PlayWeaponSound();
         }
 
         #endregion
@@ -86,12 +86,6 @@ namespace RPG.Combat
 
             oldWeapon.name = "DESTROYING";
             Destroy(oldWeapon.gameObject);
-        }
-
-        private void PlayWeaponSound()
-        {
-            if (!weaponAudioSource) return;
-            weaponAudioSource.PlayOneShot(weaponSounds.GetRandomClip());
         }
 
         private Transform GetHandTransform(Transform rightHand, Transform leftHand)

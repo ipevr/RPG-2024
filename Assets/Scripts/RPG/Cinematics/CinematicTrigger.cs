@@ -1,8 +1,7 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
-using RPG.Saving;
+﻿using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Playables;
+using RPG.Saving;
 
 namespace RPG.Cinematics
 {

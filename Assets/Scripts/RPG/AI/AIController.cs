@@ -1,13 +1,12 @@
-﻿using System;
-using UnityEngine;
-using RPG.Combat;
-using RPG.Movement;
-using RPG.Attributes;
-using RPG.Core;
+﻿using UnityEngine;
 using UnityEngine.AI;
 using Utils;
+using RPG.Attributes;
+using RPG.Combat;
+using RPG.Core;
+using RPG.Movement;
 
-namespace RPG.Control
+namespace RPG.AI
 {
     public class AIController : MonoBehaviour
     {

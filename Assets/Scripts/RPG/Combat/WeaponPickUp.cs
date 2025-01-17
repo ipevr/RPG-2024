@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using RPG.Control;
 
 namespace RPG.Combat
@@ -7,9 +8,11 @@ namespace RPG.Combat
     public class WeaponPickUp : MonoBehaviour, IRaycastable
     {
         [SerializeField] private Weapon weapon;
-        [SerializeField] private PickupSound pickupSound;
         [SerializeField] private float respawnTime = 5f;
+        [SerializeField] private UnityEvent onPickup;
 
+        #region Unity Event Functions
+        
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag("Player")) return;
@@ -17,14 +20,14 @@ namespace RPG.Combat
             Pickup(other.GetComponent<Fighter>());
         }
 
+        #endregion
+
+        #region Private Methods
+
         private void Pickup(Fighter fighter)
         {
             fighter.EquipWeapon(weapon);
-            
-            if (pickupSound)
-            {
-                Instantiate(pickupSound, transform.position, Quaternion.identity);
-            }
+            onPickup.Invoke();
             
             StartCoroutine(HideForSeconds(respawnTime));
         }
@@ -44,19 +47,29 @@ namespace RPG.Combat
                 child.gameObject.SetActive(status);
             }
         }
+        
+        #endregion
+        
+        #region Interface Implementations
 
-        public bool HandleRaycast(PlayerController callingController)
+        public bool HandleRaycast(PlayerController player)
         {
             if (Input.GetMouseButton(0))
             {
-                Pickup(callingController.gameObject.GetComponent<Fighter>());
+                Pickup(player.gameObject.GetComponent<Fighter>());
             }
             return true;
+        }
+
+        public void HandleStopRaycasting()
+        {
         }
 
         public CursorType GetCursorType()
         {
             return CursorType.Pickup;
         }
+        
+        #endregion
     }
 }

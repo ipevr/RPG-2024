@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Events;
+using Utils;
 using RPG.Movement;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Stats;
-using Utils;
 
 namespace RPG.Combat
 {
@@ -20,6 +20,7 @@ namespace RPG.Combat
         [SerializeField] private Transform rightHandTransform = null;
         [SerializeField] private Transform leftHandTransform = null;
         [SerializeField] private Weapon defaultWeapon = null;
+        [SerializeField] private UnityEvent<Weapon> onHit;
         
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
@@ -95,7 +96,7 @@ namespace RPG.Combat
         
         private void AttachWeapon(Weapon weapon)
         {
-            weapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>(), GetComponent<AudioSource>());
+            weapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
 
         private void AttackBehaviour()
@@ -142,6 +143,7 @@ namespace RPG.Combat
             
             var damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
             currentWeapon.value.MakeDamage(rightHandTransform, leftHandTransform, target, gameObject, damage);
+            onHit.Invoke(currentWeapon.value);
         }
         
         private void Shoot()

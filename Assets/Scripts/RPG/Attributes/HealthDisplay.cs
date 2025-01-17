@@ -1,5 +1,4 @@
-﻿using RPG.Stats;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 namespace RPG.Attributes

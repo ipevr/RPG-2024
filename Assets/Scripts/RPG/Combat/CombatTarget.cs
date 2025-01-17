@@ -1,19 +1,20 @@
+using UnityEngine;
+using UnityEngine.Events;
 using RPG.Attributes;
 using RPG.Control;
-using UnityEngine;
 
 namespace RPG.Combat
 {
     [RequireComponent(typeof(Health))]
     public class CombatTarget : MonoBehaviour, IRaycastable
     {
-        public bool HandleRaycast(PlayerController callingController)
+        public bool HandleRaycast(PlayerController player)
         {
-            if (!callingController.GetComponent<Fighter>().CanAttack(gameObject)) return false;
+            if (!player.GetComponent<Fighter>().CanAttack(gameObject)) return false;
             
             if (Input.GetMouseButton(0))
             {
-                callingController.GetComponent<Fighter>().Attack(gameObject);
+                player.GetComponent<Fighter>().Attack(gameObject);
             }
             
             return true;
@@ -23,5 +24,6 @@ namespace RPG.Combat
         {
             return CursorType.Combat;
         }
+
     }
 }

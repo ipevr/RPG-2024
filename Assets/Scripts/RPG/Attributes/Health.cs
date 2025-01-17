@@ -1,7 +1,7 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using Utils;
 using RPG.Saving;
 using RPG.Stats;
@@ -15,7 +15,8 @@ namespace RPG.Attributes
         private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
 
         [SerializeField] private float levelUpRegenerationPercentage = 100;
-        [SerializeField] private AudioClip[] deathSounds;
+        [SerializeField] private UnityEvent<float> onTakeDamage;
+        [SerializeField] private UnityEvent onDie; 
 
         private LazyValue<float> healthPoints;
         private BaseStats baseStats;
@@ -55,6 +56,7 @@ namespace RPG.Attributes
             if (IsDead) return;
             
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
+            onTakeDamage.Invoke(damage);
 
             if (healthPoints.value > 0) return;
             
@@ -68,7 +70,12 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return (healthPoints.value / baseStats.GetStat(Stat.Health)) * 100f;
+            return GetFraction() * 100f;
+        }
+
+        public float GetFraction()
+        {
+            return healthPoints.value / baseStats.GetStat(Stat.Health);
         }
         
         #endregion
@@ -86,15 +93,13 @@ namespace RPG.Attributes
             healthPoints.value = Mathf.Max(healthPoints.value, regenHealthPoints);
         }
 
-        private void Die(int dieTriggerId, bool silent = false)
+        private void Die(int dieTriggerId)
         {
             IsDead = true;
             GetComponent<Animator>().SetTrigger(dieTriggerId);
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
-            if (silent) return;
-            
-            GetComponent<AudioSource>().PlayOneShot(deathSounds.GetRandomClip());
+            onDie.Invoke();
         }
 
         private void GainExperience(GameObject instigator)
@@ -120,7 +125,7 @@ namespace RPG.Attributes
             healthPoints.value = (float)state;
             if (healthPoints.value <= 0)
             {
-                Die(DieFastTriggerId, true);
+                Die(DieFastTriggerId);
             }
         }
 

@@ -1,8 +1,6 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
-namespace RPG.Control
+namespace RPG.AI
 {
     public class PatrolPath : MonoBehaviour
     {
