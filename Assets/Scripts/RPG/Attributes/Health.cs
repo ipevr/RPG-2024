@@ -56,10 +56,14 @@ namespace RPG.Attributes
             if (IsDead) return;
             
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
-            onTakeDamage.Invoke(damage);
 
-            if (healthPoints.value > 0) return;
+            if (healthPoints.value > 0)
+            {
+                onTakeDamage.Invoke(damage);
+                return;
+            };
             
+            onDie.Invoke();
             Die(DieTriggerId);
             GainExperience(instigator);
         }
@@ -67,6 +71,11 @@ namespace RPG.Attributes
         public float GetHealthPoints() => healthPoints.value;
         
         public float GetMaxHealthPoints() => baseStats.GetStat(Stat.Health);
+
+        public void Heal(float healthToRestore)
+        {
+            healthPoints.value = Mathf.Min(healthPoints.value + healthToRestore, GetMaxHealthPoints());
+        }
 
         public float GetPercentage()
         {
@@ -99,7 +108,6 @@ namespace RPG.Attributes
             GetComponent<Animator>().SetTrigger(dieTriggerId);
             GetComponent<ActionScheduler>().CancelCurrentAction();
             GetComponent<NavMeshAgent>().enabled = false;
-            onDie.Invoke();
         }
 
         private void GainExperience(GameObject instigator)

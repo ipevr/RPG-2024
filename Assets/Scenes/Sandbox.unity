@@ -5433,6 +5433,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -58.06
       objectReference: {fileID: 0}
+    - target: {fileID: 3737286021664687150, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
+      propertyPath: globalVolume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5416592286052628602, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
       propertyPath: m_Alpha
       value: 0

@@ -1,5 +1,6 @@
 ﻿using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace RPG.Core

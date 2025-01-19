@@ -144,15 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e04f5b9c731d4c58b26a914816e0a08f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitClips:
-  - {fileID: 8300000, guid: bb0f8f82a26998e458aa578e38549fd4, type: 3}
-  - {fileID: 8300000, guid: 225ab1edfbc961349bc768bcfa81d68f, type: 3}
-  - {fileID: 8300000, guid: 4744d55d6337a634096d932227a6d722, type: 3}
-  - {fileID: 8300000, guid: 5b37fe7af40769c4eabd8e9c6e893456, type: 3}
-  - {fileID: 8300000, guid: aaecb7cf7e98f5a4192bacbd5256cd21, type: 3}
-  - {fileID: 8300000, guid: 807a506214841774ab00351039744d5c, type: 3}
-  - {fileID: 8300000, guid: 8eabfdbac3ffecd429e56adee8b64e2c, type: 3}
-  - {fileID: 8300000, guid: 8b5598dae711259468eb214e1692b997, type: 3}
+  hitClips: []
 --- !u!199 &8036844512544406655
 ParticleSystemRenderer:
   serializedVersion: 6

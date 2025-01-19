@@ -71,7 +71,7 @@ MonoBehaviour:
   targetSceneIndex: 0
   destination: 0
   fadeOutTime: 0.5
-  fadeInTime: 5
+  fadeInTime: 1
   fadeWaitTime: 0.5
 --- !u!1 &2641223357080038038
 GameObject:

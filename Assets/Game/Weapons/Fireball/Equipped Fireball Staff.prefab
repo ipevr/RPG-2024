@@ -8,6 +8,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: weaponSounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 00a49bdd70cd82d4da45167a24d74586, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 8446456e026c004478b10bcbb576af97, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 09e93f72a6d983f4ba41818c7da7bfc6, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ab0134904412fb49b1d6dcbf743dc72, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 88892e4064d63ea42bccb575d79c3950, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a8802236d859bdf48aca702385c87f5e, type: 3}
     - target: {fileID: 2863845462264438343, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -52,6 +80,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Equipped Fireball Staff
       objectReference: {fileID: 0}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: clips.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 00a49bdd70cd82d4da45167a24d74586, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 8446456e026c004478b10bcbb576af97, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 09e93f72a6d983f4ba41818c7da7bfc6, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ab0134904412fb49b1d6dcbf743dc72, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 88892e4064d63ea42bccb575d79c3950, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a8802236d859bdf48aca702385c87f5e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

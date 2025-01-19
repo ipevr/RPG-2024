@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237839592392268317, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: pitch
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237839592392268317, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: lowerPitch
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7237839592392268317, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: upperPitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8134560163101906175, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
       propertyPath: defaultWeapon
       value: 
@@ -84,6 +96,22 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 3029059120474411380}
+    - target: {fileID: 8134560163101906175, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: defaultWeaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 24f77c08cc297da4abf2a949c37ed142, type: 2}
+    - target: {fileID: 8530522766565055770, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: pitch
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8530522766565055770, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: lowerPitch
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8530522766565055770, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: upperPitch
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 3346794530761855793, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}

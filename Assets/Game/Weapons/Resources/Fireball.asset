@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd28030289db4802ab48e65d3a9de0d6, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  equippedPrefab: {fileID: 2732477402746559445, guid: d5ff23ccf4ecf0d499b76f79998ef2e9, type: 3}
+  equippedWeaponPrefab: {fileID: 4077627520680577040, guid: d5ff23ccf4ecf0d499b76f79998ef2e9, type: 3}
   animatorOverride: {fileID: 22100000, guid: c0c6f6d5ccc26d64b8271b7c7670a17c, type: 2}
   weaponSounds:
   - {fileID: 8300000, guid: 00a49bdd70cd82d4da45167a24d74586, type: 3}
@@ -25,3 +25,4 @@ MonoBehaviour:
   isRightHanded: 1
   range: 20
   weaponDamage: 10
+  weaponPercentageBonus: 0

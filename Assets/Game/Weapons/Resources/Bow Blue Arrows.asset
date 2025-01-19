@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd28030289db4802ab48e65d3a9de0d6, type: 3}
   m_Name: Bow Blue Arrows
   m_EditorClassIdentifier: 
-  equippedPrefab: {fileID: 5634396543656808730, guid: 3accba2c040110e42a03b986dd15dbd6, type: 3}
+  equippedWeaponPrefab: {fileID: 6002300864098861791, guid: 3accba2c040110e42a03b986dd15dbd6, type: 3}
   animatorOverride: {fileID: 22100000, guid: c21283bcca230aa4382e92fccde8cc20, type: 2}
   weaponSounds:
   - {fileID: 8300000, guid: a9eabed8a60448d428befd29f5ac464d, type: 3}
@@ -27,3 +27,4 @@ MonoBehaviour:
   isRightHanded: 0
   range: 10
   weaponDamage: 2
+  weaponPercentageBonus: 0

@@ -98,6 +98,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1541273999930598877, guid: 0b190ecd9f6311046b944da6fe20fa7a, type: 3}
+      propertyPath: hitEffect
+      value: 
+      objectReference: {fileID: 8252331348756969761, guid: 7ea03c1b4dd379148822d19baa1e3637, type: 3}
+    - target: {fileID: 1541273999930598877, guid: 0b190ecd9f6311046b944da6fe20fa7a, type: 3}
       propertyPath: tailDestroyDelayTime
       value: 0
       objectReference: {fileID: 0}
@@ -248,6 +252,10 @@ PrefabInstance:
     - target: {fileID: 6074101949208030805, guid: 0b190ecd9f6311046b944da6fe20fa7a, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8238373551254067160, guid: 0b190ecd9f6311046b944da6fe20fa7a, type: 3}
+      propertyPath: m_Pitch
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8738068705858481277, guid: 0b190ecd9f6311046b944da6fe20fa7a, type: 3}
       propertyPath: m_Name

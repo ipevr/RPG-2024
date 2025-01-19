@@ -274,7 +274,6 @@ MonoBehaviour:
   speed: 20
   aimLocationFraction: 0.7
   isFollowingTarget: 0
-  shootingSounds: []
   hitEffect: {fileID: 8625242711679945309, guid: bbad435615dc6df42b801c8720c6f3d5, type: 3}
   destroyOnHit:
   - {fileID: 3814894990208348440}
@@ -337,7 +336,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

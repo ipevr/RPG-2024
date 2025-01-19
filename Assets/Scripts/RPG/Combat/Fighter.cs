@@ -8,6 +8,7 @@ using RPG.Saving;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Stats;
+using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
@@ -19,23 +20,25 @@ namespace RPG.Combat
         [SerializeField] private float timeBetweenAttacks = 1f;
         [SerializeField] private Transform rightHandTransform = null;
         [SerializeField] private Transform leftHandTransform = null;
-        [SerializeField] private Weapon defaultWeapon = null;
-        [SerializeField] private UnityEvent<Weapon> onHit;
+        [SerializeField] private WeaponConfig defaultWeaponConfig = null;
         
         private Health target;
         private float timeSinceLastAttack = Mathf.Infinity;
-        private LazyValue<Weapon> currentWeapon;
+        private WeaponConfig currentWeaponConfig;
         
         #region Unity Event Functions
 
         private void Awake()
         {
-            currentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+            currentWeaponConfig = defaultWeaponConfig;
         }
 
         private void Start()
         {
-            currentWeapon.ForceInit();
+            if (currentWeaponConfig)
+            {
+                AttachWeapon(currentWeaponConfig);
+            }
         }
 
         private void Update()
@@ -73,10 +76,10 @@ namespace RPG.Combat
             target = combatTarget.GetComponent<Health>();
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(WeaponConfig weaponConfig)
         {
-            currentWeapon.value = weapon;
-            AttachWeapon(weapon);
+            currentWeaponConfig = weaponConfig;
+            AttachWeapon(weaponConfig);
         }
 
         public Health GetTarget()
@@ -88,15 +91,9 @@ namespace RPG.Combat
 
         #region Private Methods
 
-        private Weapon SetupDefaultWeapon()
+        private void AttachWeapon(WeaponConfig weaponConfig)
         {
-            AttachWeapon(defaultWeapon);
-            return defaultWeapon;
-        }
-        
-        private void AttachWeapon(Weapon weapon)
-        {
-            weapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
+            weaponConfig.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
 
         private void AttackBehaviour()
@@ -130,7 +127,7 @@ namespace RPG.Combat
 
         private bool IsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) <= currentWeapon.value.Range;
+            return Vector3.Distance(transform.position, target.transform.position) <= currentWeaponConfig.Range;
         }
 
         #endregion
@@ -142,8 +139,7 @@ namespace RPG.Combat
             if (!target) return;
             
             var damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-            currentWeapon.value.MakeDamage(rightHandTransform, leftHandTransform, target, gameObject, damage);
-            onHit.Invoke(currentWeapon.value);
+            currentWeaponConfig.MakeDamage(rightHandTransform, leftHandTransform, target, gameObject, damage);
         }
         
         private void Shoot()
@@ -164,13 +160,13 @@ namespace RPG.Combat
 
         public JToken CaptureAsJToken()
         {
-            return currentWeapon.value.name;
+            return currentWeaponConfig.name;
         }
 
         public void RestoreFromJToken(JToken state)
         {
             var weaponName = (string)state;
-            var weapon = Resources.Load<Weapon>(weaponName);
+            var weapon = Resources.Load<WeaponConfig>(weaponName);
             EquipWeapon(weapon);
         }
         
@@ -178,7 +174,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.value.WeaponDamage;
+                yield return currentWeaponConfig.WeaponDamage;
             }
         }
 
@@ -186,7 +182,7 @@ namespace RPG.Combat
         {
             if (stat == Stat.Damage)
             {
-                yield return currentWeapon.value.WeaponPercentageBonus;
+                yield return currentWeaponConfig.WeaponPercentageBonus;
             }
         }
 

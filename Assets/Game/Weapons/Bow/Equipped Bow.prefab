@@ -82,6 +82,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: weaponSounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a9eabed8a60448d428befd29f5ac464d, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: e931b73f30d3a614c895c27686a61110, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f708f454e6194024c8edf08538653031, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ba6c3105a0544b348894f0aa7c9a5cc2, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ffd5f21cfc466ab4b800689a71f2bd0c, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ecc58e8b12d09544185bbd61bf3b3f76, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a6b66898c245a8249b5377517c07ae5d, type: 3}
+    - target: {fileID: 2840758773274695203, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'weaponSounds.Array.data[7]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 47bb1133b4cc9f640b788f635913cd34, type: 3}
     - target: {fileID: 2863845462264438343, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -126,6 +162,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: Equipped Bow
       objectReference: {fileID: 0}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: clips.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a9eabed8a60448d428befd29f5ac464d, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: e931b73f30d3a614c895c27686a61110, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: f708f454e6194024c8edf08538653031, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[3]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ba6c3105a0544b348894f0aa7c9a5cc2, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[4]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ffd5f21cfc466ab4b800689a71f2bd0c, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[5]'
+      value: 
+      objectReference: {fileID: 8300000, guid: ecc58e8b12d09544185bbd61bf3b3f76, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[6]'
+      value: 
+      objectReference: {fileID: 8300000, guid: a6b66898c245a8249b5377517c07ae5d, type: 3}
+    - target: {fileID: 5536928465159667205, guid: c207003578289cf4bbddad42dcebbc41, type: 3}
+      propertyPath: 'clips.Array.data[7]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 47bb1133b4cc9f640b788f635913cd34, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
