@@ -74,6 +74,10 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 11400000, guid: 24f77c08cc297da4abf2a949c37ed142, type: 2}
+    - target: {fileID: 15315595926659243, guid: 55c467d8db5d8ae46bb5ccb77649d655, type: 3}
+      propertyPath: weaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 24f77c08cc297da4abf2a949c37ed142, type: 2}
     - target: {fileID: 1838979186725471886, guid: 55c467d8db5d8ae46bb5ccb77649d655, type: 3}
       propertyPath: m_Name
       value: Sword Pickup

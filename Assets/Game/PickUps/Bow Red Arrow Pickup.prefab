@@ -86,6 +86,10 @@ PrefabInstance:
       propertyPath: weapon
       value: 
       objectReference: {fileID: 11400000, guid: f219ca52aa39ece498e670e5cdae82c6, type: 2}
+    - target: {fileID: 15315595926659243, guid: 55c467d8db5d8ae46bb5ccb77649d655, type: 3}
+      propertyPath: weaponConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: f219ca52aa39ece498e670e5cdae82c6, type: 2}
     - target: {fileID: 1838979186725471886, guid: 55c467d8db5d8ae46bb5ccb77649d655, type: 3}
       propertyPath: m_Name
       value: Bow Red Arrow Pickup

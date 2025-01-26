@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using RPG.Attributes;
 using RPG.Control;
 

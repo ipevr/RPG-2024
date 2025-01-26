@@ -23,6 +23,7 @@ namespace RPG.Combat
         [SerializeField] private WeaponConfig defaultWeaponConfig = null;
         
         private Health target;
+        private Mover mover;
         private float timeSinceLastAttack = Mathf.Infinity;
         private WeaponConfig currentWeaponConfig;
         
@@ -31,6 +32,7 @@ namespace RPG.Combat
         private void Awake()
         {
             currentWeaponConfig = defaultWeaponConfig;
+            mover = GetComponent<Mover>();
         }
 
         private void Start()
@@ -47,7 +49,7 @@ namespace RPG.Combat
 
             if (!target || target.IsDead) return;
 
-            if (!IsInRange())
+            if (!IsInRange(target.transform))
             {
                 MoveToTarget();
             }
@@ -65,6 +67,8 @@ namespace RPG.Combat
         public bool CanAttack(GameObject combatTarget)
         {
             if (!combatTarget) return false;
+            
+            if (!mover.CanMoveTo(combatTarget.transform.position) && !IsInRange(combatTarget.transform)) return false;
             
             var targetToTest = combatTarget.GetComponent<Health>();
             return targetToTest && !targetToTest.IsDead;
@@ -122,12 +126,12 @@ namespace RPG.Combat
 
         private void MoveToTarget()
         {
-            GetComponent<Mover>().MoveTo(target.transform.position, 1f);
+            mover.MoveTo(target.transform.position, 1f);
         }
 
-        private bool IsInRange()
+        private bool IsInRange(Transform transformTarget)
         {
-            return Vector3.Distance(transform.position, target.transform.position) <= currentWeaponConfig.Range;
+            return Vector3.Distance(transform.position, transformTarget.transform.position) <= currentWeaponConfig.Range;
         }
 
         #endregion

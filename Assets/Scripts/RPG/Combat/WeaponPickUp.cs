@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using RPG.Control;
 using RPG.Attributes;
+using RPG.Movement;
 
 namespace RPG.Combat
 {
@@ -62,6 +63,8 @@ namespace RPG.Combat
 
         public bool HandleRaycast(PlayerController player)
         {
+            if (!player.GetComponent<Mover>().CanMoveTo(transform.position)) return false;
+            
             if (Input.GetMouseButton(0))
             {
                 Pickup(player.gameObject);

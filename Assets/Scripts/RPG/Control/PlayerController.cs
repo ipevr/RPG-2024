@@ -2,9 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 using UnityEngine.EventSystems;
-using Utils;
 using RPG.Movement;
 using RPG.Attributes;
 
@@ -23,16 +21,18 @@ namespace RPG.Control
         [SerializeField] private LayerMask ignoredLayers;
         [SerializeField] private float normalSpeedFraction = 1f;
         [SerializeField] private float navMeshProjectionDistance = .1f;
-        [FormerlySerializedAs("maxPathLength")] [SerializeField] private float maxNavPathLength = 10f;
+        [SerializeField] private float raycastRadius = 1f;
         [SerializeField] private CursorMapping[] cursorMappings;
      
         private Health health;
+        private Mover mover;
 
         #region Unity Event Functions
 
         private void Awake()
         {
             health = GetComponent<Health>();
+            mover = GetComponent<Mover>();
         }
 
         private void Update()
@@ -70,10 +70,6 @@ namespace RPG.Control
             foreach (var hit in hits)
             {
                 var raycastables = hit.transform.GetComponents<IRaycastable>();
-                if (!PathIsValid(hit.transform.position))
-                {
-                    return false;
-                }
                 
                 foreach (var raycastable in raycastables)
                 {
@@ -90,7 +86,7 @@ namespace RPG.Control
 
         private RaycastHit[] RaycastAllSorted()
         {
-            var hits = Physics.RaycastAll(GetMouseRay(), Mathf.Infinity, ~ignoredLayers);
+            var hits = Physics.SphereCastAll(GetMouseRay(), raycastRadius, Mathf.Infinity, ~ignoredLayers);
             return hits.OrderBy(hit => hit.distance).ToArray();
         }
 
@@ -98,11 +94,11 @@ namespace RPG.Control
         {
             // var hasHit = Physics.Raycast(GetMouseRay(), out var hit, Mathf.Infinity, ~ignoredLayers);
             var hasHit = RaycastNavMesh(out var target);
-            if (!hasHit) return false;
+            if (!hasHit || !mover.CanMoveTo(target)) return false;
             
             if (Input.GetMouseButton(0))
             {
-                GetComponent<Mover>().StartMoveAction(target, normalSpeedFraction);
+                mover.StartMoveAction(target, normalSpeedFraction);
             }
             SetCursor(CursorType.Movement);
             return true;
@@ -119,16 +115,7 @@ namespace RPG.Control
 
             target = navMeshHit.position;
 
-            return isOnNavMesh && PathIsValid(target);
-        }
-
-        private bool PathIsValid(Vector3 target)
-        {
-            var path = new NavMeshPath();
-            var pathExists = NavMesh.CalculatePath(transform.position, target, NavMesh.AllAreas, path);
-            if (!pathExists || path.status != NavMeshPathStatus.PathComplete) return false;
-
-            return path.PathLength() <= maxNavPathLength;
+            return isOnNavMesh;
         }
 
         private void SetCursor(CursorType cursorType)
