@@ -1,6 +1,7 @@
-﻿using Unity.Cinemachine;
+﻿using NUnit.Framework.Constraints;
+using Unity.Cinemachine;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 namespace RPG.Core
@@ -39,6 +40,8 @@ namespace RPG.Core
 
         private void Update()
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+            
             if (zoomInAction.triggered)
             {
                 composer.CameraDistance -= zoomInAction.ReadValue<float>();
@@ -49,5 +52,6 @@ namespace RPG.Core
             }
             composer.CameraDistance = Mathf.Clamp(composer.CameraDistance, maxZoomIn, maxZoomOut);
         }
+
     }
 }

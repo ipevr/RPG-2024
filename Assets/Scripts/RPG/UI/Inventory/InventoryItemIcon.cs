@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using RPG.Inventory;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace RPG.UI.Inventories
+namespace RPG.UI.Inventory
 {
     /// <summary>
     /// To be put on the inventory icon representing an inventory item. Allows the slot to update the icon and number.
@@ -9,19 +10,17 @@ namespace RPG.UI.Inventories
     [RequireComponent(typeof(Image))]
     public class InventoryItemIcon : MonoBehaviour
     {
-        public Sprite GetItem()
+        public void SetItem(InventoryItem item)
         {
             var iconImage = GetComponent<Image>();
-            return iconImage.enabled ? iconImage.sprite : null;
-        }
-
-        public void SetItem(Sprite item)
-        {
-            var iconImage = GetComponent<Image>();
-            iconImage.enabled = item != null;
-            if (item != null)
+            if (item == null)
             {
-                iconImage.sprite = item;
+                iconImage.enabled = false;
+            }
+            else
+            {
+                iconImage.enabled = true;
+                iconImage.sprite = item.Icon;
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -26,6 +27,7 @@ namespace RPG.Control
      
         private Health health;
         private Mover mover;
+        private bool movementStarted = false;
 
         #region Unity Event Functions
 
@@ -37,6 +39,11 @@ namespace RPG.Control
 
         private void Update()
         {
+            if (Input.GetMouseButtonDown(0))
+            {
+                movementStarted = false;
+            }
+            
             if (InteractWithUI()) return;
             if (health.IsDead)
             {
@@ -95,8 +102,13 @@ namespace RPG.Control
             // var hasHit = Physics.Raycast(GetMouseRay(), out var hit, Mathf.Infinity, ~ignoredLayers);
             var hasHit = RaycastNavMesh(out var target);
             if (!hasHit || !mover.CanMoveTo(target)) return false;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                movementStarted = true;
+            }
             
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && movementStarted)
             {
                 mover.StartMoveAction(target, normalSpeedFraction);
             }

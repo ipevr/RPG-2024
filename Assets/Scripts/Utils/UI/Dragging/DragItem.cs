@@ -59,19 +59,16 @@ namespace Utils.UI.Dragging
             IDragDestination<T> container;
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                Debug.Log("Not over an UI");
                 container = parentCanvas.GetComponent<IDragDestination<T>>();
             }
             else
             {
                 container = GetContainer(eventData);
-                Debug.Log($"Drag ended on {container}");
             }
 
             if (container != null)
             {
                 DropItemIntoContainer(container);
-                Debug.Log($"Dropping into container {container}");
             }
 
             
@@ -82,11 +79,9 @@ namespace Utils.UI.Dragging
             if (eventData.pointerEnter)
             {
                 var container = eventData.pointerEnter.GetComponentInParent<IDragDestination<T>>();
-                Debug.Log($"container eventData.pointerEnter: {eventData.pointerEnter.name}");
 
                 if (container != null) 
                 {
-                    Debug.Log($"Container found");
                     return container;
                 }
             }
@@ -115,7 +110,6 @@ namespace Utils.UI.Dragging
 
         private void AttemptSwap(IDragContainer<T> destination, IDragContainer<T> source)
         {
-            Debug.Log("Attempting to swap " + destination + " to " + source);
             // Provisionally remove item from both sides. 
             var removedSourceNumber = source.GetNumber();
             var removedSourceItem = source.GetItem();
@@ -172,7 +166,6 @@ namespace Utils.UI.Dragging
             {
                 source.RemoveItems(toTransfer);
                 destination.AddItems(draggingItem, toTransfer);
-                Debug.Log("Simply transferred");
                 return false;
             }
 
