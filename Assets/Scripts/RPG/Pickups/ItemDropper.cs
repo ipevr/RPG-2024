@@ -9,8 +9,14 @@ namespace RPG.Pickups
         {
             Debug.Log("Dropping " + item.name);
             var droppedItem = item.GetInventoriable();
-            var spawnedItem = droppedItem.Spawn(transform.position);
+            var spawnedItem = droppedItem.Spawn(GetDropLocation());
             spawnedItem.Setup(item);
         }
+
+        private Vector3 GetDropLocation()
+        {
+            return transform.position;
+        }
+
     }
 }

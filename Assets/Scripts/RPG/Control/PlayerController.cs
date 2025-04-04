@@ -39,7 +39,7 @@ namespace RPG.Control
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 movementStarted = false;
             }

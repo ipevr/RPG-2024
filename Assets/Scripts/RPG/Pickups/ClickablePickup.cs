@@ -20,7 +20,7 @@ namespace RPG.Pickups
         
         public bool HandleRaycast(PlayerController playerController)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 pickup.PickupItem();
             }
