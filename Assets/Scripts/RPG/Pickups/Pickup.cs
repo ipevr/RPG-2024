@@ -9,7 +9,7 @@ namespace RPG.Pickups
     public class Pickup : MonoBehaviour, IInventoriable
     {
         [SerializeField] private UnityEvent onPickup;
-        
+
         private InventoryItem inventoryItem;
         private PlayerInventory playerInventory;
         private Mover playerMover;
@@ -38,10 +38,13 @@ namespace RPG.Pickups
 
             if (foundSlot)
             {
-                onPickup.Invoke();
+                onPickup?.Invoke();
+                OnPickupInventoriable?.Invoke(this);
                 
                 Destroy(gameObject);
             }
+            
+            Debug.Log($"Picked up item {inventoryItem.name}");
         }
         
         #endregion
@@ -57,6 +60,23 @@ namespace RPG.Pickups
         {
             return Instantiate(this, position, Quaternion.identity);
         }
+
+        public void Destroy()
+        {
+            Destroy(gameObject);
+        }
+
+        public InventoryItem GetItem()
+        {
+            return inventoryItem;
+        }
+
+        public Vector3 GetPosition()
+        {
+            return transform.position;
+        }
+
+        public UnityEvent<IInventoriable> OnPickupInventoriable { get; } = new();
 
         #endregion
     }

@@ -1,11 +1,9 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 using Utils;
 using RPG.Attributes;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
-using UnityEngine.Serialization;
 
 namespace RPG.AI
 {

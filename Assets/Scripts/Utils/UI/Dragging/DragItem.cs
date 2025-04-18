@@ -38,19 +38,35 @@ namespace Utils.UI.Dragging
         // PRIVATE
         void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
+            OnBeginDragHandler(eventData);
+        }
+
+        void IDragHandler.OnDrag(PointerEventData eventData)
+        {
+            OnDragHandler(eventData);
+        }
+
+        void IEndDragHandler.OnEndDrag(PointerEventData eventData)
+        {
+            OnEndDragHandler(eventData);
+        }
+
+        protected virtual void OnBeginDragHandler(PointerEventData eventData)
+        {
             startPosition = transform.position;
             originalParent = transform.parent;
             // Else won't get the drop event.
             GetComponent<CanvasGroup>().blocksRaycasts = false;
             transform.SetParent(parentCanvas.transform, true);
+            Debug.Log("BeginDrag");
         }
 
-        void IDragHandler.OnDrag(PointerEventData eventData)
+        protected virtual void OnDragHandler(PointerEventData eventData)
         {
             transform.position = eventData.position;
         }
 
-        void IEndDragHandler.OnEndDrag(PointerEventData eventData)
+        protected virtual void OnEndDragHandler(PointerEventData eventData)
         {
             transform.position = startPosition;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
@@ -71,7 +87,7 @@ namespace Utils.UI.Dragging
                 DropItemIntoContainer(container);
             }
 
-            
+            Debug.Log("EndDrag");
         }
 
         private IDragDestination<T> GetContainer(PointerEventData eventData)

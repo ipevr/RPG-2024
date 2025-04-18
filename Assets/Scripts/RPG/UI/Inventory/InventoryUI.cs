@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using RPG.Inventory;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace RPG.UI.Inventory
 {
@@ -8,7 +11,10 @@ namespace RPG.UI.Inventory
     {
         [SerializeField] private InventorySlotUI inventorySlotPrefab;
 
+        public UnityEvent<bool> onDragging;
+        
         private PlayerInventory playerInventory;
+        private List<InventorySlotUI> inventorySlots;
         
         private void Awake()
         {
@@ -29,7 +35,10 @@ namespace RPG.UI.Inventory
             {
                 var itemUi = Instantiate(inventorySlotPrefab, transform);
                 itemUi.Setup(playerInventory, i);
+                inventorySlots.Add(itemUi);
             }
+
+            RegisterInventorySlotsDragEvents();
         }
 
         private void DestroyAllSlots()
@@ -38,6 +47,42 @@ namespace RPG.UI.Inventory
             {
                 Destroy(child.gameObject);
             }
+
+            UnRegisterInventorySlotsDragEvents();
+            inventorySlots = new List<InventorySlotUI>();
         }
+
+        private void RegisterInventorySlotsDragEvents()
+        {
+            if (inventorySlots == null || inventorySlots.Count == 0) return;
+
+            foreach (var slot in inventorySlots)
+            {
+                slot.DragItem.onBeginDragEvent.AddListener(HandleBeginDrag);
+                slot.DragItem.onEndDragEvent.AddListener(HandleEndDrag);
+            }
+        }
+
+        private void UnRegisterInventorySlotsDragEvents()
+        {
+            if (inventorySlots == null || inventorySlots.Count == 0) return;
+            
+            foreach (var slot in inventorySlots)
+            {
+                slot.DragItem.onBeginDragEvent.RemoveListener(HandleBeginDrag);
+                slot.DragItem.onEndDragEvent.RemoveListener(HandleEndDrag);
+            }
+        }
+
+        private void HandleBeginDrag()
+        {
+            onDragging?.Invoke(true);
+        }
+
+        private void HandleEndDrag()
+        {
+            onDragging?.Invoke(false);
+        }
+
     }
 }

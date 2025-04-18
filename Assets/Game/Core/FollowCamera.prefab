@@ -173,7 +173,6 @@ GameObject:
   - component: {fileID: 444510182873554932}
   - component: {fileID: 3082097413620952941}
   - component: {fileID: 1424482271402252423}
-  - component: {fileID: 8197073451115031799}
   m_Layer: 0
   m_Name: FollowCamera
   m_TagString: Untagged
@@ -320,15 +319,3 @@ MonoBehaviour:
   startDistance: 10
   maxZoomIn: 2
   maxZoomOut: 20
---- !u!114 &8197073451115031799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7137185201077657606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e84e2f430e8d414293ab7f77bd783317, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

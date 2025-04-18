@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
@@ -27,7 +26,7 @@ namespace RPG.Control
      
         private Health health;
         private Mover mover;
-        private bool movementStarted = false;
+        private bool interactionAllowed = true;
 
         #region Unity Event Functions
 
@@ -39,10 +38,7 @@ namespace RPG.Control
 
         private void Update()
         {
-            if (Input.GetMouseButtonUp(0))
-            {
-                movementStarted = false;
-            }
+            if (!interactionAllowed) return;
             
             if (InteractWithUI()) return;
             if (health.IsDead)
@@ -54,6 +50,15 @@ namespace RPG.Control
             if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
             SetCursor(CursorType.None);
+        }
+
+        #endregion
+        
+        #region Public Methods
+
+        public void AllowInteraction(bool status)
+        {
+            interactionAllowed = status;
         }
 
         #endregion
@@ -99,16 +104,10 @@ namespace RPG.Control
 
         private bool InteractWithMovement()
         {
-            // var hasHit = Physics.Raycast(GetMouseRay(), out var hit, Mathf.Infinity, ~ignoredLayers);
             var hasHit = RaycastNavMesh(out var target);
             if (!hasHit || !mover.CanMoveTo(target)) return false;
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                movementStarted = true;
-            }
-            
-            if (Input.GetMouseButton(0) && movementStarted)
+            if (Input.GetMouseButton(0))
             {
                 mover.StartMoveAction(target, normalSpeedFraction);
             }

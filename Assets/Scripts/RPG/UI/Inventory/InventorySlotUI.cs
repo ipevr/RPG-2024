@@ -7,6 +7,9 @@ namespace RPG.UI.Inventory
     public class InventorySlotUI : MonoBehaviour, IDragContainer<InventoryItem>
     {
         [SerializeField] private InventoryItemIcon icon;
+        [SerializeField] private InventoryDragItem dragItem;
+
+        public InventoryDragItem DragItem => dragItem;
 
         private int index;
         private PlayerInventory inventory;
