@@ -1,10 +1,10 @@
-﻿using RPG.Inventory;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils.UI.Dragging;
+using RPG.Inventory;
 
 namespace RPG.UI.Inventory
 {
-    public class InventorySlotUI : MonoBehaviour, IDragContainer<InventoryItem>
+    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
         [SerializeField] private InventoryItemIcon icon;
         [SerializeField] private InventoryDragItem dragItem;
@@ -34,11 +34,6 @@ namespace RPG.UI.Inventory
             inventory.AddItemToSlot(index, item);
         }
 
-        public InventoryItem GetItem()
-        {
-            return inventory.GetItemInSlot(index);
-        }
-
         public int GetNumber()
         {
             return 1;
@@ -47,6 +42,11 @@ namespace RPG.UI.Inventory
         public void RemoveItems(int number)
         {
             inventory.RemoveFromSlot(index);
+        }
+
+        public InventoryItem GetItem()
+        {
+            return inventory.GetItemInSlot(index);
         }
 
     }
