@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using RPG.Inventory;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
+using RPG.Inventory;
 
 namespace RPG.UI.Inventory
 {
@@ -58,8 +56,7 @@ namespace RPG.UI.Inventory
 
             foreach (var slot in inventorySlots)
             {
-                slot.DragItem.onBeginDragEvent.AddListener(HandleBeginDrag);
-                slot.DragItem.onEndDragEvent.AddListener(HandleEndDrag);
+                slot.DragItem.onDragging.AddListener(HandleDragging);
             }
         }
 
@@ -69,20 +66,13 @@ namespace RPG.UI.Inventory
             
             foreach (var slot in inventorySlots)
             {
-                slot.DragItem.onBeginDragEvent.RemoveListener(HandleBeginDrag);
-                slot.DragItem.onEndDragEvent.RemoveListener(HandleEndDrag);
+                slot.DragItem.onDragging.RemoveListener(HandleDragging);
             }
         }
 
-        private void HandleBeginDrag()
+        private void HandleDragging(bool status)
         {
-            onDragging?.Invoke(true);
+            onDragging?.Invoke(status);
         }
-
-        private void HandleEndDrag()
-        {
-            onDragging?.Invoke(false);
-        }
-
     }
 }

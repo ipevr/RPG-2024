@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using Utils.UI.Dragging;
 using RPG.Inventory;
 
@@ -14,6 +15,17 @@ namespace RPG.UI.Inventory
 
         private int index;
         private PlayerInventory inventory;
+        private GameObject tempIcon;
+
+        private void OnEnable()
+        {
+            dragItem.onDragging.AddListener(HandleDragging);
+        }
+
+        private void OnDisable()
+        {
+            dragItem.onDragging.RemoveListener(HandleDragging);
+        }
 
         public void Setup(PlayerInventory playerInventory, int slotIndex)
         {
@@ -50,6 +62,25 @@ namespace RPG.UI.Inventory
         {
             return inventory.GetItemInSlot(index);
         }
-
+        
+        private void HandleDragging(bool status)
+        {
+            if (status)
+            {
+                if (inventory.GetNumberInSlot(index) > 1)
+                {
+                    tempIcon = Instantiate(icon.gameObject, icon.transform.parent);
+                    amountDisplay.SetAmount(inventory.GetNumberInSlot(index) - 1);
+                }
+            }
+            else
+            {
+                if (tempIcon)
+                {
+                    Destroy(tempIcon);
+                    amountDisplay.SetAmount(inventory.GetNumberInSlot(index));
+                }
+            }
+        }
     }
 }

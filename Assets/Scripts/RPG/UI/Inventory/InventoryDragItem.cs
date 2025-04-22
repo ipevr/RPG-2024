@@ -10,18 +10,17 @@ namespace RPG.UI.Inventory
     /// </summary>
     public class InventoryDragItem : DragItem<InventoryItem>
     {
-        public UnityEvent onBeginDragEvent;
-        public UnityEvent onEndDragEvent;
+        public UnityEvent<bool> onDragging;
 
         protected override void OnBeginDragHandler(PointerEventData eventData)
         {
-            onBeginDragEvent?.Invoke();
+            onDragging?.Invoke(true);
             base.OnBeginDragHandler(eventData);
         }
 
         protected override void OnEndDragHandler(PointerEventData eventData)
         {
-            onEndDragEvent?.Invoke();
+            onDragging?.Invoke(false);
             base.OnEndDragHandler(eventData);
         }
     }
