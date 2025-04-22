@@ -9,8 +9,14 @@ namespace RPG.Inventory
     public class PlayerInventory : MonoBehaviour, ISaveable
     {
         [SerializeField] private int numberOfInventorySlots = 16;
+
+        private struct InventorySlot
+        {
+            public InventoryItem InventoryItem;
+            public int CurrentStackSize;
+        }
         
-        private InventoryItem[] slots;
+        private InventorySlot[] slots;
 
         public event Action OnInventoryChanged;
         
@@ -18,7 +24,7 @@ namespace RPG.Inventory
 
         private void Awake()
         {
-            slots = new InventoryItem[numberOfInventorySlots];
+            slots = new InventorySlot[numberOfInventorySlots];
         }
 
         #endregion
@@ -46,7 +52,8 @@ namespace RPG.Inventory
             var i = FindSlot(item);
             if (i < 0) return false;
 
-            slots[i] = item;
+            slots[i].InventoryItem = item;
+            slots[i].CurrentStackSize++;
 
             OnInventoryChanged?.Invoke();
             
@@ -57,7 +64,7 @@ namespace RPG.Inventory
         {
             foreach (var inventorySlot in slots)
             {
-                if (ReferenceEquals(inventorySlot, item)) return true;
+                if (ReferenceEquals(inventorySlot.InventoryItem, item)) return true;
             }
             
             return false;
@@ -65,35 +72,74 @@ namespace RPG.Inventory
 
         public InventoryItem GetItemInSlot(int slotNumber)
         {
-            return slots[slotNumber];
+            return slots[slotNumber].InventoryItem;
         }
 
         public int GetNumberInSlot(int slotNumber)
         {
-            return slots[slotNumber] == null ? 0 : 1;
+            return !slots[slotNumber].InventoryItem ? 0 : slots[slotNumber].CurrentStackSize;
         }
 
-        public void RemoveFromSlot(int slotNumber)
+        public int RemoveFromSlot(int slotNumber, int amount)
         {
-            slots[slotNumber] = null;
+            if (slots[slotNumber].InventoryItem == null) return 0;
             
-            OnInventoryChanged?.Invoke();
-        }
-
-        public bool AddItemToSlot(int slotNumber, InventoryItem item)
-        {
-            if (slots[slotNumber])
+            if (amount > slots[slotNumber].CurrentStackSize)
             {
-                return AddToFirstAvailableSlot(item);
+                var stackSize = slots[slotNumber].CurrentStackSize;
+                slots[slotNumber].InventoryItem = null;
+                slots[slotNumber].CurrentStackSize = 0;
+                OnInventoryChanged?.Invoke();
+                return stackSize;
             }
             
-            slots[slotNumber] = item;
-            
+            slots[slotNumber].CurrentStackSize -= amount;
+            if (slots[slotNumber].CurrentStackSize <= 0)
+            {
+                slots[slotNumber].InventoryItem = null;
+            }
             OnInventoryChanged?.Invoke();
-            
-            return true;
+            return amount;
         }
-        
+
+        public bool AddItemsToSlot(int slotNumber, InventoryItem item, int amount)
+        {
+            while (true)
+            {
+                if (amount == 0) return true;
+
+                if (slots[slotNumber].InventoryItem == item || slots[slotNumber].InventoryItem == null)
+                {
+                    var availableSpace = slots[slotNumber].InventoryItem == null
+                        ? item.MaxStackSize
+                        : item.MaxStackSize - slots[slotNumber].CurrentStackSize;
+
+                    var amountToAdd = Mathf.Min(amount, availableSpace);
+
+                    if (slots[slotNumber].InventoryItem == null)
+                    {
+                        slots[slotNumber].InventoryItem = item;
+                    }
+
+                    slots[slotNumber].CurrentStackSize += amountToAdd;
+                    amount -= amountToAdd;
+
+                    OnInventoryChanged?.Invoke();
+
+                    if (amount == 0) return true;
+                }
+
+                var nextSlotNumber = FindEmptySlot();
+
+                if (nextSlotNumber == -1)
+                {
+                    return false;
+                }
+
+                slotNumber = nextSlotNumber;
+            }
+        }
+ 
         #endregion
 
         #region Private Methods
@@ -114,7 +160,7 @@ namespace RPG.Inventory
         {
             for (var i = 0; i < slots.Length; i++)
             {
-                if (slots[i] == null)
+                if (slots[i].InventoryItem == null)
                 {
                     return i;
                 }
@@ -125,11 +171,11 @@ namespace RPG.Inventory
 
         private int FindStack(InventoryItem item)
         {
-            if (!item.Stackable) return -1;
+            if (item.MaxStackSize == 1) return -1;
 
             for (var i = 0; i < slots.Length; i++)
             {
-                if (ReferenceEquals(slots[i], item))
+                if (ReferenceEquals(slots[i].InventoryItem, item) && slots[i].CurrentStackSize < item.MaxStackSize)
                 {
                     return i;
                 };
@@ -142,14 +188,25 @@ namespace RPG.Inventory
 
         #region Interface Implementations
 
+        private struct SlotState
+        {
+            public string ItemId;
+            public int Amount;
+        }
+
         JToken ISaveable.CaptureAsJToken()
         {
             var state = new JObject();
             IDictionary<string, JToken> slotContent = state;
             for (var i = 0; i < slots.Length; i++)
             {
-                if (!slots[i]) continue;
-                slotContent.Add(i.ToString(), slots[i].ItemId);
+                if (!slots[i].InventoryItem) continue;
+                var slotToSave = new SlotState
+                {
+                    ItemId = slots[i].InventoryItem.ItemId,
+                    Amount = slots[i].CurrentStackSize
+                };
+                slotContent.Add(i.ToString(), JToken.FromObject(slotToSave));
             }
 
             return state;
@@ -161,11 +218,12 @@ namespace RPG.Inventory
             
             IDictionary<string, JToken> stateDict = jObject;
             
-            foreach (var slotState in stateDict)
+            foreach (var slot in stateDict)
             {
-                var index = int.Parse(slotState.Key);
-                var inventoryItem = InventoryItem.GetFromId(slotState.Value.ToObject<string>());
-                AddItemToSlot(index, inventoryItem);
+                var index = int.Parse(slot.Key);
+                var slotState = slot.Value.ToObject<SlotState>();
+                var inventoryItem = InventoryItem.GetFromId(slotState.ItemId);
+                AddItemsToSlot(index, inventoryItem, slotState.Amount);
             }
         }
 

@@ -8,6 +8,7 @@ namespace RPG.UI.Inventory
     {
         [SerializeField] private InventoryItemIcon icon;
         [SerializeField] private InventoryDragItem dragItem;
+        [SerializeField] private AmountDisplay amountDisplay;
 
         public InventoryDragItem DragItem => dragItem;
 
@@ -19,6 +20,7 @@ namespace RPG.UI.Inventory
             inventory = playerInventory;
             index = slotIndex;
             icon.SetItem(inventory.GetItemInSlot(index));
+            amountDisplay.SetAmount(inventory.GetNumberInSlot(index));
         }
 
         // Will be detailed when using stackable items. At the moment it says put in as much as you want if there is
@@ -31,7 +33,7 @@ namespace RPG.UI.Inventory
         public void AddItems(InventoryItem item, int number)
         {
             // number will be used later for stackable items
-            inventory.AddItemToSlot(index, item);
+            inventory.AddItemsToSlot(index, item, number);
         }
 
         public int GetNumber()
@@ -41,7 +43,7 @@ namespace RPG.UI.Inventory
 
         public void RemoveItems(int number)
         {
-            inventory.RemoveFromSlot(index);
+            inventory.RemoveFromSlot(index, number);
         }
 
         public InventoryItem GetItem()

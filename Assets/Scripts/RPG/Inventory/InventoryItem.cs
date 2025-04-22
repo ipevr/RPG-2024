@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace RPG.Inventory
 {
@@ -17,8 +18,9 @@ namespace RPG.Inventory
         [SerializeField] private Sprite icon;
         [Tooltip("The prefab that should be spawned when this item is dropped.")]
         [SerializeField] private GameObject inventoriablePrefab;
-        [Tooltip("If true, multiple items of this type can be stacked in the same inventory slot.")]
-        [SerializeField] private bool stackable = false;
+        [Tooltip("If 1, item can not be stacked. Otherwise gives the number of how much items of this type can be stacked in the same inventory slot.")]
+        [Range(1, 100)]
+        [SerializeField] private int maxStackSize = 1;
 
         private static Dictionary<string, InventoryItem> itemLookupCache;
 
@@ -26,7 +28,7 @@ namespace RPG.Inventory
         public string DisplayName => displayName;
         public string Description => description;
         public Sprite Icon => icon;
-        public bool Stackable => stackable;
+        public int MaxStackSize => maxStackSize;
 
         public static InventoryItem GetFromId(string itemId)
         {
