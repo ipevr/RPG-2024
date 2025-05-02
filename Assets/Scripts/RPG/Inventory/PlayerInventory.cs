@@ -15,7 +15,7 @@ namespace RPG.Inventory
             public InventoryItem InventoryItem;
             public int CurrentStackSize;
         }
-        
+
         private InventorySlot[] slots;
 
         public event Action OnInventoryChanged;
@@ -39,7 +39,7 @@ namespace RPG.Inventory
 
         public bool HasSpaceFor(InventoryItem item)
         {
-            return FindSlot(item) >= 0;
+            return FindNonFullStackOrEmptySlot(item) >= 0;
         }
 
         public int GetSize()
@@ -47,17 +47,9 @@ namespace RPG.Inventory
             return slots.Length;
         }
 
-        public bool AddToFirstAvailableSlot(InventoryItem item)
+        public int AddToFirstAvailableSlot(InventoryItem item, int amount)
         {
-            var i = FindSlot(item);
-            if (i < 0) return false;
-
-            slots[i].InventoryItem = item;
-            slots[i].CurrentStackSize++;
-
-            OnInventoryChanged?.Invoke();
-            
-            return true;
+            return AddItemsBeginningAtSlot(0, item, amount);
         }
 
         public bool HasItem(InventoryItem item)
@@ -82,71 +74,100 @@ namespace RPG.Inventory
 
         public int RemoveFromSlot(int slotNumber, int amount)
         {
-            if (slots[slotNumber].InventoryItem == null) return 0;
-            
-            if (amount > slots[slotNumber].CurrentStackSize)
+            var slot = slots[slotNumber];
+
+            if (slot.InventoryItem == null) return 0;
+
+            var removedAmount = Math.Min(amount, slot.CurrentStackSize);
+            slot.CurrentStackSize -= removedAmount;
+
+            if (slot.CurrentStackSize <= 0)
             {
-                var stackSize = slots[slotNumber].CurrentStackSize;
-                slots[slotNumber].InventoryItem = null;
-                slots[slotNumber].CurrentStackSize = 0;
-                OnInventoryChanged?.Invoke();
-                return stackSize;
+                slot.InventoryItem = null;
+                slot.CurrentStackSize = 0;
             }
-            
-            slots[slotNumber].CurrentStackSize -= amount;
-            if (slots[slotNumber].CurrentStackSize <= 0)
-            {
-                slots[slotNumber].InventoryItem = null;
-            }
+
             OnInventoryChanged?.Invoke();
-            return amount;
+            return removedAmount;
         }
 
-        public bool AddItemsToSlot(int slotNumber, InventoryItem item, int amount)
+        public int AddItemsBeginningAtSlot(int slotNumber, InventoryItem item, int amount)
         {
-            while (true)
+            var remainingAmount = amount;
+            
+            while (remainingAmount > 0)
             {
-                if (amount == 0) return true;
+                var availableSpace = GetAvailableSpaceInSlot(slotNumber, item);
 
-                if (slots[slotNumber].InventoryItem == item || slots[slotNumber].InventoryItem == null)
+                if (availableSpace > 0)
                 {
-                    var availableSpace = slots[slotNumber].InventoryItem == null
-                        ? item.MaxStackSize
-                        : item.MaxStackSize - slots[slotNumber].CurrentStackSize;
-
-                    var amountToAdd = Mathf.Min(amount, availableSpace);
-
-                    if (slots[slotNumber].InventoryItem == null)
-                    {
-                        slots[slotNumber].InventoryItem = item;
-                    }
-
-                    slots[slotNumber].CurrentStackSize += amountToAdd;
-                    amount -= amountToAdd;
-
-                    OnInventoryChanged?.Invoke();
-
-                    if (amount == 0) return true;
+                    var amountToAdd = Mathf.Min(remainingAmount, availableSpace);
+                    AddToSlot(slotNumber, item, amountToAdd);
+                    remainingAmount -= amountToAdd;
                 }
 
-                var nextSlotNumber = FindEmptySlot();
-
-                if (nextSlotNumber == -1)
+                if (remainingAmount > 0)
                 {
-                    return false;
+                    slotNumber++;
+                    if (slotNumber >= slots.Length) break;
                 }
-
-                slotNumber = nextSlotNumber;
             }
+
+            return amount - remainingAmount;
+        }
+        
+        public int MaxAcceptable(InventoryItem item)
+        {
+            var totalAvailableSpace = 0;
+
+            foreach (var slot in slots)
+            {
+                if (slot.InventoryItem == item)
+                {
+                    totalAvailableSpace += item.MaxStackSize - slot.CurrentStackSize;
+                }
+            }
+
+            var emptySlotCount = 0;
+            foreach (var slot in slots)
+            {
+                if (slot.InventoryItem == null)
+                {
+                    emptySlotCount++;
+                }
+            }
+
+            totalAvailableSpace += emptySlotCount * item.MaxStackSize;
+
+            return totalAvailableSpace;
         }
  
         #endregion
 
         #region Private Methods
-
-        private int FindSlot(InventoryItem item)
+        
+        private int GetAvailableSpaceInSlot(int slotNumber, InventoryItem item)
         {
-            var i = FindStack(item);
+            if (!slots[slotNumber].InventoryItem) return item.MaxStackSize;
+            if (slots[slotNumber].InventoryItem != item) return 0;
+    
+            return item.MaxStackSize - slots[slotNumber].CurrentStackSize;
+        }
+        
+        private void AddToSlot(int slotNumber, InventoryItem item, int amount)
+        {
+            if (!slots[slotNumber].InventoryItem)
+            {
+                slots[slotNumber].InventoryItem = item;
+            }
+
+            slots[slotNumber].CurrentStackSize += amount;
+            OnInventoryChanged?.Invoke();
+        }
+
+        private int FindNonFullStackOrEmptySlot(InventoryItem item)
+        {
+            var i = FindNonFullStack(item);
 
             if (i < 0)
             {
@@ -169,7 +190,7 @@ namespace RPG.Inventory
             return -1;
         }
 
-        private int FindStack(InventoryItem item)
+        private int FindNonFullStack(InventoryItem item)
         {
             if (item.MaxStackSize == 1) return -1;
 
@@ -223,7 +244,7 @@ namespace RPG.Inventory
                 var index = int.Parse(slot.Key);
                 var slotState = slot.Value.ToObject<SlotState>();
                 var inventoryItem = InventoryItem.GetFromId(slotState.ItemId);
-                AddItemsToSlot(index, inventoryItem, slotState.Amount);
+                AddItemsBeginningAtSlot(index, inventoryItem, slotState.Amount);
             }
         }
 

@@ -24,6 +24,12 @@ namespace RPG.Pickups
             {
                 pickup.PickupItem();
             }
+
+            // Todo: Nicer solution: Shift-Click item --> Desired amount can be adjusted in ui popup 
+            if (Input.GetMouseButtonDown(1))
+            {
+                pickup.PickupItem(1);
+            }
             return true;
 
         }

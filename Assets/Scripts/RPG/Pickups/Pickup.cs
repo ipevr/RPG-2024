@@ -8,11 +8,14 @@ namespace RPG.Pickups
 {
     public class Pickup : MonoBehaviour, IInventoriable
     {
-        [SerializeField] private UnityEvent onPickup;
+        [SerializeField] private UnityEvent<int> onPickup;
 
         private InventoryItem inventoryItem;
         private PlayerInventory playerInventory;
         private Mover playerMover;
+        private int currentAmount;
+
+        public UnityEvent<IInventoriable> OnPickupInventoriable { get; } = new();
 
         #region Unity Event Functions
 
@@ -32,28 +35,41 @@ namespace RPG.Pickups
             return playerMover.CanMoveTo(transform.position) && playerInventory.HasSpaceFor(inventoryItem);
         }
         
-        public void PickupItem()
+        public void PickupItem(int amount)
         {
-            var foundSlot = playerInventory.AddToFirstAvailableSlot(inventoryItem);
+            amount = Mathf.Min(amount, currentAmount);
+            
+            var amountPickedUp = playerInventory.AddToFirstAvailableSlot(inventoryItem, amount);
+            
+            currentAmount -= amountPickedUp;
 
-            if (foundSlot)
+            if (amountPickedUp > 0)
             {
-                onPickup?.Invoke();
+                onPickup?.Invoke(amountPickedUp);
                 OnPickupInventoriable?.Invoke(this);
-                
-                Destroy(gameObject);
+            }
+
+            if (currentAmount <= 0)
+            {
+                Destroy();
             }
             
-            Debug.Log($"Picked up item {inventoryItem.name}");
+            Debug.Log($"Picked up item {inventoryItem.name} with amount {amountPickedUp}");
+        }
+
+        public void PickupItem()
+        {
+            PickupItem(currentAmount);
         }
         
         #endregion
         
         #region Interface Implementations
 
-        public void Setup(InventoryItem item)
+        public void Setup(InventoryItem item, int itemAmount)
         {
             inventoryItem = item;
+            currentAmount = itemAmount;
         }
 
         public IInventoriable Spawn(Vector3 position)
@@ -71,12 +87,15 @@ namespace RPG.Pickups
             return inventoryItem;
         }
 
+        public int GetAmount()
+        {
+            return currentAmount;
+        }
+
         public Vector3 GetPosition()
         {
             return transform.position;
         }
-
-        public UnityEvent<IInventoriable> OnPickupInventoriable { get; } = new();
 
         #endregion
     }

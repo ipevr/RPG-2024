@@ -14,9 +14,9 @@ namespace RPG.Pickups
     {
         private readonly List<IInventoriable> droppedInventoriables = new();
 
-        public void Drop(InventoryItem item)
+        public void Drop(InventoryItem item, int amount)
         {
-            SpawnPickup(item, GetDropLocation());
+            SpawnPickup(item, GetDropLocation(), amount);
         }
 
         private Vector3 GetDropLocation()
@@ -24,11 +24,11 @@ namespace RPG.Pickups
             return transform.position;
         }
 
-        private void SpawnPickup(InventoryItem item, Vector3 spawnLocation)
+        private void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int amount)
         {
             var inventoriableItem = item.GetInventoriable();
             var spawnedItem = inventoriableItem.Spawn(spawnLocation);
-            spawnedItem.Setup(item);
+            spawnedItem.Setup(item, amount);
             spawnedItem.OnPickupInventoriable.AddListener(HandlePickup);
             droppedInventoriables.Add(spawnedItem);
         }
@@ -62,6 +62,7 @@ namespace RPG.Pickups
                 
                 dropStateDict.Add("itemId", drop.GetItem().ItemId);
                 dropStateDict.Add("position", drop.GetPosition().ToToken());
+                dropStateDict.Add("amount", drop.GetAmount());
                 droppedItemsList.Add(dropState);
             }
             
@@ -80,8 +81,9 @@ namespace RPG.Pickups
                 
                 var itemId = stateDict["itemId"].ToString();
                 var position = stateDict["position"].ToVector3();
+                var amount = (int)stateDict["amount"];
                 
-                SpawnPickup(InventoryItem.GetFromId(itemId), position);
+                SpawnPickup(InventoryItem.GetFromId(itemId), position, amount);
                 
             }
             Debug.Log("Restored dropped items");

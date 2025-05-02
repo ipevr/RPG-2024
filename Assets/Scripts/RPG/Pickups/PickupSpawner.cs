@@ -9,9 +9,10 @@ namespace RPG.Pickups
     public class PickupSpawner : MonoBehaviour, ISaveable
     {
         [SerializeField] private InventoryItem inventoryItem;
+        [SerializeField] private int amount = 1;
 
         private IInventoriable spawnedPickup;
-        private bool pickedUp;
+        private int amountPickedUp;
 
         private void Awake()
         {
@@ -27,7 +28,7 @@ namespace RPG.Pickups
                 return;
             }
             spawnedPickup = pickup.Spawn(transform.position);
-            spawnedPickup.Setup(inventoryItem);
+            spawnedPickup.Setup(inventoryItem, amount);
             spawnedPickup.OnPickupInventoriable.AddListener(HandlePickedUp);
         }
 
@@ -38,18 +39,18 @@ namespace RPG.Pickups
 
         private void HandlePickedUp(IInventoriable inventoriablePickedUp)
         {
-            pickedUp = true;
+            amountPickedUp = inventoriablePickedUp.GetAmount();
         }
 
         public JToken CaptureAsJToken()
         {
-            return pickedUp;
+            return amountPickedUp;
         }
 
         public void RestoreFromJToken(JToken state)
         {
-            pickedUp = (bool)state;
-            if (pickedUp)
+            amount = (int)state;
+            if (amount <= 0)
             {
                 DestroyPickup();
             }
