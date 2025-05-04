@@ -2,7 +2,6 @@
 using UnityEngine;
 using Utils.UI.Dragging;
 using RPG.Inventory;
-using UnityEngine.InputSystem;
 
 namespace RPG.UI.Inventory
 {
@@ -11,7 +10,6 @@ namespace RPG.UI.Inventory
         [SerializeField] private InventoryItemIcon icon;
         [SerializeField] private InventoryDragItem dragItem;
         [SerializeField] private AmountDisplay amountDisplay;
-        [SerializeField] private InputAction stackMoveAction;
         
         public InventoryDragItem DragItem => dragItem;
 
@@ -22,13 +20,15 @@ namespace RPG.UI.Inventory
         private void OnEnable()
         {
             dragItem.onDragging.AddListener(HandleDragging);
-            stackMoveAction.Enable();
+            dragItem.onBeginDrag.AddListener(HandleBeginDrag);
+            dragItem.onEndDrag.AddListener(HandleEndDrag);
         }
 
         private void OnDisable()
         {
             dragItem.onDragging.RemoveListener(HandleDragging);
-            stackMoveAction.Disable();
+            dragItem.onBeginDrag.RemoveListener(HandleBeginDrag);
+            dragItem.onEndDrag.RemoveListener(HandleEndDrag);
         }
 
         public void Setup(PlayerInventory playerInventory, int slotIndex)
@@ -36,7 +36,7 @@ namespace RPG.UI.Inventory
             inventory = playerInventory;
             index = slotIndex;
             icon.SetItem(inventory.GetItemInSlot(index));
-            amountDisplay.SetAmount(inventory.GetNumberInSlot(index));
+            amountDisplay.SetAmount(inventory.GetAmountInSlot(index));
         }
 
         public int MaxAcceptable(InventoryItem item)
@@ -49,9 +49,9 @@ namespace RPG.UI.Inventory
             inventory.AddItemsBeginningAtSlot(index, item, number);
         }
 
-        public int GetNumber()
+        public int GetAmount()
         {
-            return 1;
+            return inventory.GetAmountInSlot(index);
         }
 
         public void RemoveItems(int number)
@@ -64,24 +64,34 @@ namespace RPG.UI.Inventory
             return inventory.GetItemInSlot(index);
         }
         
+        private void HandleBeginDrag()
+        {
+            amountDisplay.SetAmount(0);
+        }
+
+        private void HandleEndDrag()
+        {
+            amountDisplay.SetAmount(inventory.GetAmountInSlot(index));
+        }
+
         private void HandleDragging(bool dragging)
         {
-            if (dragging)
-            {
-                if (inventory.GetNumberInSlot(index) > 1)
-                {
-                    tempIcon = Instantiate(icon.gameObject, icon.transform.parent);
-                    amountDisplay.SetAmount(inventory.GetNumberInSlot(index) - 1);
-                }
-            }
-            else
-            {
-                if (tempIcon)
-                {
-                    Destroy(tempIcon);
-                    amountDisplay.SetAmount(inventory.GetNumberInSlot(index));
-                }
-            }
+            // if (dragging)
+            // {
+            //     if (inventory.GetNumberInSlot(index) > 1)
+            //     {
+            //         tempIcon = Instantiate(icon.gameObject, icon.transform.parent);
+            //         amountDisplay.SetAmount(inventory.GetNumberInSlot(index) - 1);
+            //     }
+            // }
+            // else
+            // {
+            //     if (tempIcon)
+            //     {
+            //         Destroy(tempIcon);
+            //         amountDisplay.SetAmount(inventory.GetNumberInSlot(index));
+            //     }
+            // }
         }
     }
 }

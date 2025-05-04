@@ -12,11 +12,12 @@ namespace RPG.Pickups
         [SerializeField] private int amount = 1;
 
         private IInventoriable spawnedPickup;
-        private int amountPickedUp;
+        private int remainingAmount;
 
         private void Awake()
         {
             SpawnPickup();
+            remainingAmount = amount;
         }
 
         private void SpawnPickup()
@@ -39,21 +40,25 @@ namespace RPG.Pickups
 
         private void HandlePickedUp(IInventoriable inventoriablePickedUp)
         {
-            amountPickedUp = inventoriablePickedUp.GetAmount();
+            remainingAmount = inventoriablePickedUp.GetAmount();
         }
 
         public JToken CaptureAsJToken()
         {
-            return amountPickedUp;
+            return remainingAmount;
         }
 
         public void RestoreFromJToken(JToken state)
         {
-            amount = (int)state;
-            if (amount <= 0)
+            DestroyPickup();
+            remainingAmount = (int)state;
+            if (remainingAmount <= 0)
             {
-                DestroyPickup();
+                return;
             }
+            
+            amount = remainingAmount;
+            SpawnPickup();
         }
     }
 }

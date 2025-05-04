@@ -15,7 +15,7 @@
         /// <summary>
         /// What is the quantity of items in this source?
         /// </summary>
-        int GetNumber();
+        int GetAmount();
 
         /// <summary>
         /// Remove a given number of items from the source.

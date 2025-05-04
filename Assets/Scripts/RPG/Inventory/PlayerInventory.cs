@@ -49,7 +49,8 @@ namespace RPG.Inventory
 
         public int AddToFirstAvailableSlot(InventoryItem item, int amount)
         {
-            return AddItemsBeginningAtSlot(0, item, amount);
+            var index = FindNonFullStack(item);
+            return AddItemsBeginningAtSlot(index == -1 ? 0 : index, item, amount);
         }
 
         public bool HasItem(InventoryItem item)
@@ -67,24 +68,22 @@ namespace RPG.Inventory
             return slots[slotNumber].InventoryItem;
         }
 
-        public int GetNumberInSlot(int slotNumber)
+        public int GetAmountInSlot(int slotNumber)
         {
             return !slots[slotNumber].InventoryItem ? 0 : slots[slotNumber].CurrentStackSize;
         }
 
         public int RemoveFromSlot(int slotNumber, int amount)
         {
-            var slot = slots[slotNumber];
+            if (slots[slotNumber].InventoryItem == null) return 0;
 
-            if (slot.InventoryItem == null) return 0;
+            var removedAmount = Math.Min(amount, slots[slotNumber].CurrentStackSize);
+            slots[slotNumber].CurrentStackSize -= removedAmount;
 
-            var removedAmount = Math.Min(amount, slot.CurrentStackSize);
-            slot.CurrentStackSize -= removedAmount;
-
-            if (slot.CurrentStackSize <= 0)
+            if (slots[slotNumber].CurrentStackSize <= 0)
             {
-                slot.InventoryItem = null;
-                slot.CurrentStackSize = 0;
+                slots[slotNumber].InventoryItem = null;
+                slots[slotNumber].CurrentStackSize = 0;
             }
 
             OnInventoryChanged?.Invoke();

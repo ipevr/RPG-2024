@@ -967,6 +967,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helmet Pickup Spawner (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: fcdd7d69-56ad-4736-a85d-2684a95f2ab8
@@ -1181,6 +1185,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
@@ -1801,6 +1809,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helmet Pickup Spawner (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: a853b589-5339-41e0-9fe1-16692534f18d
@@ -2167,6 +2179,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
@@ -3224,6 +3240,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup Helmet Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: 1d1f1309-2bdb-49eb-8ad1-78f2021e1619
@@ -3547,6 +3567,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helmet Pickup Spawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: 308aaca7-7b29-4d4d-8ab4-dda90f453835
@@ -3762,6 +3786,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
@@ -4446,6 +4474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helmet Pickup Spawner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: 3c93331b-d0c7-4968-87dd-2871696493a3
@@ -4762,6 +4794,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 21c0bbb2630dffe448037ebfe9ca6739, type: 3}
       propertyPath: m_Name
       value: Sword Pickup Spawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 21c0bbb2630dffe448037ebfe9ca6739, type: 3}
+      propertyPath: amount
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 21c0bbb2630dffe448037ebfe9ca6739, type: 3}
       propertyPath: uniqueIdentifier
@@ -5238,6 +5274,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
@@ -7313,6 +7353,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helmet Pickup Spawner (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: f1d7aa03-096e-4e48-a600-33dd8afc2a50
@@ -8032,6 +8076,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
@@ -9835,6 +9883,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helmet Pickup Spawner (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: 070b7e4b-1832-48b4-b3a1-927485424729
@@ -11055,6 +11107,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
@@ -12573,6 +12629,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Helmet Pickup Spawner (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
       value: 3914c38a-df96-4adb-990d-418a93170dd0
@@ -12638,6 +12698,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
@@ -13118,6 +13182,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: m_Name
       value: Helmet Pickup Spawner (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1710073138769123637, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
+      propertyPath: amount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744542707521103390, guid: 3741d2f989b37ac4db2283191fd1553b, type: 3}
       propertyPath: uniqueIdentifier
