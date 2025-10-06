@@ -18,12 +18,12 @@ namespace RPG.Inventory
             return player.GetComponent<PlayerEquipment>();
         }
         
-        public void PutInSlot(EquipableItem item, EquipLocation location)
+        public void PutInSlot(IEquipableItem item, EquipLocation location)
         {
             slots[(int) location].SetItem(item);
         }
         
-        public EquipableItem GetItemInSlot(EquipLocation location) 
+        public IEquipableItem GetItemInSlot(EquipLocation location) 
         {
             return slots[(int) location].Item;
         }

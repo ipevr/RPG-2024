@@ -15,14 +15,9 @@ namespace RPG.UI.Inventory
             equipment = PlayerEquipment.GetPlayerEquipment();
         }
 
-        public void Setup(PlayerEquipment playerEquipment)
-        {
-            equipment = playerEquipment;
-        }
-        
         public override InventoryItem GetItem()
         {
-            return equipment.GetItemInSlot(location);
+            return equipment.GetItemInSlot(location) as InventoryItem;
         }
 
         public override int GetAmount()
@@ -38,13 +33,15 @@ namespace RPG.UI.Inventory
 
         public override void AddItems(InventoryItem item, int number)
         {
-            equipment.PutInSlot(item as EquipableItem, location);
-            icon.SetItem(equipment.GetItemInSlot(location));
+            equipment.PutInSlot(item as IEquipableItem, location);
+            icon.SetItem(equipment.GetItemInSlot(location) as InventoryItem);
         }
 
         public override int MaxAcceptable(InventoryItem item)
         {
-            return 1;
+            if (item is not IEquipableItem equipableItem) return 0;
+            
+            return equipableItem.EquipLocation != location ? 0 : 1;
         }
         
         protected override void HandleBeginDrag(bool singleMode)

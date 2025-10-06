@@ -4,19 +4,19 @@ namespace RPG.Inventory
 {
     public class EquipmentSlot
     {
-        public EquipableItem Item { get; private set; }
+        public IEquipableItem Item { get; private set; }
 
         public EquipmentSlot()
         {
             Item = null;
         }
 
-        public EquipmentSlot(EquipableItem item)
+        public EquipmentSlot(IEquipableItem item)
         {
             Item = item;
         }
 
-        public void SetItem(EquipableItem item)
+        public void SetItem(IEquipableItem item)
         {
             Item = item;
         }
