@@ -58,7 +58,6 @@ namespace Utils.UI.Dragging
             // Else won't get the drop event.
             GetComponent<CanvasGroup>().blocksRaycasts = false;
             transform.SetParent(parentCanvas.transform, true);
-            Debug.Log("BeginDrag");
         }
 
         protected virtual void OnDragHandler(PointerEventData eventData)
@@ -86,8 +85,6 @@ namespace Utils.UI.Dragging
             {
                 DropItemIntoContainer(container);
             }
-
-            Debug.Log("EndDrag");
         }
 
         private IDragDestination<T> GetContainer(PointerEventData eventData)

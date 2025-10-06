@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8037144399414384819
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1644789666242264749, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: uniqueIdentifier
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7211749192096575907, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_Name
+      value: Potion Pickup Spawner 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7690130399570477833, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8661207453634396550, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
+      propertyPath: inventoryItem
+      value: 
+      objectReference: {fileID: 11400000, guid: 88c45e455077b9f45a4521e056cd8fc3, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 54fc9618f028088488a2037dd2ec794d, type: 3}
