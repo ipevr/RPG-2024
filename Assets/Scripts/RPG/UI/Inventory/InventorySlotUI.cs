@@ -25,7 +25,7 @@ namespace RPG.UI.Inventory
 
         public override void AddItems(InventoryItem item, int number)
         {
-            inventory.AddItemsBeginningAtSlot(index, item as ConsumableItem, number);
+            inventory.AddItemsBeginningAtSlot(index, item, number);
         }
 
         public override int GetAmount()
