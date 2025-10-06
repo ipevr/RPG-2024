@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace RPG.Inventory
 {
     public class PlayerEquipment : MonoBehaviour
     {
-        private EquipmentSlot[] slots;
+        private Dictionary<EquipLocation, IEquipableItem> slotDictionary;
 
         private void Awake()
         {
@@ -20,30 +21,30 @@ namespace RPG.Inventory
         
         public void PutInSlot(IEquipableItem item, EquipLocation location)
         {
-            slots[(int) location].SetItem(item);
+            slotDictionary[location] = item;
         }
         
         public IEquipableItem GetItemInSlot(EquipLocation location) 
         {
-            return slots[(int) location].Item;
+            return slotDictionary[location];
         }
 
         public bool IsEquipped(EquipLocation location)
         {
-            return slots[(int) location].Item != null;
+            return slotDictionary[location] != null;
         }
 
         public void RemoveFromSlot(EquipLocation location)
         {
-            slots[(int) location].RemoveItem();
+            slotDictionary[location] = null;
         }
 
         private void InitializeSlots()
         {
-            slots = new EquipmentSlot[Enum.GetNames(typeof(EquipLocation)).Length];
-            for (var i = 0; i < slots.Length; i++)
+            slotDictionary = new Dictionary<EquipLocation, IEquipableItem>();
+            foreach (EquipLocation equipLocation in Enum.GetValues(typeof(EquipLocation)))
             {
-                slots[i] = new EquipmentSlot();
+                slotDictionary.Add(equipLocation, null);
             }
         }
 
