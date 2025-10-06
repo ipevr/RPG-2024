@@ -5,15 +5,12 @@ using RPG.Inventory;
 
 namespace RPG.UI.Inventory
 {
-    public class InventoryUI : MonoBehaviour
+    public class InventoryUI : PossessionUI
     {
         [SerializeField] private InventorySlotUI inventorySlotPrefab;
 
-        public UnityEvent<bool> onDragging;
-        
         private PlayerInventory playerInventory;
-        private List<InventorySlotUI> inventorySlots;
-        
+
         private void Awake()
         {
             playerInventory = PlayerInventory.GetPlayerInventory();
@@ -28,15 +25,19 @@ namespace RPG.UI.Inventory
         private void Redraw()
         {
             DestroyAllSlots();
+            InitializeSlots();
+            RegisterPossessionSlotsDragEvents();
+        }
 
+        protected override void InitializeSlots()
+        {
+            possessionSlots = new List<PossessionSlotUI>();
             for (var i = 0; i < playerInventory.GetSize(); i++)
             {
                 var itemUi = Instantiate(inventorySlotPrefab, transform);
                 itemUi.Setup(playerInventory, i);
-                inventorySlots.Add(itemUi);
+                possessionSlots.Add(itemUi);
             }
-
-            RegisterInventorySlotsDragEvents();
         }
 
         private void DestroyAllSlots()
@@ -46,33 +47,9 @@ namespace RPG.UI.Inventory
                 Destroy(child.gameObject);
             }
 
-            UnRegisterInventorySlotsDragEvents();
-            inventorySlots = new List<InventorySlotUI>();
+            UnRegisterPossessionSlotsDragEvents();
+            possessionSlots = new List<PossessionSlotUI>();
         }
 
-        private void RegisterInventorySlotsDragEvents()
-        {
-            if (inventorySlots == null || inventorySlots.Count == 0) return;
-
-            foreach (var slot in inventorySlots)
-            {
-                slot.DragItem.onDragging.AddListener(HandleDragging);
-            }
-        }
-
-        private void UnRegisterInventorySlotsDragEvents()
-        {
-            if (inventorySlots == null || inventorySlots.Count == 0) return;
-            
-            foreach (var slot in inventorySlots)
-            {
-                slot.DragItem.onDragging.RemoveListener(HandleDragging);
-            }
-        }
-
-        private void HandleDragging(bool status)
-        {
-            onDragging?.Invoke(status);
-        }
     }
 }

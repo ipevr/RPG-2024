@@ -1,35 +1,14 @@
-﻿using System;
+﻿using RPG.Inventory;
 using UnityEngine;
-using Utils.UI.Dragging;
-using RPG.Inventory;
 
 namespace RPG.UI.Inventory
 {
-    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
+    public class InventorySlotUI : PossessionSlotUI
     {
-        [SerializeField] private InventoryItemIcon icon;
-        [SerializeField] private InventoryDragItem dragItem;
         [SerializeField] private AmountDisplay amountDisplay;
         
-        public InventoryDragItem DragItem => dragItem;
-
-        private int index;
         private PlayerInventory inventory;
-        private GameObject tempIcon;
-
-        private void OnEnable()
-        {
-            dragItem.onDragging.AddListener(HandleDragging);
-            dragItem.onBeginDrag.AddListener(HandleBeginDrag);
-            dragItem.onEndDrag.AddListener(HandleEndDrag);
-        }
-
-        private void OnDisable()
-        {
-            dragItem.onDragging.RemoveListener(HandleDragging);
-            dragItem.onBeginDrag.RemoveListener(HandleBeginDrag);
-            dragItem.onEndDrag.RemoveListener(HandleEndDrag);
-        }
+        private int index;
 
         public void Setup(PlayerInventory playerInventory, int slotIndex)
         {
@@ -38,60 +17,59 @@ namespace RPG.UI.Inventory
             icon.SetItem(inventory.GetItemInSlot(index));
             amountDisplay.SetAmount(inventory.GetAmountInSlot(index));
         }
-
-        public int MaxAcceptable(InventoryItem item)
+        
+        public override int MaxAcceptable(InventoryItem item)
         {
-            return inventory.MaxAcceptable(item);
+            return inventory.MaxAcceptable(item as ConsumableItem);
         }
 
-        public void AddItems(InventoryItem item, int number)
+        public override void AddItems(InventoryItem item, int number)
         {
-            inventory.AddItemsBeginningAtSlot(index, item, number);
+            inventory.AddItemsBeginningAtSlot(index, item as ConsumableItem, number);
         }
 
-        public int GetAmount()
+        public override int GetAmount()
         {
+            // Todo: Implement Single-Drag of items. To implement it properly, the dragging util has to be modified.
+            // In dragging util, a stack where only one item is dragged, must remain visible.
+            // if (Keyboard.current.shiftKey.isPressed && inventory.GetAmountInSlot(index) > 1)
+            // {
+            //     return 1;
+            // }
             return inventory.GetAmountInSlot(index);
         }
 
-        public void RemoveItems(int number)
+        public override void RemoveItems(int number)
         {
             inventory.RemoveFromSlot(index, number);
         }
 
-        public InventoryItem GetItem()
+        public override InventoryItem GetItem()
         {
             return inventory.GetItemInSlot(index);
         }
-        
-        private void HandleBeginDrag()
+
+        protected override void HandleBeginDrag(bool singleMode)
         {
-            amountDisplay.SetAmount(0);
+            if (singleMode)
+            {
+                amountDisplay.SetAmount(inventory.GetAmountInSlot(index) - 1);
+                // inventory.RemoveFromSlot(index, 1);
+            }
+            else
+            {
+                amountDisplay.SetAmount(0);
+            }
         }
 
-        private void HandleEndDrag()
+        protected override void HandleEndDrag(bool singleMode)
         {
             amountDisplay.SetAmount(inventory.GetAmountInSlot(index));
         }
 
-        private void HandleDragging(bool dragging)
+        protected override void HandleDragging(bool dragging)
         {
-            // if (dragging)
-            // {
-            //     if (inventory.GetNumberInSlot(index) > 1)
-            //     {
-            //         tempIcon = Instantiate(icon.gameObject, icon.transform.parent);
-            //         amountDisplay.SetAmount(inventory.GetNumberInSlot(index) - 1);
-            //     }
-            // }
-            // else
-            // {
-            //     if (tempIcon)
-            //     {
-            //         Destroy(tempIcon);
-            //         amountDisplay.SetAmount(inventory.GetNumberInSlot(index));
-            //     }
-            // }
+            
         }
     }
 }

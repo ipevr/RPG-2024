@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using UnityEngine;
 using RPG.Inventory;
 using RPG.Saving;
+using UnityEngine.Serialization;
 
 namespace RPG.Pickups
 {

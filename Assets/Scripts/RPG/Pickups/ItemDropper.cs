@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
-using NUnit.Framework.Internal.Execution;
 using UnityEngine;
 using RPG.Inventory;
 using RPG.Saving;
-using UnityEngine.EventSystems;
 
 namespace RPG.Pickups
 {
@@ -83,7 +79,7 @@ namespace RPG.Pickups
                 var position = stateDict["position"].ToVector3();
                 var amount = (int)stateDict["amount"];
                 
-                SpawnPickup(InventoryItem.GetFromId(itemId), position, amount);
+                SpawnPickup(InventoryItem.GetFromId(itemId) as ConsumableItem, position, amount);
                 
             }
             Debug.Log("Restored dropped items");

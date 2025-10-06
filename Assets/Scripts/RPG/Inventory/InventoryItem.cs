@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace RPG.Inventory
 {
-    [CreateAssetMenu(menuName = "RPG/Inventory/Item")]
-    public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
+    public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     {
         [Tooltip("Auto-generated UUID for saving / loading. Clear this field if you want to generate a new one.")]
         [SerializeField] private string itemId;
@@ -18,9 +16,6 @@ namespace RPG.Inventory
         [SerializeField] private Sprite icon;
         [Tooltip("The prefab that should be spawned when this item is dropped.")]
         [SerializeField] private GameObject inventoriablePrefab;
-        [Tooltip("If 1, item can not be stacked. Otherwise gives the number of how much items of this type can be stacked in the same inventory slot.")]
-        [Range(1, 100)]
-        [SerializeField] private int maxStackSize = 1;
 
         private static Dictionary<string, InventoryItem> itemLookupCache;
 
@@ -28,7 +23,6 @@ namespace RPG.Inventory
         public string DisplayName => displayName;
         public string Description => description;
         public Sprite Icon => icon;
-        public int MaxStackSize => maxStackSize;
 
         public static InventoryItem GetFromId(string itemId)
         {
@@ -37,9 +31,9 @@ namespace RPG.Inventory
                 CreateItemLookupCache();
             }
             
-            if (itemId == null || !itemLookupCache!.TryGetValue(itemId, out var inventoryItem)) return null;
+            if (itemId == null || !itemLookupCache!.TryGetValue(itemId, out var possessionItem)) return null;
             
-            return inventoryItem;
+            return possessionItem;
         }
 
         public IInventoriable GetInventoriable()

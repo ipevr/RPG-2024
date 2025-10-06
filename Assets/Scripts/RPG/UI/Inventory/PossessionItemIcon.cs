@@ -8,7 +8,7 @@ namespace RPG.UI.Inventory
     /// To be put on the inventory icon representing an inventory item. Allows the slot to update the icon and number.
     /// </summary>
     [RequireComponent(typeof(Image))]
-    public class InventoryItemIcon : MonoBehaviour
+    public class PossessionItemIcon : MonoBehaviour
     {
         public void SetItem(InventoryItem item)
         {
