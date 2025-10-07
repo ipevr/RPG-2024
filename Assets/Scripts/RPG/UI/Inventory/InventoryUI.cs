@@ -31,12 +31,12 @@ namespace RPG.UI.Inventory
 
         protected override void InitializeSlots()
         {
-            possessionSlots = new List<PossessionSlotUI>();
+            slots = new List<PossessionSlotUI>();
             for (var i = 0; i < playerInventory.GetSize(); i++)
             {
-                var itemUi = Instantiate(inventorySlotPrefab, transform);
-                itemUi.Setup(playerInventory, i);
-                possessionSlots.Add(itemUi);
+                var inventorySlot = Instantiate(inventorySlotPrefab, transform);
+                inventorySlot.Setup(playerInventory, i);
+                slots.Add(inventorySlot);
             }
         }
 
@@ -48,7 +48,7 @@ namespace RPG.UI.Inventory
             }
 
             UnRegisterPossessionSlotsDragEvents();
-            possessionSlots = new List<PossessionSlotUI>();
+            slots = new List<PossessionSlotUI>();
         }
 
     }

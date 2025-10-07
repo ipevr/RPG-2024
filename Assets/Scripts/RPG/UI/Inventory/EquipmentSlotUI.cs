@@ -1,23 +1,31 @@
 ﻿using System;
-using RPG.Inventory;
 using UnityEngine;
+using RPG.Inventory;
 
 namespace RPG.UI.Inventory
 {
     public class EquipmentSlotUI : PossessionSlotUI
     {
         [SerializeField] private EquipLocation location;
-        
+
+        public EquipLocation Location => location;
+
         private PlayerEquipment equipment;
 
-        private void Awake()
+        public void Setup(PlayerEquipment playerEquipment)
         {
-            equipment = PlayerEquipment.GetPlayerEquipment();
+            equipment = playerEquipment;
+        }
+
+        public void SetItem(EquipableItem item)
+        {
+            equipment.PutInSlot(item, location);
+            icon.SetItem(equipment.GetItemInSlot(location));
         }
 
         public override InventoryItem GetItem()
         {
-            return equipment.GetItemInSlot(location) as InventoryItem;
+            return equipment.GetItemInSlot(location);
         }
 
         public override int GetAmount()
@@ -33,8 +41,8 @@ namespace RPG.UI.Inventory
 
         public override void AddItems(InventoryItem item, int number)
         {
-            equipment.PutInSlot(item as IEquipableItem, location);
-            icon.SetItem(equipment.GetItemInSlot(location) as InventoryItem);
+            equipment.PutInSlot(item as EquipableItem, location);
+            icon.SetItem(equipment.GetItemInSlot(location));
         }
 
         public override int MaxAcceptable(InventoryItem item)

@@ -7,7 +7,7 @@ namespace RPG.UI.Inventory
 {
     public abstract class PossessionUI : MonoBehaviour
     {
-        protected List<PossessionSlotUI> possessionSlots;
+        protected List<PossessionSlotUI> slots;
 
         public UnityEvent<bool> onDragging;
         
@@ -15,9 +15,9 @@ namespace RPG.UI.Inventory
 
         protected void RegisterPossessionSlotsDragEvents()
         {
-            if (possessionSlots == null || possessionSlots.Count == 0) return;
+            if (slots == null || slots.Count == 0) return;
 
-            foreach (var slot in possessionSlots)
+            foreach (var slot in slots)
             {
                 slot.DragItem.onDragging.AddListener(HandleDragging);
             }
@@ -25,9 +25,9 @@ namespace RPG.UI.Inventory
 
         protected void UnRegisterPossessionSlotsDragEvents()
         {
-            if (possessionSlots == null || possessionSlots.Count == 0) return;
+            if (slots == null || slots.Count == 0) return;
             
-            foreach (var slot in possessionSlots)
+            foreach (var slot in slots)
             {
                 slot.DragItem.onDragging.RemoveListener(HandleDragging);
             }

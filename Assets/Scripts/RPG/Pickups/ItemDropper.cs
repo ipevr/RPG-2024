@@ -79,7 +79,7 @@ namespace RPG.Pickups
                 var position = stateDict["position"].ToVector3();
                 var amount = (int)stateDict["amount"];
                 
-                SpawnPickup(InventoryItem.GetFromId(itemId) as ConsumableItem, position, amount);
+                SpawnPickup(InventoryItem.GetFromId(itemId), position, amount);
                 
             }
             Debug.Log("Restored dropped items");

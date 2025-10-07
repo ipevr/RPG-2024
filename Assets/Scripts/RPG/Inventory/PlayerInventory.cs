@@ -215,13 +215,14 @@ namespace RPG.Inventory
             if (state is not JObject jObject) return;
             
             IDictionary<string, JToken> stateDict = jObject;
+            slots.value = InitializeSlots();
             
             foreach (var slot in stateDict)
             {
                 var index = int.Parse(slot.Key);
                 var slotState = slot.Value.ToObject<SlotState>();
                 var inventoryItem = InventoryItem.GetFromId(slotState.ItemId);
-                AddItemsBeginningAtSlot(index, inventoryItem as ConsumableItem, slotState.Amount);
+                AddItemsBeginningAtSlot(index, inventoryItem, slotState.Amount);
             }
         }
 

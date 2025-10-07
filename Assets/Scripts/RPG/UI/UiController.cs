@@ -26,7 +26,7 @@ namespace RPG.UI
         {
             foreach (var possessionUI in possessionUIs)
             {
-                possessionUI.onDragging.AddListener(HandleInventoryUiDragging);
+                possessionUI.onDragging.AddListener(HandlePossessionUiDragging);
             }
         }
 
@@ -34,11 +34,11 @@ namespace RPG.UI
         {
             foreach (var possessionUI in possessionUIs)
             {
-                possessionUI.onDragging.RemoveListener(HandleInventoryUiDragging);
+                possessionUI.onDragging.RemoveListener(HandlePossessionUiDragging);
             }
         }
         
-        private void HandleInventoryUiDragging(bool isDragging)
+        private void HandlePossessionUiDragging(bool isDragging)
         {
             playerController.AllowInteraction(!isDragging);
         }

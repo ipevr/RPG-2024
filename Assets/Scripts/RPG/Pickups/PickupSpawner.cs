@@ -37,6 +37,8 @@ namespace RPG.Pickups
         private void DestroyPickup()
         {
             spawnedPickup?.Destroy();
+            spawnedPickup?.OnPickupInventoriable.RemoveListener(HandlePickedUp);
+            spawnedPickup = null;
         }
 
         private void HandlePickedUp(IInventoriable inventoriablePickedUp)
