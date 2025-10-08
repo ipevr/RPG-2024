@@ -7,7 +7,7 @@ namespace RPG.Inventory
     public interface IInventoriable
     {
         void Setup(InventoryItem inventoryItem, int amount);
-        IInventoriable Spawn(Vector3 position);
+        IInventoriable Spawn(Vector3 position, Transform parent);
         void Destroy();
         InventoryItem GetItem();
         int GetAmount();

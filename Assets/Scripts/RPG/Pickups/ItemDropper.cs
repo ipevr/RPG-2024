@@ -23,7 +23,7 @@ namespace RPG.Pickups
         private void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int amount)
         {
             var inventoriableItem = item.GetInventoriable();
-            var spawnedItem = inventoriableItem.Spawn(spawnLocation);
+            var spawnedItem = inventoriableItem.Spawn(spawnLocation, transform);
             spawnedItem.Setup(item, amount);
             spawnedItem.OnPickupInventoriable.AddListener(HandlePickup);
             droppedInventoriables.Add(spawnedItem);
@@ -44,6 +44,15 @@ namespace RPG.Pickups
             {
                 droppedInventoriables.Remove(inventoriableItemToBeRemoved);
             }
+        }
+
+        private void DestroyAllDrops()
+        {
+            foreach (var inventoriable in droppedInventoriables)
+            {
+                inventoriable.Destroy();
+            }
+            droppedInventoriables.Clear();
         }
 
         public JToken CaptureAsJToken()
@@ -69,6 +78,8 @@ namespace RPG.Pickups
         {
             if (state is not JArray jArray) return;
             IList<JToken> droppedItemsList = jArray;
+            
+            DestroyAllDrops();
             
             foreach (var jToken in droppedItemsList)
             {

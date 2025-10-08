@@ -72,9 +72,9 @@ namespace RPG.Pickups
             currentAmount = itemAmount;
         }
 
-        public IInventoriable Spawn(Vector3 position)
+        public IInventoriable Spawn(Vector3 position, Transform parent)
         {
-            return Instantiate(this, position, Quaternion.identity);
+            return Instantiate(this, position, Quaternion.identity, parent);
         }
 
         public void Destroy()

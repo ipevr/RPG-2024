@@ -224,6 +224,8 @@ namespace RPG.Inventory
                 var inventoryItem = InventoryItem.GetFromId(slotState.ItemId);
                 AddItemsBeginningAtSlot(index, inventoryItem, slotState.Amount);
             }
+            
+            OnInventoryChanged?.Invoke();
         }
 
         #endregion

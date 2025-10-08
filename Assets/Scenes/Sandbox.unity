@@ -3954,6 +3954,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Potion Pickup Spawner 1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 836802642607679760, guid: e76b43a98c81cdc44bf2e2bfbb67528d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1710073138769123637, guid: e76b43a98c81cdc44bf2e2bfbb67528d, type: 3}
       propertyPath: amount
       value: 20
@@ -11311,6 +11315,10 @@ PrefabInstance:
     - target: {fileID: 836802642607679760, guid: e76b43a98c81cdc44bf2e2bfbb67528d, type: 3}
       propertyPath: m_Name
       value: Potion Pickup Spawner 1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 836802642607679760, guid: e76b43a98c81cdc44bf2e2bfbb67528d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1710073138769123637, guid: e76b43a98c81cdc44bf2e2bfbb67528d, type: 3}
       propertyPath: amount
