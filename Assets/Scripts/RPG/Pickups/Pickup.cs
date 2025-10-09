@@ -1,21 +1,18 @@
-﻿using System;
+﻿using RPG.Inventory;
+using RPG.Movement;
 using UnityEngine;
 using UnityEngine.Events;
-using RPG.Inventory;
-using RPG.Movement;
 
 namespace RPG.Pickups
 {
     public class Pickup : MonoBehaviour, IInventoriable
     {
         [SerializeField] private UnityEvent<int> onPickup;
+        private int currentAmount;
 
         private InventoryItem inventoryItem;
         private PlayerInventory playerInventory;
         private Mover playerMover;
-        private int currentAmount;
-
-        public UnityEvent<IInventoriable> OnPickupInventoriable { get; } = new();
 
         #region Unity Event Functions
 
@@ -27,20 +24,22 @@ namespace RPG.Pickups
         }
 
         #endregion
-        
+
+        public UnityEvent<IInventoriable> OnPickupInventoriable { get; } = new();
+
         #region Public Methods
 
         public bool CanBePickedUp()
         {
             return playerMover.CanMoveTo(transform.position) && playerInventory.HasSpaceFor(inventoryItem);
         }
-        
+
         public void PickupItem(int amount)
         {
             amount = Mathf.Min(amount, currentAmount);
-            
+
             var amountPickedUp = playerInventory.AddToFirstAvailableSlot(inventoryItem, amount);
-            
+
             currentAmount -= amountPickedUp;
 
             if (amountPickedUp > 0)
@@ -49,11 +48,8 @@ namespace RPG.Pickups
                 OnPickupInventoriable?.Invoke(this);
             }
 
-            if (currentAmount <= 0)
-            {
-                Destroy();
-            }
-            
+            if (currentAmount <= 0) Destroy();
+
             Debug.Log($"Picked up item {inventoryItem.name} with amount {amountPickedUp}");
         }
 
@@ -61,9 +57,9 @@ namespace RPG.Pickups
         {
             PickupItem(currentAmount);
         }
-        
+
         #endregion
-        
+
         #region Interface Implementations
 
         public void Setup(InventoryItem item, int itemAmount)
@@ -72,9 +68,9 @@ namespace RPG.Pickups
             currentAmount = itemAmount;
         }
 
-        public IInventoriable Spawn(Vector3 position, Transform parent)
+        public IInventoriable Spawn(Vector3 position)
         {
-            return Instantiate(this, position, Quaternion.identity, parent);
+            return Instantiate(this, position, Quaternion.identity);
         }
 
         public void Destroy()

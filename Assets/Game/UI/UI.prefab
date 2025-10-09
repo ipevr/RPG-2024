@@ -92,7 +92,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208c530a55fd4e58ac223d0bcd1d8e4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventoryUI: {fileID: 5132410739900713525}
 --- !u!1 &7662427454594269773
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +105,7 @@ GameObject:
   - component: {fileID: 1855461054137007003}
   - component: {fileID: 8115267653625911802}
   - component: {fileID: 6583780712997520048}
+  - component: {fileID: 2966943568929555171}
   - component: {fileID: 1464984645113663083}
   m_Layer: 0
   m_Name: Canvas
@@ -227,6 +227,36 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   uiContainer: {fileID: 7824797381378232417}
+--- !u!114 &2966943568929555171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662427454594269773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c69aa4d75a04a458306e32030bbdb97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.UI.ShowHideUI
+  toggleUI:
+    m_Name: Toggle UI
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a2b7bfb3-c782-440a-a548-d77fff7afbb7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: efbaa15a-746e-4eb1-b355-1fbea764a5ff
+      m_Path: <Keyboard>/c
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Toggle UI
+      m_Flags: 0
+    m_Flags: 0
+  uiContainer: {fileID: 6351052828148960899}
 --- !u!114 &1464984645113663083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -555,17 +585,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4734990485307895198, guid: f44f57f148768644682759a458b3f396, type: 3}
   m_PrefabInstance: {fileID: 8334871491740410440}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5132410739900713525 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3788254158840735869, guid: f44f57f148768644682759a458b3f396, type: 3}
-  m_PrefabInstance: {fileID: 8334871491740410440}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c69c68cbc83946f7bc3d018906f28685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7824797381378232417 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2250720870484111913, guid: f44f57f148768644682759a458b3f396, type: 3}
@@ -668,6 +687,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9df2bc74d0bc54c4e832a37b8524d6c3, type: 3}
+--- !u!1 &6351052828148960899 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2691334657660114114, guid: 9df2bc74d0bc54c4e832a37b8524d6c3, type: 3}
+  m_PrefabInstance: {fileID: 9041805805452024385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7875373082814197500 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1166432778499683517, guid: 9df2bc74d0bc54c4e832a37b8524d6c3, type: 3}

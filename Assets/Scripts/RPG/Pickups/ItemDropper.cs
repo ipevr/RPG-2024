@@ -23,7 +23,7 @@ namespace RPG.Pickups
         private void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int amount)
         {
             var inventoriableItem = item.GetInventoriable();
-            var spawnedItem = inventoriableItem.Spawn(spawnLocation, transform);
+            var spawnedItem = inventoriableItem.Spawn(spawnLocation);
             spawnedItem.Setup(item, amount);
             spawnedItem.OnPickupInventoriable.AddListener(HandlePickup);
             droppedInventoriables.Add(spawnedItem);

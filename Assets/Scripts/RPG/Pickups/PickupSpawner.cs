@@ -34,7 +34,7 @@ namespace RPG.Pickups
                 Debug.LogError("IInventoriable is no pickup");
                 return;
             }
-            spawnedPickup = pickup.Spawn(transform.position, transform);
+            spawnedPickup = pickup.Spawn(transform.position);
             spawnedPickup.Setup(inventoryItem, amount);
             spawnedPickup.OnPickupInventoriable.AddListener(HandlePickedUp);
             pickupIsDestroyed = false;
