@@ -22,7 +22,9 @@ namespace RPG.Inventory
         
         public void AddItem(EquipableItem item, EquipLocation location)
         {
-            equippedItems[location] = item;
+            Debug.Assert(item.EquipLocation == location);
+            
+            equippedItems.Add(location, item);
             onEquipmentChanged?.Invoke();
         }
         
@@ -38,7 +40,7 @@ namespace RPG.Inventory
 
         public void RemoveItem(EquipLocation location)
         {
-            equippedItems[location] = null;
+            equippedItems.Remove(location);
             onEquipmentChanged?.Invoke();
         }
 
@@ -61,7 +63,7 @@ namespace RPG.Inventory
             IDictionary<string, JToken> equipmentContent = state;
             foreach (var item in equippedItems)
             {
-                equipmentContent.Add(item.Key.ToString(), JToken.FromObject(item.Value ? item.Value.ItemId : string.Empty));
+                equipmentContent.Add(item.Key.ToString(), JToken.FromObject(item.Value.ItemId));
             }
             
             return state;
@@ -72,13 +74,14 @@ namespace RPG.Inventory
             if (state is not JObject jObject) return;
             
             IDictionary<string, JToken> stateDict = jObject;
+            equippedItems.Clear();
 
             foreach (var item in stateDict)
             {
                 var location = (EquipLocation)Enum.Parse(typeof(EquipLocation), item.Key);
                 var itemId = item.Value.ToObject<string>();
                 
-                var itemInstance = string.IsNullOrEmpty(itemId) ? null : InventoryItem.GetFromId(itemId);
+                var itemInstance = InventoryItem.GetFromId(itemId);
                 AddItem(itemInstance as EquipableItem, location);
             }
         }
