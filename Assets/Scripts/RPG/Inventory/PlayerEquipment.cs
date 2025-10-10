@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using Utils;
-using RPG.Saving;
 using UnityEngine.Events;
-using UnityEngine.Serialization;
+using RPG.Saving;
 
 namespace RPG.Inventory
 {
     public class PlayerEquipment : MonoBehaviour, ISaveable
     {
-        private LazyValue<Dictionary<EquipLocation, EquipableItem>> equippedItems;
+        private readonly Dictionary<EquipLocation, EquipableItem> equippedItems = new();
 
         public UnityEvent onEquipmentChanged;
 
-        private void Awake()
-        {
-            equippedItems = new LazyValue<Dictionary<EquipLocation, EquipableItem>>(InitializeSlots);
-        }
 
         public static PlayerEquipment GetPlayerEquipment()
         {
@@ -26,26 +20,26 @@ namespace RPG.Inventory
             return player.GetComponent<PlayerEquipment>();
         }
         
-        public void PutInSlot(EquipableItem item, EquipLocation location)
+        public void AddItem(EquipableItem item, EquipLocation location)
         {
-            equippedItems.value[location] = item;
-            onEquipmentChanged.Invoke();
+            equippedItems[location] = item;
+            onEquipmentChanged?.Invoke();
         }
         
-        public EquipableItem GetItemInSlot(EquipLocation location) 
+        public EquipableItem GetItem(EquipLocation location)
         {
-            return equippedItems.value[location];
+            return equippedItems.GetValueOrDefault(location);
         }
 
         public bool IsEquipped(EquipLocation location)
         {
-            return equippedItems.value[location] != null;
+            return equippedItems.ContainsKey(location);
         }
 
-        public void RemoveFromSlot(EquipLocation location)
+        public void RemoveItem(EquipLocation location)
         {
-            equippedItems.value[location] = null;
-            onEquipmentChanged.Invoke();
+            equippedItems[location] = null;
+            onEquipmentChanged?.Invoke();
         }
 
         private Dictionary<EquipLocation, EquipableItem> InitializeSlots()
@@ -65,7 +59,7 @@ namespace RPG.Inventory
         {
             var state = new JObject();
             IDictionary<string, JToken> equipmentContent = state;
-            foreach (var item in equippedItems.value)
+            foreach (var item in equippedItems)
             {
                 equipmentContent.Add(item.Key.ToString(), JToken.FromObject(item.Value ? item.Value.ItemId : string.Empty));
             }
@@ -85,7 +79,7 @@ namespace RPG.Inventory
                 var itemId = item.Value.ToObject<string>();
                 
                 var itemInstance = string.IsNullOrEmpty(itemId) ? null : InventoryItem.GetFromId(itemId);
-                PutInSlot(itemInstance as EquipableItem, location);
+                AddItem(itemInstance as EquipableItem, location);
             }
         }
 

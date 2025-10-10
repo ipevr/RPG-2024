@@ -24,7 +24,7 @@ namespace RPG.UI.Inventory
 
         public override InventoryItem GetItem()
         {
-            return equipment.GetItemInSlot(location);
+            return equipment.GetItem(location);
         }
 
         public override int GetAmount()
@@ -34,12 +34,12 @@ namespace RPG.UI.Inventory
 
         public override void RemoveItems(int number)
         {
-            equipment.RemoveFromSlot(location);
+            equipment.RemoveItem(location);
         }
 
         public override void AddItems(InventoryItem item, int number)
         {
-            equipment.PutInSlot(item as EquipableItem, location);
+            equipment.AddItem(item as EquipableItem, location);
         }
 
         public override int MaxAcceptable(InventoryItem item)
@@ -50,7 +50,7 @@ namespace RPG.UI.Inventory
 
         private void RedrawUI()
         {
-            icon.SetItem(equipment.GetItemInSlot(location));
+            icon.SetItem(equipment.GetItem(location));
         }
         
     }
