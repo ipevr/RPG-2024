@@ -5,11 +5,12 @@ using RPG.Inventory;
 
 namespace RPG.UI.Inventory
 {
-    public class InventoryUI : PossessionUI
+    public class InventoryUI : MonoBehaviour
     {
         [SerializeField] private InventorySlotUI inventorySlotPrefab;
 
         private PlayerInventory playerInventory;
+        private List<PossessionSlotUI> slots;
 
         private void Awake()
         {
@@ -26,18 +27,6 @@ namespace RPG.UI.Inventory
         {
             DestroyAllSlots();
             InitializeSlots();
-            RegisterPossessionSlotsDragEvents();
-        }
-
-        protected override void InitializeSlots()
-        {
-            slots = new List<PossessionSlotUI>();
-            for (var i = 0; i < playerInventory.GetSize(); i++)
-            {
-                var inventorySlot = Instantiate(inventorySlotPrefab, transform);
-                inventorySlot.Setup(playerInventory, i);
-                slots.Add(inventorySlot);
-            }
         }
 
         private void DestroyAllSlots()
@@ -47,9 +36,18 @@ namespace RPG.UI.Inventory
                 Destroy(child.gameObject);
             }
 
-            UnRegisterPossessionSlotsDragEvents();
             slots = new List<PossessionSlotUI>();
         }
 
+        private void InitializeSlots()
+        {
+            slots = new List<PossessionSlotUI>();
+            for (var i = 0; i < playerInventory.GetSize(); i++)
+            {
+                var inventorySlot = Instantiate(inventorySlotPrefab, transform);
+                inventorySlot.Setup(playerInventory, i);
+                slots.Add(inventorySlot);
+            }
+        }
     }
 }

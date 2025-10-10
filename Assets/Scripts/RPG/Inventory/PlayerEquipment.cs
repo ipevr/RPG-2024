@@ -5,6 +5,7 @@ using UnityEngine;
 using Utils;
 using RPG.Saving;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace RPG.Inventory
 {
@@ -12,7 +13,7 @@ namespace RPG.Inventory
     {
         private LazyValue<Dictionary<EquipLocation, EquipableItem>> equippedItems;
 
-        public UnityEvent OnEquipmentRestored;
+        public UnityEvent onEquipmentChanged;
 
         private void Awake()
         {
@@ -28,6 +29,7 @@ namespace RPG.Inventory
         public void PutInSlot(EquipableItem item, EquipLocation location)
         {
             equippedItems.value[location] = item;
+            onEquipmentChanged.Invoke();
         }
         
         public EquipableItem GetItemInSlot(EquipLocation location) 
@@ -43,6 +45,7 @@ namespace RPG.Inventory
         public void RemoveFromSlot(EquipLocation location)
         {
             equippedItems.value[location] = null;
+            onEquipmentChanged.Invoke();
         }
 
         private Dictionary<EquipLocation, EquipableItem> InitializeSlots()
@@ -84,8 +87,6 @@ namespace RPG.Inventory
                 var itemInstance = string.IsNullOrEmpty(itemId) ? null : InventoryItem.GetFromId(itemId);
                 PutInSlot(itemInstance as EquipableItem, location);
             }
-            
-            OnEquipmentRestored.Invoke();
         }
 
         #endregion

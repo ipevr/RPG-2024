@@ -66,10 +66,5 @@ namespace RPG.UI.Inventory
         {
             amountDisplay.SetAmount(inventory.GetAmountInSlot(index));
         }
-
-        protected override void HandleDragging(bool dragging)
-        {
-            
-        }
     }
 }

@@ -56,6 +56,12 @@ namespace RPG.Control
         
         #region Public Methods
 
+        public static PlayerController GetPlayerController()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            return player.GetComponent<PlayerController>();
+        }
+        
         public void AllowInteraction(bool status)
         {
             interactionAllowed = status;

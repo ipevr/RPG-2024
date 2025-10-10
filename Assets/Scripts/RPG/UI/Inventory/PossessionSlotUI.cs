@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils.UI.Dragging;
+using RPG.Control;
 using RPG.Inventory;
 
 namespace RPG.UI.Inventory
@@ -11,7 +13,14 @@ namespace RPG.UI.Inventory
         [SerializeField] protected PossessionDragItem dragItem;
         
         public PossessionDragItem DragItem => dragItem;
+        public UnityEvent<bool> onDragging;
 
+        private PlayerController playerController;
+
+        public virtual void Awake()
+        {
+            playerController = PlayerController.GetPlayerController();
+        }
 
         private void OnEnable()
         {
@@ -32,10 +41,13 @@ namespace RPG.UI.Inventory
         public abstract int MaxAcceptable(InventoryItem item);
         public abstract int GetAmount();
         public abstract void RemoveItems(int number);
-        protected abstract void HandleBeginDrag(bool singleMode);
+        protected virtual void HandleBeginDrag(bool singleMode){}
 
-        protected abstract void HandleEndDrag(bool singleMode);
+        protected virtual void HandleEndDrag(bool singleMode){}
 
-        protected abstract void HandleDragging(bool dragging);
+        protected virtual void HandleDragging(bool dragging)
+        {
+            playerController.AllowInteraction(!dragging);
+        }
     }
 }
