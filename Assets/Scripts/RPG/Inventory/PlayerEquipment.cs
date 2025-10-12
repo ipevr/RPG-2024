@@ -44,17 +44,6 @@ namespace RPG.Inventory
             onEquipmentChanged?.Invoke();
         }
 
-        private Dictionary<EquipLocation, EquipableItem> InitializeSlots()
-        {
-            var items = new Dictionary<EquipLocation, EquipableItem>();
-            foreach (EquipLocation equipLocation in Enum.GetValues(typeof(EquipLocation)))
-            {
-                items.Add(equipLocation, null);
-            }
-            
-            return items;
-        }
-
         #region Interface Implementations
 
         JToken ISaveable.CaptureAsJToken()
@@ -87,5 +76,6 @@ namespace RPG.Inventory
         }
 
         #endregion
+
     }
 }

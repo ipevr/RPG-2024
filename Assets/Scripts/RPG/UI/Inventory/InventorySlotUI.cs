@@ -14,13 +14,13 @@ namespace RPG.UI.Inventory
         {
             inventory = playerInventory;
             index = slotIndex;
-            icon.SetItem(inventory.GetItemInSlot(index));
-            amountDisplay.SetAmount(inventory.GetAmountInSlot(index));
+            icon.SetItem(GetItem());
+            amountDisplay.SetAmount(GetAmount());
         }
         
         public override int MaxAcceptable(InventoryItem item)
         {
-            return inventory.MaxAcceptable(item as ConsumableItem);
+            return inventory.MaxAcceptable(item);
         }
 
         public override void AddItems(InventoryItem item, int number)

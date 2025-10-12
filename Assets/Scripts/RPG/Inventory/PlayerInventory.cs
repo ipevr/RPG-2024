@@ -188,8 +188,8 @@ namespace RPG.Inventory
 
         private struct SlotState
         {
-            public string ItemId;
-            public int Amount;
+            public string itemId;
+            public int amount;
         }
 
         JToken ISaveable.CaptureAsJToken()
@@ -201,8 +201,8 @@ namespace RPG.Inventory
                 if (!slots.value[i].Item) continue;
                 var slotToSave = new SlotState
                 {
-                    ItemId = slots.value[i].Item.ItemId,
-                    Amount = slots.value[i].CurrentStackSize
+                    itemId = slots.value[i].Item.ItemId,
+                    amount = slots.value[i].CurrentStackSize
                 };
                 slotContent.Add(i.ToString(), JToken.FromObject(slotToSave));
             }
@@ -221,8 +221,8 @@ namespace RPG.Inventory
             {
                 var index = int.Parse(slot.Key);
                 var slotState = slot.Value.ToObject<SlotState>();
-                var inventoryItem = InventoryItem.GetFromId(slotState.ItemId);
-                AddItemsBeginningAtSlot(index, inventoryItem, slotState.Amount);
+                var inventoryItem = InventoryItem.GetFromId(slotState.itemId);
+                AddItemsBeginningAtSlot(index, inventoryItem, slotState.amount);
             }
             
             OnInventoryChanged?.Invoke();

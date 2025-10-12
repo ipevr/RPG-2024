@@ -661,9 +661,12 @@ PrefabInstance:
       addedObject: {fileID: 4364270686831376673}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: 6
+      addedObject: {fileID: 7669146279448167105}
+    - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      insertIndex: 7
       addedObject: {fileID: 6516502199436196655}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
-      insertIndex: 12
+      insertIndex: 13
       addedObject: {fileID: 4975698236223278587}
   m_SourcePrefab: {fileID: 100100000, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
 --- !u!114 &148499438458294820 stripped
@@ -757,6 +760,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e05d41f97734938a4ccc6e7ee53615d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RPG.Inventory.PlayerEquipment
+  onEquipmentChanged:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7669146279448167105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2653495166915529232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39476189e5344cf6bda1ec64e9b2d39c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Inventory.PlayerActionStore
+  onActionStoreChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &6516502199436196655
 MonoBehaviour:
   m_ObjectHideFlags: 0
