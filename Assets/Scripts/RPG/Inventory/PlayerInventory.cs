@@ -1,9 +1,11 @@
-﻿using System;
+﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
-using RPG.Saving;
+using UnityEngine.Events;
 using Utils;
+using RPG.Saving;
 
 namespace RPG.Inventory
 {
@@ -13,7 +15,8 @@ namespace RPG.Inventory
 
         private LazyValue<InventorySlot[]> slots;
 
-        public event Action OnInventoryChanged;
+        public UnityEvent onInventoryChanged;
+        private bool suppressEvents;
         
         #region Unity Event Functions
 
@@ -74,7 +77,7 @@ namespace RPG.Inventory
 
             var removedAmount = slots.value[slotNumber].RemoveFromStack(amount);
 
-            OnInventoryChanged?.Invoke();
+            if (!suppressEvents) onInventoryChanged?.Invoke();
             return removedAmount;
         }
 
@@ -141,7 +144,7 @@ namespace RPG.Inventory
                 slots.value[slotNumber].AddToStack(amount);
             }
 
-            OnInventoryChanged?.Invoke();
+            if (!suppressEvents) onInventoryChanged?.Invoke();
         }
 
         private int FindNonFullStackOrEmptySlot(InventoryItem item)
@@ -217,6 +220,7 @@ namespace RPG.Inventory
             IDictionary<string, JToken> stateDict = jObject;
             slots.value = InitializeSlots();
             
+            suppressEvents = true;
             foreach (var slot in stateDict)
             {
                 var index = int.Parse(slot.Key);
@@ -224,8 +228,16 @@ namespace RPG.Inventory
                 var inventoryItem = InventoryItem.GetFromId(slotState.itemId);
                 AddItemsBeginningAtSlot(index, inventoryItem, slotState.amount);
             }
+            suppressEvents = false;
             
-            OnInventoryChanged?.Invoke();
+            onInventoryChanged?.Invoke();
+            StartCoroutine(InvokeChangedNextFrame());
+        }
+        
+        private IEnumerator InvokeChangedNextFrame()
+        {
+            yield return null;
+            onInventoryChanged?.Invoke();
         }
 
         #endregion

@@ -17,19 +17,19 @@ namespace RPG.UI.Inventory
 
         private PlayerController playerController;
 
-        public virtual void Awake()
+        protected virtual void Awake()
         {
             playerController = PlayerController.GetPlayerController();
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             dragItem.onDragging.AddListener(HandleDragging);
             dragItem.onBeginDrag.AddListener(HandleBeginDrag);
             dragItem.onEndDrag.AddListener(HandleEndDrag);
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             dragItem.onDragging.RemoveListener(HandleDragging);
             dragItem.onBeginDrag.RemoveListener(HandleBeginDrag);

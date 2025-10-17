@@ -1,4 +1,5 @@
-﻿using System;
+﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace RPG.Inventory
     public class PlayerEquipment : MonoBehaviour, ISaveable
     {
         private readonly Dictionary<EquipLocation, EquipableItem> equippedItems = new();
+
+        private bool suppressEvents;
 
         public UnityEvent onEquipmentChanged;
 
@@ -25,7 +28,7 @@ namespace RPG.Inventory
             Debug.Assert(item.EquipLocation == location);
             
             equippedItems.Add(location, item);
-            onEquipmentChanged?.Invoke();
+            if (!suppressEvents) onEquipmentChanged?.Invoke();
         }
         
         public EquipableItem GetItem(EquipLocation location)
@@ -41,7 +44,7 @@ namespace RPG.Inventory
         public void RemoveItem(EquipLocation location)
         {
             equippedItems.Remove(location);
-            onEquipmentChanged?.Invoke();
+            if (!suppressEvents) onEquipmentChanged?.Invoke();
         }
 
         #region Interface Implementations
@@ -65,6 +68,7 @@ namespace RPG.Inventory
             IDictionary<string, JToken> stateDict = jObject;
             equippedItems.Clear();
 
+            suppressEvents = true;
             foreach (var item in stateDict)
             {
                 var location = (EquipLocation)Enum.Parse(typeof(EquipLocation), item.Key);
@@ -73,6 +77,15 @@ namespace RPG.Inventory
                 var itemInstance = InventoryItem.GetFromId(itemId);
                 AddItem(itemInstance as EquipableItem, location);
             }
+            suppressEvents = false;
+
+            StartCoroutine(InvokeChangedNextFrame());
+        }
+        
+        private IEnumerator InvokeChangedNextFrame()
+        {
+            yield return null;
+            onEquipmentChanged?.Invoke();
         }
 
         #endregion

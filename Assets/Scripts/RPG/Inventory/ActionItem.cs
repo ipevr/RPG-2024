@@ -10,5 +10,10 @@ namespace RPG.Inventory
         
         public bool IsConsumable => isConsumable;
         public int MaxStackSize =>  maxStackSize;
+
+        public virtual void Use(GameObject user)
+        {
+            Debug.Log($"Using Action Item: {this} by {user.name}");
+        }
     }
 }

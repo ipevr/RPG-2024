@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using RPG.Inventory;
@@ -14,7 +15,16 @@ namespace RPG.UI.Inventory
         private void Awake()
         {
             playerInventory = PlayerInventory.GetPlayerInventory();
-            playerInventory.OnInventoryChanged += Redraw;
+        }
+
+        private void OnEnable()
+        {
+            playerInventory.onInventoryChanged.AddListener(Redraw);
+        }
+
+        private void OnDisable()
+        {
+            playerInventory.onInventoryChanged.RemoveListener(Redraw);
         }
 
         private void Start()

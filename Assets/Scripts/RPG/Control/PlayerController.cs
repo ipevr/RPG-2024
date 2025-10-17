@@ -3,8 +3,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using RPG.Movement;
 using RPG.Attributes;
+using RPG.Inventory;
 
 namespace RPG.Control
 {
@@ -23,9 +25,11 @@ namespace RPG.Control
         [SerializeField] private float navMeshProjectionDistance = .1f;
         [SerializeField] private float raycastRadius = 1f;
         [SerializeField] private CursorMapping[] cursorMappings;
+        [SerializeField] private InputAction[] specialAbilityKeys;
      
         private Health health;
         private Mover mover;
+        private PlayerActionStore actionStore;
         private bool interactionAllowed = true;
 
         #region Unity Event Functions
@@ -34,10 +38,12 @@ namespace RPG.Control
         {
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
+            actionStore = GetComponent<PlayerActionStore>();
         }
 
         private void Update()
         {
+            CheckSpecialAbilityKeys();
             if (!interactionAllowed) return;
             
             if (InteractWithUI()) return;
@@ -70,6 +76,17 @@ namespace RPG.Control
         #endregion
         
         #region Private Methods
+
+        private void CheckSpecialAbilityKeys()
+        {
+            for (var i = 0; i < specialAbilityKeys.Length; i++)
+            {
+                if (specialAbilityKeys[i].IsPressed())
+                {
+                    actionStore.Use(i, gameObject);
+                }
+            }
+        }
 
         private bool InteractWithUI()
         {

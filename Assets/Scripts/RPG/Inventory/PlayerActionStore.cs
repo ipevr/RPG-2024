@@ -1,9 +1,10 @@
 ﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
+using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using RPG.Saving;
-using UnityEngine;
-using UnityEngine.Events;
 
 namespace RPG.Inventory
 {
@@ -17,6 +18,8 @@ namespace RPG.Inventory
             public int amount;
         }
         
+        private bool suppressEvents;
+        
         public UnityEvent onActionStoreChanged;
 
         public static PlayerActionStore GetPlayerActionStore()
@@ -25,7 +28,20 @@ namespace RPG.Inventory
             return player.GetComponent<PlayerActionStore>();
         }
 
-        public void AddItem(InventoryItem item, int amount, int index)
+        public bool Use(int index, GameObject user)
+        {
+            if (!dockedItems.ContainsKey(index)) return false;
+            
+            dockedItems[index].item.Use(user);
+            if (dockedItems[index].item.IsConsumable)
+            {
+                RemoveItems(index, 1);
+            }
+
+            return true;
+        }
+        
+        public void AddAction(InventoryItem item, int amount, int index)
         {
             if (dockedItems.ContainsKey(index) && ReferenceEquals(dockedItems[index].item, item))
             {
@@ -41,7 +57,7 @@ namespace RPG.Inventory
                 dockedItems.Add(index, dockedItem);
             }
 
-            onActionStoreChanged?.Invoke();
+            if (!suppressEvents) onActionStoreChanged?.Invoke();
         }
 
         public ActionItem GetAction(int index)
@@ -54,11 +70,17 @@ namespace RPG.Inventory
             return dockedItems.TryGetValue(index, out var item) ? item.amount : 0;
         }
         
-        public void RemoveItem(int index)
+        public void RemoveItems(int index, int number)
         {
-            dockedItems.Remove(index);
+            if (!dockedItems.TryGetValue(index, out var slot)) return;
+            
+            slot.amount -= number;
+            if (slot.amount <= 0)
+            {
+                dockedItems.Remove(index);
+            }
 
-            onActionStoreChanged?.Invoke();
+            if (!suppressEvents) onActionStoreChanged?.Invoke();
         }
 
         public int MaxAcceptable(InventoryItem item, int index)
@@ -72,7 +94,12 @@ namespace RPG.Inventory
                 return 0;
             }
 
-            return actionItem.IsConsumable ? int.MaxValue : 1;
+            if (actionItem.IsConsumable)
+            {
+                return int.MaxValue;
+            }
+
+            return dockedItems.ContainsKey(index) ? 0 : 1;
         }
 
         #region Interface Implementations
@@ -83,7 +110,7 @@ namespace RPG.Inventory
             public int amount;
         }
 
-        public JToken CaptureAsJToken()
+        JToken ISaveable.CaptureAsJToken()
         {
             var state = new JObject();
             IDictionary<string, JToken> actionStoreContent = state;
@@ -101,19 +128,29 @@ namespace RPG.Inventory
             return state;
         }
 
-        public void RestoreFromJToken(JToken state)
+        void ISaveable.RestoreFromJToken(JToken state)
         {
             if (state is not JObject jObject) return;
             
             IDictionary<string, JToken> stateDict = jObject;
             dockedItems.Clear();
             
+            suppressEvents = true;
             foreach (var slot in stateDict)
             {
                 var slotState = slot.Value.ToObject<SlotState>();
                 var item = InventoryItem.GetFromId(slotState.itemId);
-                AddItem(item, slotState.amount, int.Parse(slot.Key));
+                AddAction(item, slotState.amount, int.Parse(slot.Key));
             }
+            suppressEvents = false;
+            
+            StartCoroutine(InvokeChangedNextFrame());
+        }
+
+        private IEnumerator InvokeChangedNextFrame()
+        {
+            yield return null;
+            onActionStoreChanged?.Invoke();
         }
         
         #endregion

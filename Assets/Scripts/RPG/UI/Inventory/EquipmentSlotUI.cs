@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using RPG.Inventory;
+using Unity.VisualScripting;
 
 namespace RPG.UI.Inventory
 {
@@ -10,11 +11,20 @@ namespace RPG.UI.Inventory
 
         private PlayerEquipment equipment;
 
-        public override void Awake()
+        protected override void Awake()
         {
             base.Awake();
             equipment = PlayerEquipment.GetPlayerEquipment();
+        }
+
+        protected override void OnEnable()
+        {
             equipment.onEquipmentChanged.AddListener(RedrawUI);
+        }
+        
+        protected override void OnDisable()
+        {
+            equipment.onEquipmentChanged.RemoveListener(RedrawUI);
         }
 
         private void Start()

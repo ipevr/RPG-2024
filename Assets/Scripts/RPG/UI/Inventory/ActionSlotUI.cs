@@ -12,11 +12,20 @@ namespace RPG.UI.Inventory
         
         private PlayerActionStore actionStore;
 
-        public override void Awake()
+        protected override void Awake()
         {
             base.Awake();
             actionStore = PlayerActionStore.GetPlayerActionStore();
+        }
+
+        protected override void OnEnable()
+        {
             actionStore.onActionStoreChanged.AddListener(RedrawUI);
+        }
+
+        protected override void OnDisable()
+        {
+            actionStore.onActionStoreChanged.RemoveListener(RedrawUI);
         }
 
         private void Start()
@@ -36,12 +45,12 @@ namespace RPG.UI.Inventory
 
         public override void RemoveItems(int number)
         {
-            actionStore.RemoveItem(index);
+            actionStore.RemoveItems(index, number);
         }
 
         public override void AddItems(InventoryItem item, int number)
         {
-            actionStore.AddItem(item, number, index);
+            actionStore.AddAction(item, number, index);
         }
 
         public override int MaxAcceptable(InventoryItem item)
