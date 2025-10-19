@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using RPG.Control;
 using RPG.Attributes;
+using RPG.Inventory;
 using RPG.Movement;
 
 namespace RPG.Combat
@@ -31,7 +32,7 @@ namespace RPG.Combat
         {
             if (weaponConfig)
             {
-                subject.GetComponent<Fighter>().EquipWeapon(weaponConfig);
+                subject.GetComponent<Fighter>().Equip(weaponConfig);
             }
             
             subject.GetComponent<Health>().Heal(healthToRestore);

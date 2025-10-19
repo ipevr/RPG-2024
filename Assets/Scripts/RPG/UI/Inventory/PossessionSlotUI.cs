@@ -12,7 +12,6 @@ namespace RPG.UI.Inventory
         [SerializeField] protected PossessionItemIcon icon;
         [SerializeField] protected PossessionDragItem dragItem;
         
-        public PossessionDragItem DragItem => dragItem;
         public UnityEvent<bool> onDragging;
 
         private PlayerController playerController;

@@ -41,6 +41,28 @@ namespace RPG.Control
             actionStore = GetComponent<PlayerActionStore>();
         }
 
+        private void OnEnable()
+        {
+            if (specialAbilityKeys != null)
+            {
+                foreach (var action in specialAbilityKeys)
+                {
+                    action?.Enable();
+                }
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (specialAbilityKeys != null)
+            {
+                foreach (var action in specialAbilityKeys)
+                {
+                    action?.Disable();
+                }
+            }
+        }
+
         private void Update()
         {
             CheckSpecialAbilityKeys();
@@ -81,7 +103,7 @@ namespace RPG.Control
         {
             for (var i = 0; i < specialAbilityKeys.Length; i++)
             {
-                if (specialAbilityKeys[i].IsPressed())
+                if (specialAbilityKeys[i].WasPressedThisFrame())
                 {
                     actionStore.Use(i, gameObject);
                 }

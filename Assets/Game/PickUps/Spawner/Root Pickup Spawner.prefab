@@ -14,7 +14,7 @@ GameObject:
   m_Layer: 0
   m_Name: Root Pickup Spawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryItem: {fileID: 0}
+  amount: 1
 --- !u!114 &1644789666242264749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,4 +59,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43dda008135e44daaf5c8ff43ef2e9db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqueIdentifier: 
+  uniqueIdentifier: e7cf56a2-463e-4c4a-a36f-a88c16789c69

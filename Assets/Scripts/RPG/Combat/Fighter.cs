@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,6 +8,7 @@ using RPG.Movement;
 using RPG.Saving;
 using RPG.Attributes;
 using RPG.Core;
+using RPG.Inventory;
 using RPG.Stats;
 using UnityEngine.Serialization;
 
@@ -24,6 +26,7 @@ namespace RPG.Combat
         
         private Health target;
         private Mover mover;
+        private PlayerEquipment playerEquipment;
         private float timeSinceLastAttack = Mathf.Infinity;
         private WeaponConfig currentWeaponConfig;
         
@@ -33,6 +36,17 @@ namespace RPG.Combat
         {
             currentWeaponConfig = defaultWeaponConfig;
             mover = GetComponent<Mover>();
+            playerEquipment = PlayerEquipment.GetPlayerEquipment();
+        }
+
+        private void OnEnable()
+        {
+            playerEquipment.onEquipmentChanged.AddListener(UpdateWeapon);
+        }
+
+        private void OnDisable()
+        {
+            playerEquipment.onEquipmentChanged.RemoveListener(UpdateWeapon);
         }
 
         private void Start()
@@ -80,10 +94,18 @@ namespace RPG.Combat
             target = combatTarget.GetComponent<Health>();
         }
 
-        public void EquipWeapon(WeaponConfig weaponConfig)
+        private void UpdateWeapon()
         {
+            var weaponConfig = playerEquipment.GetItem(EquipLocation.Weapon) as WeaponConfig;
+            Equip(!weaponConfig ? defaultWeaponConfig : weaponConfig);
+        }
+
+        public void Equip(WeaponConfig weaponConfig)
+        {
+            if (weaponConfig.EquipLocation != EquipLocation.Weapon) return;
+            
             currentWeaponConfig = weaponConfig;
-            AttachWeapon(weaponConfig);
+            AttachWeapon(currentWeaponConfig);
         }
 
         public Health GetTarget()
@@ -171,7 +193,7 @@ namespace RPG.Combat
         {
             var weaponName = (string)state;
             var weapon = Resources.Load<WeaponConfig>(weaponName);
-            EquipWeapon(weapon);
+            Equip(weapon);
         }
         
         public IEnumerable<float> GetAdditiveModifiers(Stat stat)

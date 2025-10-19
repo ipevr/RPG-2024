@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd28030289db4802ab48e65d3a9de0d6, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
+  itemId: 1a3ed4fe-1840-4c66-8b21-21927aea857b
+  displayName: Fireball
+  description: A bombastic fireball
+  icon: {fileID: 21300000, guid: c46ec76cc4a747a4e92540e50740f634, type: 3}
+  inventoriablePrefab: {fileID: 1449388233691795844, guid: c9871343c44be3b4799a1d0b7934c1f7, type: 3}
+  equipLocation: 6
   equippedWeaponPrefab: {fileID: 4077627520680577040, guid: d5ff23ccf4ecf0d499b76f79998ef2e9, type: 3}
   animatorOverride: {fileID: 22100000, guid: c0c6f6d5ccc26d64b8271b7c7670a17c, type: 2}
-  weaponSounds:
-  - {fileID: 8300000, guid: 00a49bdd70cd82d4da45167a24d74586, type: 3}
-  - {fileID: 8300000, guid: 8446456e026c004478b10bcbb576af97, type: 3}
-  - {fileID: 8300000, guid: 09e93f72a6d983f4ba41818c7da7bfc6, type: 3}
-  - {fileID: 8300000, guid: 4ab0134904412fb49b1d6dcbf743dc72, type: 3}
-  - {fileID: 8300000, guid: 88892e4064d63ea42bccb575d79c3950, type: 3}
-  - {fileID: 8300000, guid: a8802236d859bdf48aca702385c87f5e, type: 3}
   projectile: {fileID: 3455540643939442279, guid: eecbd52d741d8d4458b6304ed54243b3, type: 3}
   isRightHanded: 1
   range: 20

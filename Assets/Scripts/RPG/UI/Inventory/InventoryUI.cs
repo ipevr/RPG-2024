@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -20,6 +21,7 @@ namespace RPG.UI.Inventory
         private void OnEnable()
         {
             playerInventory.onInventoryChanged.AddListener(Redraw);
+            StartCoroutine(RedrawOnNextFrame());
         }
 
         private void OnDisable()
@@ -53,6 +55,13 @@ namespace RPG.UI.Inventory
                 var inventorySlot = Instantiate(inventorySlotPrefab, transform);
                 inventorySlot.Setup(playerInventory, i);
             }
+        }
+
+        private IEnumerator RedrawOnNextFrame()
+        {
+            // This might be necessary as OnEnable might be called before Awake in PlayerInventory.
+            yield return new WaitForEndOfFrame();
+            Redraw();
         }
     }
 }

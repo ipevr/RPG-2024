@@ -26,7 +26,7 @@ namespace RPG.UI
 
         private void Update()
         {
-            if (toggleUI.triggered)
+            if (toggleUI.WasPerformedThisFrame())
             {
                 uiContainer.SetActive(!uiContainer.activeSelf);
             }

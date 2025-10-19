@@ -816,6 +816,22 @@ MonoBehaviour:
       m_Action: Input Action
       m_Flags: 0
     m_Flags: 0
+  - m_Name: Input Action
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4eecb255-7345-4067-9a11-a851ed444a38
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: b99b1cd2-bb2f-41cc-86fd-40e7dfafa008
+      m_Path: <Keyboard>/6
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Input Action
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &966032940304236699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -829,6 +845,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfInventorySlots: 16
+  onInventoryChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4364270686831376673
 MonoBehaviour:
   m_ObjectHideFlags: 0

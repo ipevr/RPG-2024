@@ -11,11 +11,9 @@ namespace RPG.Inventory
     public class PlayerEquipment : MonoBehaviour, ISaveable
     {
         private readonly Dictionary<EquipLocation, EquipableItem> equippedItems = new();
-
         private bool suppressEvents;
 
         public UnityEvent onEquipmentChanged;
-
 
         public static PlayerEquipment GetPlayerEquipment()
         {

@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 8115267653625911802}
   - component: {fileID: 6583780712997520048}
   - component: {fileID: 2966943568929555171}
+  - component: {fileID: 3403908714911888830}
   - component: {fileID: 1464984645113663083}
   m_Layer: 0
   m_Name: Canvas
@@ -245,6 +246,38 @@ MonoBehaviour:
       m_Flags: 0
     m_Flags: 0
   uiContainer: {fileID: 6351052828148960899}
+--- !u!114 &3403908714911888830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662427454594269773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423e0684866043b88b883736b23affa2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.UI.HideAllUIs
+  hideAllUIs:
+    m_Name: Hide All U Is
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 4b8a0c04-5723-47de-9219-e8e0e80836f9
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 524bb533-beb9-4115-b043-909d5b294e28
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Hide All U Is
+      m_Flags: 0
+    m_Flags: 0
+  uiContainers:
+  - {fileID: 7824797381378232417}
+  - {fileID: 6351052828148960899}
 --- !u!114 &1464984645113663083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +453,10 @@ PrefabInstance:
       value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 398168039296200554, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 398168039296200554, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 892.5
       objectReference: {fileID: 0}
@@ -442,6 +479,10 @@ PrefabInstance:
     - target: {fileID: 3807692517101587468, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_SizeDelta.x
       value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807692517101587468, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3807692517101587468, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -544,6 +585,10 @@ PrefabInstance:
       value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 5750594851761339290, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5750594851761339290, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 489.16666
       objectReference: {fileID: 0}
@@ -562,6 +607,10 @@ PrefabInstance:
     - target: {fileID: 6561519910268504214, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_SizeDelta.x
       value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 6561519910268504214, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6561519910268504214, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -584,6 +633,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8326327909322021673, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8326327909322021673, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 1008.3334
       objectReference: {fileID: 0}
@@ -602,6 +655,10 @@ PrefabInstance:
     - target: {fileID: 8853116787301888679, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8853116787301888679, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 8853116787301888679, guid: 88fb6528e2b181448bbcd786ca108452, type: 3}
       propertyPath: m_AnchoredPosition.x

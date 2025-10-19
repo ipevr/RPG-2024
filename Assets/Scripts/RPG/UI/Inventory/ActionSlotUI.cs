@@ -20,11 +20,13 @@ namespace RPG.UI.Inventory
 
         protected override void OnEnable()
         {
+            base.OnEnable();
             actionStore.onActionStoreChanged.AddListener(RedrawUI);
         }
 
         protected override void OnDisable()
         {
+            base.OnDisable();
             actionStore.onActionStoreChanged.RemoveListener(RedrawUI);
         }
 

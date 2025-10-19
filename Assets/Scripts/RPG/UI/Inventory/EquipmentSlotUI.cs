@@ -19,11 +19,13 @@ namespace RPG.UI.Inventory
 
         protected override void OnEnable()
         {
+            base.OnEnable();
             equipment.onEquipmentChanged.AddListener(RedrawUI);
         }
         
         protected override void OnDisable()
         {
+            base.OnDisable();
             equipment.onEquipmentChanged.RemoveListener(RedrawUI);
         }
 

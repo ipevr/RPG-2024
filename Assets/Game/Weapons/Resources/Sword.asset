@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd28030289db4802ab48e65d3a9de0d6, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
+  itemId: c4206860-fd90-4ba1-a96c-59e864f6a5df
+  displayName: Simple Sword
+  description: A simple sword
+  icon: {fileID: 21300000, guid: 85dd6b563d8577345af5cbdeca0eb132, type: 3}
+  inventoriablePrefab: {fileID: 1449388233691795844, guid: b9ee2f8ec0d0d2d47b842918b7b577cd, type: 3}
+  equipLocation: 6
   equippedWeaponPrefab: {fileID: 3042716249829877532, guid: 07a5993b8a85cc044bc2be23f7c1fe58, type: 3}
   animatorOverride: {fileID: 22100000, guid: c4351e9da7a968f47ab1be54e68427c4, type: 2}
-  weaponSounds:
-  - {fileID: 8300000, guid: 8834bf43757e31a41ba75a92ae9a8206, type: 3}
-  - {fileID: 8300000, guid: 65eeb2a38dc205444b7129de7539d5e7, type: 3}
-  - {fileID: 8300000, guid: 175009a9ad8b98e44a5665d16ab0b84e, type: 3}
-  - {fileID: 8300000, guid: e25680b07c510104b8ea972c4d01b8b4, type: 3}
   projectile: {fileID: 0}
   isRightHanded: 1
   range: 3
