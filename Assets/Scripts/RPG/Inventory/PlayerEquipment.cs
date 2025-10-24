@@ -45,6 +45,11 @@ namespace RPG.Inventory
             if (!suppressEvents) onEquipmentChanged?.Invoke();
         }
 
+        public IEnumerable<EquipLocation> GetAllPopulatedSlots()
+        {
+            return equippedItems.Keys;
+        }
+
         #region Interface Implementations
 
         JToken ISaveable.CaptureAsJToken()

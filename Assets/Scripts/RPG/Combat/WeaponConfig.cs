@@ -4,8 +4,8 @@ using RPG.Inventory;
 
 namespace RPG.Combat
 {
-    [CreateAssetMenu(fileName = "WeaponConfig", menuName = "RPG/Weapons/Create new Weapon", order = 0)]
-    public class WeaponConfig : EquipableItem
+    [CreateAssetMenu(fileName = "WeaponConfig", menuName = "RPG/Inventory/Create Weapon", order = 0)]
+    public class WeaponConfig : StatsEquipableItem
     {
         [SerializeField] private Weapon equippedWeaponPrefab = null;
         [SerializeField] private AnimatorOverrideController animatorOverride = null;

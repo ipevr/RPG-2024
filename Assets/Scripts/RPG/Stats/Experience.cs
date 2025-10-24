@@ -1,22 +1,25 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using RPG.Saving;
 
 namespace RPG.Stats
 {
     public class Experience : MonoBehaviour, ISaveable
     {
-        public event Action OnExperienceGained;
-        
         public float ExperiencePoints { get; private set; }
+        
+        public UnityEvent onExperienceGained;
 
         #region Public Methods
         
         public void GainExperience(float experience)
         {
-            ExperiencePoints += experience;
-            OnExperienceGained?.Invoke();
+            var multiplicator = ModifierAggregator.GetPercentageFraction(gameObject, Stat.ExperienceReward);
+            var additionalExp = ModifierAggregator.GetAdditive(gameObject, Stat.ExperienceReward);
+            ExperiencePoints += (experience + additionalExp) * multiplicator;
+            onExperienceGained?.Invoke();
         }
 
         #endregion

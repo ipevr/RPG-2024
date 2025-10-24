@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 
 namespace RPG.Stats
@@ -18,7 +19,7 @@ namespace RPG.Stats
         private LazyValue<int> currentLevel;
         private Experience experience;
         
-        public event Action OnLevelUp;
+        public UnityEvent onLevelUp;
 
         #region Unity Event Functions
 
@@ -37,7 +38,7 @@ namespace RPG.Stats
         {
             if (experience)
             {
-                experience.OnExperienceGained += UpdateLevel;
+                experience.onExperienceGained.AddListener(UpdateLevel); 
             }
         }
 
@@ -45,7 +46,7 @@ namespace RPG.Stats
         {
             if (experience)
             {
-                experience.OnExperienceGained -= UpdateLevel;
+                experience.onExperienceGained.RemoveListener(UpdateLevel);
             }
         }
 
@@ -55,8 +56,14 @@ namespace RPG.Stats
         
         public float GetStat(Stat stat)
         {
-            var additionalPercentageFraction = 1 + GetPercentageModifiers(stat) / 100f;
-            return (GetBaseStat(stat) + GetAdditiveModifiers(stat)) * additionalPercentageFraction;
+            if (shouldUseModifiers)
+            {
+                var modifierAddPoints = ModifierAggregator.GetAdditive(gameObject, stat);
+                var modifierPercentageFraction = ModifierAggregator.GetPercentageFraction(gameObject, stat);
+                return (GetBaseStat(stat) + modifierAddPoints) * modifierPercentageFraction;
+            }
+            
+            return GetBaseStat(stat);
         }
 
         public int GetLevel()
@@ -73,38 +80,6 @@ namespace RPG.Stats
             return progression.GetStat(stat, characterClass, GetLevel());
         }
 
-        private float GetAdditiveModifiers(Stat stat)
-        {
-            if (!shouldUseModifiers) return 0;
-            
-            var total = 0f;
-            foreach (var modifierProvider in GetComponents<IModifierProvider>())
-            {
-                foreach (var modifier in modifierProvider.GetAdditiveModifiers(stat))
-                {
-                    total += modifier;
-                }
-            }
-            
-            return total;
-        }
-
-        private float GetPercentageModifiers(Stat stat)
-        {
-            if (!shouldUseModifiers) return 0;
-            
-            var total = 0f;
-            foreach (var modifierProvider in GetComponents<IModifierProvider>())
-            {
-                foreach (var modifier in modifierProvider.GetPercentageModifiers(stat))
-                {
-                    total += modifier;
-                }
-            }
-            
-            return total;
-        }
-
         private void UpdateLevel()
         {
             var level = CalculateLevel();
@@ -118,7 +93,7 @@ namespace RPG.Stats
         private void ProcessLevelUp(int level)
         {
             currentLevel.value = level;
-            OnLevelUp?.Invoke();
+            onLevelUp?.Invoke();
             Instantiate(levelUpEffect, levelUpEffectSpawnPoint);
             GetComponent<AudioSource>().PlayOneShot(levelUpSound);
         }

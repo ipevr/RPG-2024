@@ -18,6 +18,10 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: c46ec76cc4a747a4e92540e50740f634, type: 3}
   inventoriablePrefab: {fileID: 1449388233691795844, guid: c9871343c44be3b4799a1d0b7934c1f7, type: 3}
   equipLocation: 6
+  additiveModifiers:
+  - stat: 2
+    value: 10
+  percentageModifiers: []
   equippedWeaponPrefab: {fileID: 4077627520680577040, guid: d5ff23ccf4ecf0d499b76f79998ef2e9, type: 3}
   animatorOverride: {fileID: 22100000, guid: c0c6f6d5ccc26d64b8271b7c7670a17c, type: 2}
   projectile: {fileID: 3455540643939442279, guid: eecbd52d741d8d4458b6304ed54243b3, type: 3}

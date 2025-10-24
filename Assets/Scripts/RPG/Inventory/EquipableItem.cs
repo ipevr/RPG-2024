@@ -2,8 +2,7 @@
 
 namespace RPG.Inventory
 {
-    [CreateAssetMenu(menuName = "RPG/Inventory/Equipable Item")]
-    public class EquipableItem : InventoryItem, IEquipableItem
+    public abstract class EquipableItem : InventoryItem, IEquipableItem
     {
         [SerializeField] private EquipLocation equipLocation = EquipLocation.Weapon;
         

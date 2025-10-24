@@ -11,12 +11,12 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        private static readonly int DieTriggerId = Animator.StringToHash("die");
-        private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
-
         [SerializeField] private float levelUpRegenerationPercentage = 100;
         [SerializeField] private UnityEvent<float> onTakeDamage;
         [SerializeField] private UnityEvent onDie; 
+
+        private static readonly int DieTriggerId = Animator.StringToHash("die");
+        private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
 
         private LazyValue<float> healthPoints;
         private BaseStats baseStats;
@@ -38,12 +38,12 @@ namespace RPG.Attributes
 
         private void OnEnable()
         {
-            baseStats.OnLevelUp += HandleLevelUp;
+            baseStats.onLevelUp.AddListener(HandleLevelUp);
         }
 
         private void OnDisable()
         {
-            baseStats.OnLevelUp -= HandleLevelUp;
+            baseStats.onLevelUp.RemoveListener(HandleLevelUp);
         }
 
         #endregion
@@ -115,7 +115,7 @@ namespace RPG.Attributes
             var experienceComponent = instigator.GetComponent<Experience>(); 
             if (!experienceComponent) return;
             
-            var experienceAmount = baseStats.GetStat(Stat.ExperienceReward);
+            var experienceAmount = GetComponent<BaseStats>().GetStat(Stat.ExperienceReward);
             experienceComponent.GainExperience(experienceAmount);
         }
 

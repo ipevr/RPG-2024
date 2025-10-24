@@ -658,7 +658,7 @@ PrefabInstance:
       addedObject: {fileID: 966032940304236699}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: 5
-      addedObject: {fileID: 4364270686831376673}
+      addedObject: {fileID: 7218157237264077113}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: 6
       addedObject: {fileID: 7669146279448167105}
@@ -848,7 +848,7 @@ MonoBehaviour:
   onInventoryChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4364270686831376673
+--- !u!114 &7218157237264077113
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -857,9 +857,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2653495166915529232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e05d41f97734938a4ccc6e7ee53615d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7eb95735fc7a428c8ad794ff8dc92f25, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RPG.Inventory.PlayerEquipment
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Inventory.StatsEquipment
   onEquipmentChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -902,3 +902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c6371ff6d74a4bae9d59460970d40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onExperienceGained:
+    m_PersistentCalls:
+      m_Calls: []
