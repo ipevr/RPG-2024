@@ -14,7 +14,7 @@ using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
+    public class Fighter : MonoBehaviour, IAction, ISaveable
     {
         private static readonly int AttackTriggerId = Animator.StringToHash("attack");
         private static readonly int StopAttackId = Animator.StringToHash("stopAttack");
@@ -36,17 +36,17 @@ namespace RPG.Combat
         {
             currentWeaponConfig = defaultWeaponConfig;
             mover = GetComponent<Mover>();
-            playerEquipment = PlayerEquipment.GetPlayerEquipment();
+            playerEquipment = GetComponent<PlayerEquipment>();
         }
 
         private void OnEnable()
         {
-            playerEquipment.onEquipmentChanged.AddListener(UpdateWeapon);
+            playerEquipment?.onEquipmentChanged.AddListener(UpdateWeapon);
         }
 
         private void OnDisable()
         {
-            playerEquipment.onEquipmentChanged.RemoveListener(UpdateWeapon);
+            playerEquipment?.onEquipmentChanged.RemoveListener(UpdateWeapon);
         }
 
         private void Start()
@@ -196,22 +196,6 @@ namespace RPG.Combat
             Equip(weapon);
         }
         
-        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return currentWeaponConfig.WeaponDamage;
-            }
-        }
-
-        public IEnumerable<float> GetPercentageModifiers(Stat stat)
-        {
-            if (stat == Stat.Damage)
-            {
-                yield return currentWeaponConfig.WeaponPercentageBonus;
-            }
-        }
-
         #endregion
     }
 }

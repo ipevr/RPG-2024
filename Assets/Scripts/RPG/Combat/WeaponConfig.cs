@@ -12,16 +12,12 @@ namespace RPG.Combat
         [SerializeField] private Projectile projectile = null;
         [SerializeField] private bool isRightHanded = true;
         [SerializeField] private float range = 2f;
-        [SerializeField] private float weaponDamage = 5f;
-        [SerializeField] private float weaponPercentageBonus = 0;
 
         private const string WeaponName = "Weapon";
         
         private Weapon weapon = null;
 
         public float Range => range;
-        public float WeaponDamage => weaponDamage;
-        public float WeaponPercentageBonus => weaponPercentageBonus;
         
         #region Public Methods
 
