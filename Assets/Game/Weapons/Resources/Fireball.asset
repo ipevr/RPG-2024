@@ -21,11 +21,11 @@ MonoBehaviour:
   additiveModifiers:
   - stat: 2
     value: 10
+  - stat: 1
+    value: 20
   percentageModifiers: []
   equippedWeaponPrefab: {fileID: 4077627520680577040, guid: d5ff23ccf4ecf0d499b76f79998ef2e9, type: 3}
   animatorOverride: {fileID: 22100000, guid: c0c6f6d5ccc26d64b8271b7c7670a17c, type: 2}
   projectile: {fileID: 3455540643939442279, guid: eecbd52d741d8d4458b6304ed54243b3, type: 3}
   isRightHanded: 1
   range: 20
-  weaponDamage: 10
-  weaponPercentageBonus: 0
