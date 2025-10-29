@@ -16,7 +16,8 @@ MonoBehaviour:
   displayName: Fireball
   description: A bombastic fireball
   icon: {fileID: 21300000, guid: c46ec76cc4a747a4e92540e50740f634, type: 3}
-  inventoriablePrefab: {fileID: 1449388233691795844, guid: c9871343c44be3b4799a1d0b7934c1f7, type: 3}
+  pickupPrefab: {fileID: 1449388233691795844, guid: c9871343c44be3b4799a1d0b7934c1f7, type: 3}
+  isStackable: 0
   equipLocation: 6
   additiveModifiers:
   - stat: 2

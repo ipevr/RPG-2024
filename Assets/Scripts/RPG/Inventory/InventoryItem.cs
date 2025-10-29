@@ -15,7 +15,8 @@ namespace RPG.Inventory
         [Tooltip("The UI icon to represent this item in the inventory.")]
         [SerializeField] private Sprite icon;
         [Tooltip("The prefab that should be spawned when this item is dropped.")]
-        [SerializeField] private GameObject inventoriablePrefab;
+        [SerializeField] private GameObject pickupPrefab;
+        [SerializeField] private bool isStackable;
 
         private static Dictionary<string, InventoryItem> itemLookupCache;
 
@@ -23,6 +24,7 @@ namespace RPG.Inventory
         public string DisplayName => displayName;
         public string Description => description;
         public Sprite Icon => icon;
+        public bool IsStackable => isStackable;
 
         public static InventoryItem GetFromId(string itemId)
         {
@@ -36,13 +38,13 @@ namespace RPG.Inventory
             return possessionItem;
         }
 
-        public IInventoriable GetInventoriable()
+        public IInventoriable GetPickup()
         {
-            var inventoriable = inventoriablePrefab.GetComponent<IInventoriable>();
+            var inventoriable = pickupPrefab.GetComponent<IInventoriable>();
 
             if (inventoriable == null)
             {
-                Debug.LogError($"{inventoriablePrefab.name} does not have any Inventoriable");
+                Debug.LogError($"{pickupPrefab.name} does not have any Inventoriable");
             }
             
             return inventoriable;

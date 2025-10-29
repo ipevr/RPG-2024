@@ -28,7 +28,7 @@ namespace RPG.Pickups
         {
             if (amount == 0) return;
             
-            var pickup = inventoryItem.GetInventoriable();
+            var pickup = inventoryItem.GetPickup();
             if (pickup == null)
             {
                 Debug.LogError("IInventoriable is no pickup");

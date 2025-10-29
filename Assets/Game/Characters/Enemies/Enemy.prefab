@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.size
@@ -43,7 +43,7 @@ PrefabInstance:
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 7237839592392268317}
+      objectReference: {fileID: 9145358576843284839}
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: PlayRandomClip
+      value: RandomDrop
       objectReference: {fileID: 0}
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -126,7 +126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: RPG.Core.SoundPlayer, Assembly-CSharp
+      value: RPG.Pickups.RandomItemDropper, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 44548448136315328, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: onTakeDamage.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -172,6 +172,10 @@ PrefabInstance:
       propertyPath: m_Avatar
       value: 
       objectReference: {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
+    - target: {fileID: 2506605217967167949, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      propertyPath: uniqueIdentifier
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3869725707801448184, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: maxSpeed
       value: 3
@@ -376,6 +380,9 @@ PrefabInstance:
       insertIndex: 3
       addedObject: {fileID: 1933663375039642839}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      insertIndex: 9
+      addedObject: {fileID: 9145358576843284839}
+    - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2948169227195512928}
   m_SourcePrefab: {fileID: 100100000, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
@@ -416,6 +423,21 @@ MonoBehaviour:
   mobRadius: 5
   patrolSpeedFraction: 0.5
   maxNavPathLength: 20
+--- !u!114 &9145358576843284839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4804620049016750633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92aeb6e059cb486aa5c50276035c571f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Pickups.RandomItemDropper
+  dropTable: {fileID: 0}
+  dropDistance: 1
+  maxNavMeshProjectionDistance: 0.1
 --- !u!114 &2948169227195512928
 MonoBehaviour:
   m_ObjectHideFlags: 0

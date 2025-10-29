@@ -16,12 +16,13 @@ MonoBehaviour:
   displayName: Simple Sword
   description: A simple sword
   icon: {fileID: 21300000, guid: 85dd6b563d8577345af5cbdeca0eb132, type: 3}
-  inventoriablePrefab: {fileID: 1449388233691795844, guid: b9ee2f8ec0d0d2d47b842918b7b577cd, type: 3}
+  pickupPrefab: {fileID: 1449388233691795844, guid: b9ee2f8ec0d0d2d47b842918b7b577cd, type: 3}
+  isStackable: 0
   equipLocation: 6
+  additiveModifiers: []
+  percentageModifiers: []
   equippedWeaponPrefab: {fileID: 3042716249829877532, guid: 07a5993b8a85cc044bc2be23f7c1fe58, type: 3}
   animatorOverride: {fileID: 22100000, guid: c4351e9da7a968f47ab1be54e68427c4, type: 2}
   projectile: {fileID: 0}
   isRightHanded: 1
   range: 3
-  weaponDamage: 8
-  weaponPercentageBonus: 50

@@ -13,14 +13,15 @@ namespace RPG.Attributes
     {
         [SerializeField] private float levelUpRegenerationPercentage = 100;
         [SerializeField] private UnityEvent<float> onTakeDamage;
-        [SerializeField] private UnityEvent onDie; 
+        
+        public UnityEvent onDie;
 
         private static readonly int DieTriggerId = Animator.StringToHash("die");
         private static readonly int DieFastTriggerId = Animator.StringToHash("dieFast");
 
         private LazyValue<float> healthPoints;
         private BaseStats baseStats;
-
+        
         public bool IsDead { get; private set; }
 
         #region Unity Event Functions

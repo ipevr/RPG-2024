@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2635001139400800248, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: uniqueIdentifier
+      value: 21576ef0-fd01-4389-929a-9ce525adf58a
+      objectReference: {fileID: 0}
     - target: {fileID: 4804620049016750633, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
       propertyPath: m_Name
       value: Grunt
@@ -72,6 +76,10 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 8303961451898265022}
+    - target: {fileID: 8330930673576201026, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: dropTable
+      value: 
+      objectReference: {fileID: 11400000, guid: b6b5885452578e14c9debf2e44e0d481, type: 2}
     - target: {fileID: 8530522766565055770, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
       propertyPath: pitch
       value: 1.2
@@ -84,6 +92,10 @@ PrefabInstance:
       propertyPath: upperPitch
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9145358576843284839, guid: 065b03fdc1c44ee42a304e3c5f6ef548, type: 3}
+      propertyPath: dropTable
+      value: 
+      objectReference: {fileID: 11400000, guid: b6b5885452578e14c9debf2e44e0d481, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

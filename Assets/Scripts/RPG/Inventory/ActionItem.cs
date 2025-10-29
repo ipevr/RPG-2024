@@ -9,7 +9,7 @@ namespace RPG.Inventory
         [SerializeField] private int maxStackSize = 5;
         
         public bool IsConsumable => isConsumable;
-        public int MaxStackSize =>  maxStackSize;
+        public int MaxStackSize => IsStackable ? maxStackSize : 1;
 
         public virtual void Use(GameObject user)
         {

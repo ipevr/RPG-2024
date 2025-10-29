@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2506605217967167949, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: uniqueIdentifier
-      value: 107c650d-5c5a-467c-9b52-94893d955e64
+      value: player
       objectReference: {fileID: 0}
     - target: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: m_Name
@@ -664,7 +664,7 @@ PrefabInstance:
       addedObject: {fileID: 7669146279448167105}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: 7
-      addedObject: {fileID: 6516502199436196655}
+      addedObject: {fileID: 8839230385444028237}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: 13
       addedObject: {fileID: 4975698236223278587}
@@ -878,7 +878,7 @@ MonoBehaviour:
   onActionStoreChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6516502199436196655
+--- !u!114 &8839230385444028237
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -887,9 +887,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2653495166915529232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56bc37a75f3c4201aa9acc16b19524d4, type: 3}
+  m_Script: {fileID: 11500000, guid: 92aeb6e059cb486aa5c50276035c571f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Pickups.RandomItemDropper
+  dropTable: {fileID: 0}
+  dropDistance: 1
+  maxNavMeshProjectionDistance: 0.1
 --- !u!114 &4975698236223278587
 MonoBehaviour:
   m_ObjectHideFlags: 0

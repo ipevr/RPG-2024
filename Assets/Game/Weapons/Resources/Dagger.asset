@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd28030289db4802ab48e65d3a9de0d6, type: 3}
   m_Name: Dagger
   m_EditorClassIdentifier: 
+  itemId: a30f2cca-846c-4f5a-9b83-d7e15a83de95
+  displayName: Dagger
+  description: A dagger
+  icon: {fileID: 21300000, guid: 33c38c013a626144795b4f9f32318e58, type: 3}
+  pickupPrefab: {fileID: 1449388233691795844, guid: 8be4c45beefacc047a412bf5ec86a837, type: 3}
+  isStackable: 0
+  equipLocation: 6
+  additiveModifiers: []
+  percentageModifiers: []
   equippedWeaponPrefab: {fileID: 5506406424124878941, guid: f520fbf1e63e14946906105b00f5c046, type: 3}
   animatorOverride: {fileID: 22100000, guid: 26ebe01f335703e449bdc889b731dbf1, type: 2}
-  weaponSounds: []
   projectile: {fileID: 0}
   isRightHanded: 1
   range: 2
-  weaponDamage: 5
-  weaponPercentageBonus: 0
