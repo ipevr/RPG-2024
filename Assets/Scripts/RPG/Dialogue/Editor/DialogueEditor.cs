@@ -14,6 +14,10 @@ namespace RPG.Dialogue.Editor
         private DialogueNode draggingNode;
         private Vector2 draggingOffset;
         private DialogueNode linkingNode;
+        private Vector2 scrollPosition;
+
+        private const int CanvasSize = 5000;
+        private const int BackgroundSize = 50;
 
         [MenuItem("RPG/Dialogue Editor")]
         private static void ShowWindow()
@@ -61,6 +65,18 @@ namespace RPG.Dialogue.Editor
                 return;
             }
             
+            ProcessEvents();
+            
+            scrollPosition = EditorGUILayout.BeginScrollView(
+                scrollPosition
+                );
+
+            var canvas = GUILayoutUtility.GetRect(CanvasSize, CanvasSize);
+            var backgroundTex = Resources.Load<Texture2D>("background");
+            const int texSize = CanvasSize / BackgroundSize;
+            var texCoords = new Rect(0, 0, texSize, texSize);
+            GUI.DrawTextureWithTexCoords(canvas, backgroundTex, texCoords);
+            
             foreach (var node in currentDialogue.GetAllNodes())
             {
                 DrawConnections(node);
@@ -70,8 +86,8 @@ namespace RPG.Dialogue.Editor
                 DrawNode(node);
             }
 
-            ProcessEvents();
-
+            GUILayout.EndScrollView();
+            
         }
 
         private void DrawConnections(DialogueNode node)
@@ -118,10 +134,15 @@ namespace RPG.Dialogue.Editor
             var currentEvent = Event.current;
             if (currentEvent.type == EventType.MouseDown && draggingNode == null)
             {
-                draggingNode = GetNodeAtPoint(currentEvent.mousePosition);
+                draggingNode = GetNodeAtPoint(currentEvent.mousePosition + scrollPosition);
+
                 if (draggingNode != null)
                 {
                     draggingOffset = draggingNode.Rect.position - currentEvent.mousePosition;
+                }
+                else
+                {
+                    draggingOffset = currentEvent.mousePosition;
                 }
             }
             else if (currentEvent.type == EventType.MouseDrag && draggingNode != null)
@@ -129,6 +150,13 @@ namespace RPG.Dialogue.Editor
                 Undo.RegisterCompleteObjectUndo(currentDialogue, "Changed Dialogue Position");
                 draggingNode.SetPosition(currentEvent.mousePosition + draggingOffset);
                 GUI.changed = true;
+            }
+            else if (currentEvent.type == EventType.MouseDrag && draggingNode == null)
+            {
+                var delta = currentEvent.mousePosition - draggingOffset;
+                scrollPosition -= delta;
+                draggingOffset = currentEvent.mousePosition;
+                Repaint();
             }
             else if (currentEvent.type == EventType.MouseUp && draggingNode != null)
             {
