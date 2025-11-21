@@ -1,46 +1,70 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Dialogue
 {
-    [System.Serializable]
-    public class DialogueNode
+    public class DialogueNode : ScriptableObject
     {
-        [SerializeField] private string uniqueId = Guid.NewGuid().ToString();
         [SerializeField] private string text;
         [SerializeField] private List<string> children = new();
         [SerializeField] private Rect rect = new (10, 10, 200, 150);
 
-        public string UniqueId => uniqueId;
-
-        public Rect Rect
-        {
-            get => rect;
-            private set => rect = value;
-        }
-
-        public string Text
-        {
-            get => text; 
-            set => text = value;
-        }
-
+        public Rect Rect => rect;
         public IEnumerable<string> Children => children;
+        public string Text => text;
+        
+#if UNITY_EDITOR        
+        public UnityEvent onUndoRedoPerformed = new ();
+        
+        private void OnEnable()
+        {
+            Undo.undoRedoPerformed += HandleUndoRedo;
+        }
 
+        private void OnDisable()
+        {
+            Undo.undoRedoPerformed -= HandleUndoRedo;
+        }
+
+        public void SetText(string newText)
+        {
+            if (newText != text)
+            {
+                Undo.RecordObject(this, "Changed Dialogue Text");
+                text = newText;
+            }
+        }
+
+        public Vector2 Position
+        {
+            get => rect.position;
+            set
+            {
+                Undo.RegisterCompleteObjectUndo(this, "Changed Dialogue Position");
+                rect.position = value;
+            }
+        }
+        
         public void AddChild(string childId)
         {
+            Undo.RecordObject(this, "Linked Dialogue Node");
             children.Add(childId);
         }
 
         public void RemoveChild(string childId)
         {
+            Undo.RecordObject(this, "Unlinked Dialogue Node");
             children.Remove(childId);
         }
 
-        public void SetPosition(Vector2 position)
+        private void HandleUndoRedo()
         {
-            Rect = new Rect(position, rect.size);
+            onUndoRedoPerformed?.Invoke();
         }
+#endif
+        
     }
-}
+} 
