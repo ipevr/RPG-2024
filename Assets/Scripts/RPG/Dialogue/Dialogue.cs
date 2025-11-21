@@ -74,7 +74,7 @@ namespace RPG.Dialogue
         public void CreateNode(DialogueNode parentNode)
         {
             var newNode = MakeNode(parentNode);
-            AssetDatabase.AddObjectToAsset(newNode, this);
+            newNode.onUndoRedoPerformed.AddListener(HandleUndoRedo);
             
             Undo.RegisterCreatedObjectUndo(newNode, "Created Dialogue Node");
             
@@ -123,8 +123,8 @@ namespace RPG.Dialogue
         {
             var newNode = CreateInstance<DialogueNode>();
             newNode.name = Guid.NewGuid().ToString();
-            newNode.onUndoRedoPerformed.AddListener(HandleUndoRedo);
-            
+            AssetDatabase.AddObjectToAsset(newNode, this);
+
             if (parentNode)
             {
                 parentNode.AddChild(newNode.name);

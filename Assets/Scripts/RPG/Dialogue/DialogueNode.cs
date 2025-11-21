@@ -35,6 +35,7 @@ namespace RPG.Dialogue
             {
                 Undo.RecordObject(this, "Changed Dialogue Text");
                 text = newText;
+                EditorUtility.SetDirty(this);
             }
         }
 
@@ -45,6 +46,7 @@ namespace RPG.Dialogue
             {
                 Undo.RegisterCompleteObjectUndo(this, "Changed Dialogue Position");
                 rect.position = value;
+                EditorUtility.SetDirty(this);
             }
         }
         
@@ -52,12 +54,14 @@ namespace RPG.Dialogue
         {
             Undo.RecordObject(this, "Linked Dialogue Node");
             children.Add(childId);
+            EditorUtility.SetDirty(this);
         }
 
         public void RemoveChild(string childId)
         {
             Undo.RecordObject(this, "Unlinked Dialogue Node");
             children.Remove(childId);
+            EditorUtility.SetDirty(this);
         }
 
         private void HandleUndoRedo()
