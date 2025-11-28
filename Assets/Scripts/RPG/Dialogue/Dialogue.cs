@@ -10,6 +10,7 @@ namespace RPG.Dialogue
     public class Dialogue : ScriptableObject
     {
         [SerializeField] private List<DialogueNode> nodes = new ();
+        [SerializeField] private Vector2 newNodeOffset = new (250, 0);
         
         private readonly Dictionary<string, DialogueNode> nodeLookup = new();
         
@@ -45,6 +46,11 @@ namespace RPG.Dialogue
                     yield return node;
                 }
             }
+        }
+
+        public DialogueNode GetRootNode()
+        {
+            return nodes.Count == 0 ? null : nodes[0];
         }
         
         private void BuildNodeLookUp()
@@ -127,8 +133,9 @@ namespace RPG.Dialogue
 
             if (parentNode)
             {
+                newNode.IsPlayerSpeaking = !parentNode.IsPlayerSpeaking;
                 parentNode.AddChild(newNode.name);
-                newNode.Position = parentNode.Position + new Vector2(250, 0);
+                newNode.Position = parentNode.Position + newNodeOffset;
             }
 
             return newNode;

@@ -8,6 +8,7 @@ namespace RPG.Dialogue
 {
     public class DialogueNode : ScriptableObject
     {
+        [SerializeField] private bool isPlayerSpeaking;
         [SerializeField] private string text;
         [SerializeField] private List<string> children = new();
         [SerializeField] private Rect rect = new (10, 10, 200, 150);
@@ -27,6 +28,16 @@ namespace RPG.Dialogue
         private void OnDisable()
         {
             Undo.undoRedoPerformed -= HandleUndoRedo;
+        }
+
+        public bool IsPlayerSpeaking
+        {
+            get => isPlayerSpeaking;
+            set  {
+                Undo.RecordObject(this, "Changed Dialogue Speaker");
+                isPlayerSpeaking = value;
+                EditorUtility.SetDirty(this);
+            }
         }
 
         public void SetText(string newText)

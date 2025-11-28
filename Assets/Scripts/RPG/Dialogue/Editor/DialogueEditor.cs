@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -10,7 +8,8 @@ namespace RPG.Dialogue.Editor
     public class DialogueEditor : EditorWindow
     {
         private Dialogue currentDialogue;
-        private GUIStyle nodeStyle;
+        private GUIStyle nodeStyleNpc;
+        private GUIStyle nodeStylePlayer;
         private DialogueNode draggingNode;
         private Vector2 draggingOffset;
         private DialogueNode linkingNode;
@@ -39,15 +38,21 @@ namespace RPG.Dialogue.Editor
             return false;
         }
 
-        private void Awake()
+        private void OnEnable()
         {
             var tex = new Texture2D(1, 1);
             tex.SetPixel(0, 0, new Color(0.18f, 0.18f, 0.18f, 1));
             tex.Apply();
 
-            nodeStyle = new GUIStyle
+            nodeStyleNpc = new GUIStyle
             {
                 normal = {background = EditorGUIUtility.Load("node0") as Texture2D},
+                padding = new RectOffset(12, 12, 12, 12),
+                border = new RectOffset(12, 12, 12, 12)
+            };
+            nodeStylePlayer = new GUIStyle
+            {
+                normal = {background = EditorGUIUtility.Load("node1") as Texture2D},
                 padding = new RectOffset(12, 12, 12, 12),
                 border = new RectOffset(12, 12, 12, 12)
             };
@@ -98,6 +103,11 @@ namespace RPG.Dialogue.Editor
         
         private void DrawNode(DialogueNode node)
         {
+            var nodeStyle = nodeStyleNpc;
+            if (node.IsPlayerSpeaking)
+            {
+                nodeStyle = nodeStylePlayer;
+            }
             GUILayout.BeginArea(node.Rect, GUIContent.none, nodeStyle);
 
             node.SetText(EditorGUILayout.TextField(node.Text));
