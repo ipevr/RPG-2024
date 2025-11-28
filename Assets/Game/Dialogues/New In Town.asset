@@ -1,0 +1,306 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5712589748533948301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 900a13a3-c05c-456b-b965-ee38fc5854b0
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: Mr. Bowler is a good friend of mine!
+  children:
+  - 38157651-5945-4ac7-88ee-6bbed9c7dbf1
+  rect:
+    serializedVersion: 2
+    x: 1490
+    y: 65
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-5000840259224067640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 9a24d426-80e3-4c29-a2cc-2fde87935f15
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: Who?
+  children:
+  - 9f2d25fd-990b-4ef4-8a69-a6d7616a8a3e
+  rect:
+    serializedVersion: 2
+    x: 1492
+    y: 242
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-4722223276094576157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 25cadf33-081a-42fb-9cdc-f43365a95e5f
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: Did I say Newton? I'm actually from Springville.
+  children:
+  - 75843e9e-6574-4a88-8f78-f66b84be4602
+  rect:
+    serializedVersion: 2
+    x: 837
+    y: 299
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-4301776622734227343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 6d7da9d5-91dd-4268-ba42-90ca7fb59010
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: I've lived here all my life!
+  children:
+  - 75843e9e-6574-4a88-8f78-f66b84be4602
+  rect:
+    serializedVersion: 2
+    x: 330
+    y: 26
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-2890450419240646601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 911b82ba-a95f-4051-a4cb-5ad7a2765c6c
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: Newton, eh? I heard there's trouble brewing down there.
+  children:
+  - 25cadf33-081a-42fb-9cdc-f43365a95e5f
+  - 93f97cfe-e5ab-4585-8761-edb4fc039b05
+  rect:
+    serializedVersion: 2
+    x: 575
+    y: 373
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-1756928715498917576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 38157651-5945-4ac7-88ee-6bbed9c7dbf1
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: You liar! There ain't no Mr. Bowler, I made him up!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 1758
+    y: 70
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-118169484601338890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 4002882a-3961-4727-aa45-4a9e1a0c8bb3
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: I came here from Newton.
+  children:
+  - 911b82ba-a95f-4051-a4cb-5ad7a2765c6c
+  rect:
+    serializedVersion: 2
+    x: 334
+    y: 195
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94baa3224d474c59ab347512319b3a66, type: 3}
+  m_Name: New In Town
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.Dialogue
+  nodes:
+  - {fileID: 6695725096030118211}
+  - {fileID: -4301776622734227343}
+  - {fileID: -118169484601338890}
+  - {fileID: 4018290965563529115}
+  - {fileID: -2890450419240646601}
+  - {fileID: -5712589748533948301}
+  - {fileID: -5000840259224067640}
+  - {fileID: -4722223276094576157}
+  - {fileID: 3453658380070878066}
+  - {fileID: -1756928715498917576}
+  - {fileID: 3830498684910732388}
+  newNodeOffset: {x: 250, y: 0}
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3453658380070878066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 93f97cfe-e5ab-4585-8761-edb4fc039b05
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: I haven't heard about any trouble.
+  children:
+  - 9f2d25fd-990b-4ef4-8a69-a6d7616a8a3e
+  rect:
+    serializedVersion: 2
+    x: 838
+    y: 495
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &3830498684910732388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 9f2d25fd-990b-4ef4-8a69-a6d7616a8a3e
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: Don't worry about it. Say, do you have something to eat? I'm starving.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 1754
+    y: 421
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4018290965563529115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 75843e9e-6574-4a88-8f78-f66b84be4602
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: Oh really? Then you must know Mr. Bowler.
+  children:
+  - 900a13a3-c05c-456b-b965-ee38fc5854b0
+  - 9a24d426-80e3-4c29-a2cc-2fde87935f15
+  rect:
+    serializedVersion: 2
+    x: 1130
+    y: 153
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6695725096030118211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 34d08c8c-c0f1-47df-a458-4ea642c31787
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: You don't look like you're from around here.
+  children:
+  - 6d7da9d5-91dd-4268-ba42-90ca7fb59010
+  - 4002882a-3961-4727-aa45-4a9e1a0c8bb3
+  rect:
+    serializedVersion: 2
+    x: 19
+    y: 93
+    width: 200
+    height: 150
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []

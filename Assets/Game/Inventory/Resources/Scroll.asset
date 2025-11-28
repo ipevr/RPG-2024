@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fcdae90fec84b71bf910a4135d841e2, type: 3}
+  m_Name: Scroll
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Inventory.ActionItem
+  itemId: 369a73d4-354b-410d-93e9-2fd939103152
+  displayName: Scroll
+  description: An enchantment scroll
+  icon: {fileID: 21300000, guid: f7466855c8de7a74c810bab782a20f04, type: 3}
+  pickupPrefab: {fileID: 1449388233691795844, guid: ac414e442a03e4346a8f50a626562b14, type: 3}
+  isStackable: 1
+  isConsumable: 0
+  maxStackSize: 5
