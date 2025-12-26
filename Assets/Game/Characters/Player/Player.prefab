@@ -671,6 +671,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: 14
       addedObject: {fileID: 617566172193619049}
+    - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1220129937575409127}
   m_SourcePrefab: {fileID: 100100000, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
 --- !u!114 &148499438458294820 stripped
 MonoBehaviour:
@@ -732,109 +735,23 @@ MonoBehaviour:
   - type: 2
     texture: {fileID: 2800000, guid: 913df4190fee777438ef07887e256146, type: 3}
     hotspot: {x: 0, y: 0}
-  - type: 3
-    texture: {fileID: 2800000, guid: 74f49d5fba4ceda418681ec5f093e457, type: 3}
-    hotspot: {x: 0, y: 0}
-  - type: 4
+  - type: 5
     texture: {fileID: 2800000, guid: 573a515fb1427dd4d855b8885a2d3a4b, type: 3}
     hotspot: {x: 0, y: 0}
+  - type: 3
+    texture: {fileID: 2800000, guid: 1a413d2b27d9d474f8cafb33702179d1, type: 3}
+    hotspot: {x: 0, y: 0}
+  - type: 4
+    texture: {fileID: 2800000, guid: 74f49d5fba4ceda418681ec5f093e457, type: 3}
+    hotspot: {x: 0, y: 0}
+  moveAction: {fileID: -3220046851730890146, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
   specialAbilityKeys:
-  - m_Name: Element 0
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 1a29b305-6036-4d1b-b582-71403c5e10ed
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 0292ed9f-ccfa-4cf7-a644-28c4abe6e8ab
-      m_Path: <Keyboard>/1
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Element 0
-      m_Flags: 0
-    m_Flags: 0
-  - m_Name: Input Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: d23a0752-b3e0-41e9-90e7-fb8a101c6e68
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: ab96189b-59a2-4f95-ba9a-d6240e295729
-      m_Path: <Keyboard>/2
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Action
-      m_Flags: 0
-    m_Flags: 0
-  - m_Name: Input Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 58faf7b8-bac0-4e1b-82fc-637b1597af8b
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e6bbcd61-b6d2-4dec-84d1-f081432b4905
-      m_Path: <Keyboard>/3
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Action
-      m_Flags: 0
-    m_Flags: 0
-  - m_Name: Input Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 94840a93-8372-4849-a476-318e790f80a5
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 71c47116-3cb6-4ccd-af7b-f35330c3297d
-      m_Path: <Keyboard>/4
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Action
-      m_Flags: 0
-    m_Flags: 0
-  - m_Name: Input Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 93e15170-b44a-49e0-9f44-ede651c03f40
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: c8e10db3-90a7-47ad-b4df-b84c20da5824
-      m_Path: <Keyboard>/5
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Action
-      m_Flags: 0
-    m_Flags: 0
-  - m_Name: Input Action
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 4eecb255-7345-4067-9a11-a851ed444a38
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: b99b1cd2-bb2f-41cc-86fd-40e7dfafa008
-      m_Path: <Keyboard>/6
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Input Action
-      m_Flags: 0
-    m_Flags: 0
+  - {fileID: -7094542476967073358, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  - {fileID: 550326137229114734, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  - {fileID: -405722571240764008, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  - {fileID: 7327846976119248675, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  - {fileID: 1226111562474744048, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  - {fileID: -3654611920445685436, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
 --- !u!114 &966032940304236699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -923,4 +840,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8829e0ea71b54aa0843c487d04a87f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.PlayerConversant
-  currentDialogue: {fileID: 11400000, guid: 31c13a14f9e764e4e8c8ef2d30fa5787, type: 2}
+--- !u!114 &1220129937575409127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2653495166915529232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b830f427-14ce-4aab-9f79-adfc53fb1008
+    m_ActionName: 'Player/Interact[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 70a4ffd5-e46e-46a6-9c24-1abc633d41ab
+    m_ActionName: 'Player/Attack[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 96258b3a-bac0-4a51-ae63-f714e3a4f38c
+    m_ActionName: 'Player/Move[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 6f40a5ae-2525-45bb-a538-e57445e4466d
+    m_ActionName: 'Player/Special Ability 1[/Keyboard/1]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f1478951-fa2b-45a5-8864-e35e19e670f8
+    m_ActionName: 'Player/Special Ability 2[/Keyboard/2]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0cf2996c-c58b-4176-a05f-6b21f2b3b13b
+    m_ActionName: 'Player/Special Ability 3[/Keyboard/3]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 85827828-ce88-4f83-9aa8-f092d16e20ec
+    m_ActionName: 'Player/Special Ability 4[/Keyboard/4]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 96244b69-ef2c-4a5e-88db-4ca1f650e08e
+    m_ActionName: 'Player/Special Ability 5[/Keyboard/5]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c8797b4c-ba13-4ce4-9359-03c552a50890
+    m_ActionName: 'Player/Special Ability 6[/Keyboard/6]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

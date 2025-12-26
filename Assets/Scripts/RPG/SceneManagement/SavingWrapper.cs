@@ -7,9 +7,9 @@ namespace RPG.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
-        [SerializeField] private InputAction saveAction;
-        [SerializeField] private InputAction loadAction;
-        [SerializeField] private InputAction deleteAction;
+        [SerializeField] private InputActionReference saveAction;
+        [SerializeField] private InputActionReference loadAction;
+        [SerializeField] private InputActionReference deleteAction;
         [SerializeField] private string saveFileName = "save";
         [SerializeField] private float fadeTime = 1f;
         
@@ -21,20 +21,6 @@ namespace RPG.SceneManagement
         {
             savingSystem = GetComponent<SavingSystem>();
             StartCoroutine(LoadLastScene());
-        }
-
-        private void OnEnable()
-        {
-            saveAction.Enable();
-            loadAction.Enable();
-            deleteAction.Enable();
-        }
-
-        private void OnDisable()
-        {
-            saveAction.Disable();
-            loadAction.Disable();
-            deleteAction.Disable();
         }
 
         private void Update()
@@ -79,7 +65,7 @@ namespace RPG.SceneManagement
 
         private void HandleLoadAction()
         {
-            if (loadAction.triggered)
+            if (loadAction && loadAction.action.triggered)
             {
                 Load();
             }
@@ -87,7 +73,7 @@ namespace RPG.SceneManagement
 
         private void HandleSaveAction()
         {
-            if (saveAction.triggered)
+            if (saveAction && saveAction.action.triggered)
             {
                 Save();
             }
@@ -95,7 +81,7 @@ namespace RPG.SceneManagement
 
         private void HandleDeleteAction()
         {
-            if (deleteAction.triggered)
+            if (deleteAction && deleteAction.action.triggered)
             {
                 Delete();
             }

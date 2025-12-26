@@ -57,56 +57,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80e164a390714492a0630e644fa2bcfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveAction:
-    m_Name: Save
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 66d5d13b-9375-4f43-be5f-88c639d47e6c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 7a673ec0-b006-4485-b5c5-47443bc3fe09
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Save
-      m_Flags: 0
-    m_Flags: 0
-  loadAction:
-    m_Name: Load
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6a495f2b-39ae-47d3-870c-a1d52b56509e
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 84d28442-959e-440e-a568-f7d1a9dc95f2
-      m_Path: <Keyboard>/l
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Load
-      m_Flags: 0
-    m_Flags: 0
-  deleteAction:
-    m_Name: Delete
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: eab4f51c-70e9-43e3-a826-79945ee93daa
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e4ccaf78-2cee-4027-aaab-a5b81517eacf
-      m_Path: <Keyboard>/delete
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Delete
-      m_Flags: 0
-    m_Flags: 0
+  saveAction: {fileID: 1730513383970587972, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  loadAction: {fileID: -2062071835163447260, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  deleteAction: {fileID: 2075524926448704157, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
   saveFileName: saveFile
   fadeTime: 0.2

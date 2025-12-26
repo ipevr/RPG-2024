@@ -25,7 +25,8 @@ namespace RPG.Control
         [SerializeField] private float navMeshProjectionDistance = .1f;
         [SerializeField] private float raycastRadius = 1f;
         [SerializeField] private CursorMapping[] cursorMappings;
-        [SerializeField] private InputAction[] specialAbilityKeys;
+        [SerializeField] private InputActionReference moveAction;
+        [SerializeField] private InputActionReference[] specialAbilityKeys;
      
         private Health health;
         private Mover mover;
@@ -39,28 +40,6 @@ namespace RPG.Control
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
             actionStore = GetComponent<PlayerActionStore>();
-        }
-
-        private void OnEnable()
-        {
-            if (specialAbilityKeys != null)
-            {
-                foreach (var action in specialAbilityKeys)
-                {
-                    action?.Enable();
-                }
-            }
-        }
-
-        private void OnDisable()
-        {
-            if (specialAbilityKeys != null)
-            {
-                foreach (var action in specialAbilityKeys)
-                {
-                    action?.Disable();
-                }
-            }
         }
 
         private void Update()
@@ -103,7 +82,7 @@ namespace RPG.Control
         {
             for (var i = 0; i < specialAbilityKeys.Length; i++)
             {
-                if (specialAbilityKeys[i].WasPressedThisFrame())
+                if (specialAbilityKeys[i].action.WasPressedThisFrame())
                 {
                     actionStore.Use(i, gameObject);
                 }
@@ -152,7 +131,7 @@ namespace RPG.Control
             var hasHit = RaycastNavMesh(out var target);
             if (!hasHit || !mover.CanMoveTo(target)) return false;
 
-            if (Input.GetMouseButton(0))
+            if (moveAction.action.triggered)
             {
                 mover.StartMoveAction(target, normalSpeedFraction);
             }
@@ -193,11 +172,9 @@ namespace RPG.Control
         private Ray GetMouseRay()
         {
             var mainCamera = Camera.main;
-            if (!mainCamera)
-            {
-                throw new MissingReferenceException("No main camera found");
-            }
-            return mainCamera.ScreenPointToRay(Input.mousePosition);
+            return mainCamera
+                ? mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue())
+                : throw new MissingReferenceException("No main camera found");
         }
 
         #endregion

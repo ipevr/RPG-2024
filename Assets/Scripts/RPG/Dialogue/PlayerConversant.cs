@@ -1,49 +1,97 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Dialogue
 {
     public class PlayerConversant : MonoBehaviour
     {
-        [SerializeField] private Dialogue currentDialogue;
-        
+        private Dialogue currentDialogue;
         private DialogueNode currentNode;
 
-        private void Awake()
-        {
-            currentNode = currentDialogue.GetRootNode();
-        }
+        public DialogueNode CurrentNode => currentNode;
 
+        private bool isChoosing; // explicit UI state: are we showing player choices?
+
+        public bool IsChoosing => isChoosing;
+        
+        public UnityAction OnConversationUpdated;
+        
         public static PlayerConversant GetPlayerConversant()
         {
             var player = GameObject.FindGameObjectWithTag("Player");
             return player.GetComponent<PlayerConversant>();
         }
-
-        public string GetText()
+        
+        public void StartDialogue(Dialogue newDialogue)
         {
-            return !currentNode ? "" : currentNode.Text;
+            currentDialogue = newDialogue;
+            currentNode = currentDialogue.GetRootNode();
+            isChoosing = currentNode.IsPlayerSpeaking;
+            
+            OnConversationUpdated?.Invoke();
+        }
+        
+        public void Quit()
+        {
+            currentDialogue = null;
+            currentNode = null;
+            isChoosing = false;
+            OnConversationUpdated?.Invoke();
         }
 
-        public bool MoveToNextNode()
+        public bool IsActive()
         {
-            if (!currentNode)
+            return currentDialogue != null;
+        }
+        
+        public IEnumerable<DialogueNode> GetChoices()
+        {
+            return currentDialogue.GetPlayerChildren(currentNode);
+        }
+        
+        public void SelectChoice(DialogueNode selectedChoice)
+        {
+            currentNode = selectedChoice;
+            isChoosing = false;
+            Next();
+        }
+
+
+        public void Next()
+        {
+            if (!HasNext())
             {
-                return false;
+                Quit();
+                return;
             }
-            if (currentNode.Children == null)
+
+            var numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
+
+            if (numPlayerResponses > 0)
             {
-                return false;
+                isChoosing = true; 
+                OnConversationUpdated?.Invoke();
+                return;
             }
-            var nodeChildren = currentDialogue.GetAllChildren(currentNode).ToArray();
-            if (nodeChildren.Length > 0)
+            
+            var numAIResponses = currentDialogue.GetAIChildren(currentNode).Count();
+            
+            if (numAIResponses > 0)
             {
-                var randomIndex = UnityEngine.Random.Range(0, nodeChildren.Length);
-                currentNode = nodeChildren[randomIndex];
-                return true;
+                var aiResponses = currentDialogue.GetAIChildren(currentNode).ToArray();
+                currentNode = aiResponses[UnityEngine.Random.Range(0, aiResponses.Length)];
+                isChoosing = false;
             }
-            return false;
+
+            OnConversationUpdated?.Invoke();
+        }
+
+        public bool HasNext()
+        {
+            return currentDialogue != null && currentNode != null &&
+                   currentDialogue.GetAllChildren(currentNode).Any();
         }
 
     }

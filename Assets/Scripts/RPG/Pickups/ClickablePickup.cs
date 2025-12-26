@@ -1,10 +1,13 @@
-﻿using RPG.Control;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using RPG.Control;
 
 namespace RPG.Pickups
 {
     public class ClickablePickup : MonoBehaviour, IRaycastable
     {
+        [SerializeField] private InputActionReference pickupAllAction; 
+        [SerializeField] private InputActionReference pickupOneAction; 
         private Pickup pickup;
 
         #region Unity Event Functions
@@ -18,15 +21,15 @@ namespace RPG.Pickups
         
         #region Interface Implementations
         
-        public bool HandleRaycast(PlayerController playerController)
+        public bool HandleRaycast(PlayerController player)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (pickupAllAction && pickupAllAction.action.triggered)
             {
                 pickup.PickupItem();
             }
 
             // Todo: Nicer solution: Shift-Click item --> Desired amount can be adjusted in ui popup 
-            if (Input.GetMouseButtonDown(1))
+            if (pickupOneAction && pickupOneAction.action.triggered)
             {
                 pickup.PickupItem(1);
             }

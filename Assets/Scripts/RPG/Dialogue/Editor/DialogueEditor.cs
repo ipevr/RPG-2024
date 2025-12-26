@@ -29,7 +29,7 @@ namespace RPG.Dialogue.Editor
         [OnOpenAsset(1)]
         public static bool OnOpenAsset(int instanceID, int line, int column)
         {
-            if (EditorUtility.InstanceIDToObject(instanceID) is Dialogue)
+            if (EditorUtility.EntityIdToObject(instanceID) is Dialogue)
             {
                 ShowWindow();
                 return true;

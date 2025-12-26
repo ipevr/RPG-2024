@@ -6,7 +6,7 @@ namespace RPG.UI
 {
     public class ShowHideUI : MonoBehaviour
     {
-        [SerializeField] private InputAction toggleUI;
+        [SerializeField] private InputActionReference toggleUI;
         [SerializeField] private GameObject uiContainer;
 
         private void Start()
@@ -14,19 +14,9 @@ namespace RPG.UI
             uiContainer.SetActive(false);
         }
 
-        private void OnEnable()
-        {
-            toggleUI.Enable();
-        }
-
-        private void OnDisable()
-        {
-            toggleUI.Disable();
-        }
-
         private void Update()
         {
-            if (toggleUI.WasPerformedThisFrame())
+            if (toggleUI && toggleUI.action.triggered)
             {
                 uiContainer.SetActive(!uiContainer.activeSelf);
             }

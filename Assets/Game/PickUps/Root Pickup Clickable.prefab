@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1838979186725471886, guid: 56c4d8126d850194d9bf549da5298464, type: 3}
       propertyPath: m_Name
-      value: Clickable Pickup
+      value: Root Pickup Clickable
       objectReference: {fileID: 0}
     - target: {fileID: 3581437979859870041, guid: 56c4d8126d850194d9bf549da5298464, type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,3 +77,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3392fa5c303d4d57af63de715a79de71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupAllAction: {fileID: -6651627989939019733, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
+  pickupOneAction: {fileID: 8543955879955764147, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}

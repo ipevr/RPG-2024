@@ -5,23 +5,12 @@ namespace RPG.UI
 {
     public class HideAllUIs : MonoBehaviour
     {
-        [SerializeField] private InputAction hideAllUIs;
+        [SerializeField] private InputActionReference hideAllUIs;
         [SerializeField] private GameObject[] uiContainers;
-
-
-        private void OnEnable()
-        {
-            hideAllUIs.Enable();
-        }
-
-        private void OnDisable()
-        {
-            hideAllUIs.Disable();
-        }
 
         private void Update()
         {
-            if (hideAllUIs.WasPerformedThisFrame())
+            if (hideAllUIs && hideAllUIs.action.triggered)
             {
                 HideAllUIContainers();
             }

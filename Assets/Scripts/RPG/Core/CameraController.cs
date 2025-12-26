@@ -8,8 +8,8 @@ namespace RPG.Core
 {
     public class CameraController : MonoBehaviour
     {
-        [SerializeField] private InputAction zoomInAction;
-        [SerializeField] private InputAction zoomOutAction;
+        [SerializeField] private InputActionReference zoomAction;
+        [SerializeField] private float zoomSensitivity = 0.01f;
         [SerializeField] private float startDistance = 10;
         [SerializeField] private float maxZoomIn = 2;
         [SerializeField] private float maxZoomOut = 20;
@@ -26,30 +26,19 @@ namespace RPG.Core
             composer.CameraDistance = startDistance;
         }
 
-        private void OnEnable()
-        {
-            zoomInAction.Enable();
-            zoomOutAction.Enable();
-        }
-
-        private void OnDisable()
-        {
-            zoomInAction.Disable();
-            zoomOutAction.Disable();
-        }
-
         private void Update()
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
             
-            if (zoomInAction.triggered)
+            if (zoomAction)
             {
-                composer.CameraDistance -= zoomInAction.ReadValue<float>();
+                var scrollValue = zoomAction.action.ReadValue<float>();
+                if (Mathf.Abs(scrollValue) > 0.1f)
+                {
+                    composer.CameraDistance -= scrollValue * zoomSensitivity;
+                }
             }
-            else if (zoomOutAction.triggered)
-            {
-                composer.CameraDistance += zoomOutAction.ReadValue<float>();
-            }
+
             composer.CameraDistance = Mathf.Clamp(composer.CameraDistance, maxZoomIn, maxZoomOut);
         }
 

@@ -5,6 +5,7 @@
         None,
         Movement,
         Combat,
+        Dialogue,
         UI,
         Pickup
     }

@@ -16,6 +16,7 @@ namespace RPG.Dialogue
         public Rect Rect => rect;
         public IEnumerable<string> Children => children;
         public string Text => text;
+        public bool IsPlayerSpeaking => isPlayerSpeaking;
         
 #if UNITY_EDITOR        
         public UnityEvent onUndoRedoPerformed = new ();
@@ -30,14 +31,11 @@ namespace RPG.Dialogue
             Undo.undoRedoPerformed -= HandleUndoRedo;
         }
 
-        public bool IsPlayerSpeaking
+        public void SetPlayerSpeaking(bool status)
         {
-            get => isPlayerSpeaking;
-            set  {
-                Undo.RecordObject(this, "Changed Dialogue Speaker");
-                isPlayerSpeaking = value;
-                EditorUtility.SetDirty(this);
-            }
+            Undo.RecordObject(this, "Changed Dialogue Speaker");
+            isPlayerSpeaking = status;
+            EditorUtility.SetDirty(this);
         }
 
         public void SetText(string newText)

@@ -1,17 +1,21 @@
-﻿using System;
-using RPG.Dialogue;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using RPG.Dialogue;
 
 namespace RPG.UI.Dialogue
 {
     public class DialogueUI : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI aiText;
+        [SerializeField] private Transform choiceRoot;
+        [SerializeField] private Button choiceButtonPrefab;
+        [SerializeField] private Transform aiResponse;
         [SerializeField] private Button nextButton;
+        [SerializeField] private Button quitButton;
+        [SerializeField] private TextMeshProUGUI aiText;
         
         private PlayerConversant playerConversant;
+        private DialogueNode currentNode;
 
         private void Awake()
         {
@@ -20,31 +24,64 @@ namespace RPG.UI.Dialogue
 
         private void OnEnable()
         {
-            nextButton.onClick.AddListener(HandleNextButtonClicked);
+            nextButton.onClick.AddListener(playerConversant.Next);
+            quitButton.onClick.AddListener(playerConversant.Quit);
         }
 
         private void OnDisable()
         {
-            nextButton.onClick.RemoveListener(HandleNextButtonClicked);
+            nextButton.onClick.RemoveListener(playerConversant.Next);
+            quitButton.onClick.RemoveListener(playerConversant.Quit);
         }
 
         private void Start()
         {
-            ShowCurrentText();
+            playerConversant.OnConversationUpdated += UpdateUI;
+            UpdateUI();
         }
 
-        private void ShowCurrentText()
+        private void UpdateUI()
         {
-            aiText.text = playerConversant.GetText();
-            if (!playerConversant.MoveToNextNode())
+            gameObject.SetActive(playerConversant.IsActive());
+            
+            if (!playerConversant.IsActive())
             {
-                nextButton.gameObject.SetActive(false);
+                return;
+            }
+            
+            var isChoosing = playerConversant.IsChoosing;
+            aiResponse.gameObject.SetActive(!isChoosing);
+            choiceRoot.gameObject.SetActive(isChoosing);
+            
+            if (isChoosing)
+            {
+                BuildChoiceList();
+            }
+            else
+            {
+                aiText.text = playerConversant.CurrentNode.Text;
+                nextButton.gameObject.SetActive(playerConversant.HasNext());
             }
         }
 
-        private void HandleNextButtonClicked()
+        private void BuildChoiceList()
         {
-            ShowCurrentText();
+            DestroyChoiceButtons();
+            
+            foreach (var choice in playerConversant.GetChoices())
+            {
+                var button = Instantiate(choiceButtonPrefab, choiceRoot);
+                button.GetComponentInChildren<TextMeshProUGUI>().text = choice.Text;
+                button.onClick.AddListener(() => playerConversant.SelectChoice(choice));
+            }
+        }
+
+        private void DestroyChoiceButtons()
+        {
+            foreach (Transform item in choiceRoot)
+            {
+                Destroy(item.gameObject);
+            }
         }
     }
 }

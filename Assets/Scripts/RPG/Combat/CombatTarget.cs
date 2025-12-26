@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using RPG.Attributes;
 using RPG.Control;
 
@@ -7,11 +8,13 @@ namespace RPG.Combat
     [RequireComponent(typeof(Health))]
     public class CombatTarget : MonoBehaviour, IRaycastable
     {
+        [SerializeField] private InputActionReference attackAction;
+
         public bool HandleRaycast(PlayerController player)
         {
             if (!player.GetComponent<Fighter>().CanAttack(gameObject)) return false;
             
-            if (Input.GetMouseButton(0))
+            if (attackAction && attackAction.action.triggered)
             {
                 player.GetComponent<Fighter>().Attack(gameObject);
             }

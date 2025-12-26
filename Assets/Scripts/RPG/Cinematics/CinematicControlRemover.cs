@@ -9,7 +9,7 @@ namespace RPG.Cinematics
 {
     public class CinematicControlRemover : MonoBehaviour
     {
-        [SerializeField] private InputAction cancelCinematic;
+        [SerializeField] private InputActionReference cancelCinematic;
         
         private GameObject player;
         
@@ -32,7 +32,7 @@ namespace RPG.Cinematics
 
         private void Update()
         {
-            if (cancelCinematic.IsPressed())
+            if (cancelCinematic  && cancelCinematic.action.triggered)
             {
                 GetComponent<PlayableDirector>().Stop();
             }
@@ -40,14 +40,12 @@ namespace RPG.Cinematics
 
         private void DisableControl(PlayableDirector playableDirector)
         {
-            cancelCinematic.Enable();
             player.GetComponent<ActionScheduler>().CancelCurrentAction();
             player.GetComponent<PlayerController>().enabled = false;
         }
 
         private void EnableControl(PlayableDirector playableDirector)
         {
-            cancelCinematic.Disable();
             player.GetComponent<PlayerController>().enabled = true;
         }
     }

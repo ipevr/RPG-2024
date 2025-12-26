@@ -48,9 +48,31 @@ namespace RPG.Dialogue
             }
         }
 
+        public IEnumerable<DialogueNode> GetPlayerChildren(DialogueNode node)
+        {
+            foreach (var child in GetAllChildren(node))
+            {
+                if (child.IsPlayerSpeaking)
+                {
+                    yield return child;
+                }
+            }
+        }
+
+        public IEnumerable<DialogueNode> GetAIChildren(DialogueNode node)
+        {
+            foreach (var child in GetAllChildren(node))
+            {
+                if (!child.IsPlayerSpeaking)
+                {
+                    yield return child;
+                }
+            }
+        }
+
         public DialogueNode GetRootNode()
         {
-            return nodes.Count == 0 ? null : nodes[0];
+            return nodes[0];
         }
         
         private void BuildNodeLookUp()
@@ -133,7 +155,7 @@ namespace RPG.Dialogue
 
             if (parentNode)
             {
-                newNode.IsPlayerSpeaking = !parentNode.IsPlayerSpeaking;
+                newNode.SetPlayerSpeaking(!parentNode.IsPlayerSpeaking);
                 parentNode.AddChild(newNode.name);
                 newNode.Position = parentNode.Position + newNodeOffset;
             }
@@ -154,7 +176,7 @@ namespace RPG.Dialogue
         {
             onUndoRedoPerformed?.Invoke();
         }
-#endif       
+#endif
 
     }
 }

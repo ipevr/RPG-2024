@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
     - target: {fileID: 2506605217967167949, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: uniqueIdentifier
-      value: 
+      value: 75f27cba-1945-48c7-b3a6-20cbf18a87fb
       objectReference: {fileID: 0}
     - target: {fileID: 3869725707801448184, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       propertyPath: maxSpeed
@@ -450,6 +450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a44b8bfad9b8343991aed90b60e59d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackAction: {fileID: 3767811868213120535, guid: 67d868d02910dba4a89f7a22aa2cee32, type: 3}
 --- !u!4 &7211533123216701675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083217268819252958, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
