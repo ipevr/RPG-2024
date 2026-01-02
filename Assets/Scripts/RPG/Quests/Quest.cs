@@ -12,9 +12,10 @@ namespace RPG.Quests
         [Tooltip("The objectives to be completed for completing this quest.")]
         [SerializeField] private List<Objective> objectives = new();
         [SerializeField] private List<Reward> rewards = new();
-        
+
+
         [System.Serializable]
-        private class Reward
+        public class Reward
         {
             public int amount;
             public InventoryItem item;
@@ -30,6 +31,7 @@ namespace RPG.Quests
         public string ID => id;
         public string Title => name;
         public IEnumerable<Objective> Objectives => objectives;
+        public List<Reward> Rewards => rewards;
 
         public static Quest GetFromId(string questId)
         {
@@ -37,6 +39,8 @@ namespace RPG.Quests
             {
                 if (quest.id == questId) return quest;
             }
+            
+            Debug.LogError($"Quest with id {questId} not found!");
 
             return null;
         }

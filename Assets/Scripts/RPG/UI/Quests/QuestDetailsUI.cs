@@ -1,15 +1,31 @@
-﻿using RPG.Quests;
-using TMPro;
+﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using RPG.Quests;
+using RPG.UI.Inventory;
 
 namespace RPG.UI.Quests
 {
-    public class QuestTooltipUI : MonoBehaviour
+    public class QuestDetailsUI : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private GameObject objectiveOpenPrefab;
         [SerializeField] private GameObject objectiveCompletedPrefab;
+        [SerializeField] private RewardUi rewardPrefab;
         [SerializeField] private Transform objectiveList;
+        [SerializeField] private Transform rewardsList;
+        [SerializeField] private Button closeButton;
+        
+        private void OnEnable()
+        {
+            closeButton.onClick.AddListener(HandleCloseButtonClicked);
+        }
+
+        private void OnDisable()
+        {
+            closeButton.onClick.RemoveListener(HandleCloseButtonClicked);
+        }
 
         public void Setup(QuestStatus status)
         {
@@ -23,6 +39,17 @@ namespace RPG.UI.Quests
                 
                 objectiveItem.GetComponentInChildren<TextMeshProUGUI>().text = objective.description;
             }
+            
+            foreach (var reward in status.Quest.Rewards)
+            {
+                var rewardUi = Instantiate(rewardPrefab, rewardsList);
+                rewardUi.Setup(reward.item);
+            }
+        }
+
+        private void HandleCloseButtonClicked()
+        {
+            Destroy(gameObject);
         }
 
     }

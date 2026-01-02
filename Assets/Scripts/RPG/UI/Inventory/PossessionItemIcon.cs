@@ -10,17 +10,19 @@ namespace RPG.UI.Inventory
     [RequireComponent(typeof(Image))]
     public class PossessionItemIcon : MonoBehaviour
     {
-        public void SetItem(InventoryItem item)
+        private InventoryItem item;
+        
+        public void SetItem(InventoryItem inventoryItem)
         {
             var iconImage = GetComponent<Image>();
-            if (item == null)
+            if (!inventoryItem)
             {
                 iconImage.enabled = false;
             }
             else
             {
                 iconImage.enabled = true;
-                iconImage.sprite = item.Icon;
+                iconImage.sprite = inventoryItem.Icon;
             }
         }
     }
