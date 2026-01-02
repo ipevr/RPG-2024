@@ -136,9 +136,7 @@ namespace RPG.Pickups
                 dropRecords.Add(record);
 
                 SpawnPickup(record);
-                
             }
-            Debug.Log("Restored dropped items");
         }
     }
 }

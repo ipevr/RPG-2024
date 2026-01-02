@@ -672,6 +672,9 @@ PrefabInstance:
       insertIndex: 14
       addedObject: {fileID: 617566172193619049}
     - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
+      insertIndex: 15
+      addedObject: {fileID: 4067502967523375551}
+    - targetCorrespondingSourceObject: {fileID: 4968974261587029020, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1220129937575409127}
   m_SourcePrefab: {fileID: 100100000, guid: 63aa96c4873e61740ace64c6bbc0e6e6, type: 3}
@@ -840,6 +843,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8829e0ea71b54aa0843c487d04a87f27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.PlayerConversant
+  playerName: Picard
+--- !u!114 &4067502967523375551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2653495166915529232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4be2e7f42da47a4b8691b7210eef589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Quests.QuestList
+  questStatuses:
+  - quest: {fileID: 11400000, guid: 677c639b9bdf67b4b80735fd4f521fa2, type: 2}
+    completedObjectives:
+    - Go to sleep again
 --- !u!114 &1220129937575409127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,6 +921,50 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: c8797b4c-ba13-4ce4-9359-03c552a50890
     m_ActionName: 'Player/Special Ability 6[/Keyboard/6]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 98112970-c94d-4ba9-9cbe-f2ca6fb84b81
+    m_ActionName: 'Player/Pickup All[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0a0fc2eb-298e-4b3b-b692-5d3eeb742baf
+    m_ActionName: 'Player/Pickup One[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5c7c347e-14f1-4b04-ab9c-dde0efa60f5a
+    m_ActionName: 'Player/Camera Zoom[/Mouse/scroll/y]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f34bdc75-0ced-47f8-99c6-8f91c7d0cac5
+    m_ActionName: 'Player/UI Inventory[/Keyboard/i]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2daffa72-b719-4c51-bb8d-2f3ed31af2da
+    m_ActionName: 'Player/UI Equipment[/Keyboard/c]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: af96b2ea-bf7a-42c8-8d18-9870ad0f7783
+    m_ActionName: 'Player/UI Hide All[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1bde4c48-ee1b-4848-8a60-0a8399c7580f
+    m_ActionName: 'Player/Saving System Save[/Keyboard/s]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 18e127c4-5395-4a1f-b2d4-8f270aa35891
+    m_ActionName: 'Player/Saving System Load[/Keyboard/l]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d442b74a-c0b4-4436-8eac-172be519ed64
+    m_ActionName: 'Player/Saving System Delete[/Keyboard/d]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f71be451-ced3-48c5-96b9-77464dc1f15f
+    m_ActionName: 'Player/Cinematic Cancel[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b97526ca-bfa4-495f-93c4-2b188e726671
+    m_ActionName: 'Player/UI Quests[/Keyboard/j]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

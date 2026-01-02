@@ -8,19 +8,24 @@ namespace RPG.Dialogue
     {
         [SerializeField] private Dialogue dialogue;
         [SerializeField] private InputActionReference interactAction;
+        [SerializeField] private string conversantName;
         
+        public Dialogue Dialogue => dialogue;
+        public string Name => conversantName;
+
         public bool HandleRaycast(PlayerController player)
         {
+            if (!enabled) return false;
             if (!dialogue) return false;
             
             if (interactAction && interactAction.action.triggered)
             {
-                player.GetComponent<PlayerConversant>().StartDialogue(dialogue);
+                PlayerConversant.GetPlayerConversant().StartDialogue(this);
             }
 
             return true;
         }
-
+        
         public CursorType GetCursorType()
         {
             return CursorType.Dialogue;

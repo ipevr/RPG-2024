@@ -7,13 +7,15 @@ namespace RPG.Dialogue
 {
     public class PlayerConversant : MonoBehaviour
     {
+        [SerializeField] private string playerName;
+        
         private Dialogue currentDialogue;
         private DialogueNode currentNode;
+        private bool isChoosing;
+        private AIConversant currentConversant;
+        private string currentConversantName;
 
         public DialogueNode CurrentNode => currentNode;
-
-        private bool isChoosing; // explicit UI state: are we showing player choices?
-
         public bool IsChoosing => isChoosing;
         
         public UnityAction OnConversationUpdated;
@@ -24,10 +26,13 @@ namespace RPG.Dialogue
             return player.GetComponent<PlayerConversant>();
         }
         
-        public void StartDialogue(Dialogue newDialogue)
+        public void StartDialogue(AIConversant newConversant)
         {
-            currentDialogue = newDialogue;
+            currentDialogue = newConversant.Dialogue;
+            currentConversant = newConversant;
+            currentConversantName = newConversant.Name;
             currentNode = currentDialogue.GetRootNode();
+            TriggerEnterAction();
             isChoosing = currentNode.IsPlayerSpeaking;
             
             OnConversationUpdated?.Invoke();
@@ -36,6 +41,8 @@ namespace RPG.Dialogue
         public void Quit()
         {
             currentDialogue = null;
+            TriggerExitAction();
+            currentConversant = null;
             currentNode = null;
             isChoosing = false;
             OnConversationUpdated?.Invoke();
@@ -44,6 +51,16 @@ namespace RPG.Dialogue
         public bool IsActive()
         {
             return currentDialogue != null;
+        }
+
+        public string GetSpeakerName()
+        {
+            if (isChoosing)
+            {
+                return playerName;
+            }
+            
+            return currentConversant ? currentConversantName : "";
         }
         
         public IEnumerable<DialogueNode> GetChoices()
@@ -54,6 +71,7 @@ namespace RPG.Dialogue
         public void SelectChoice(DialogueNode selectedChoice)
         {
             currentNode = selectedChoice;
+            TriggerEnterAction();
             isChoosing = false;
             Next();
         }
@@ -72,6 +90,7 @@ namespace RPG.Dialogue
             if (numPlayerResponses > 0)
             {
                 isChoosing = true; 
+                TriggerExitAction();
                 OnConversationUpdated?.Invoke();
                 return;
             }
@@ -81,7 +100,9 @@ namespace RPG.Dialogue
             if (numAIResponses > 0)
             {
                 var aiResponses = currentDialogue.GetAIChildren(currentNode).ToArray();
+                TriggerExitAction();
                 currentNode = aiResponses[UnityEngine.Random.Range(0, aiResponses.Length)];
+                TriggerEnterAction();
                 isChoosing = false;
             }
 
@@ -90,8 +111,31 @@ namespace RPG.Dialogue
 
         public bool HasNext()
         {
-            return currentDialogue != null && currentNode != null &&
+            return currentDialogue && currentNode &&
                    currentDialogue.GetAllChildren(currentNode).Any();
+        }
+
+        private void TriggerEnterAction()
+        {
+            TriggerAction(currentNode.OnEnterAction);
+        }
+
+        private void TriggerExitAction()
+        {
+            TriggerAction(currentNode.OnExitAction);
+        }
+
+        private void TriggerAction(DialogueAction action)
+        {
+            if (!currentNode || action == DialogueAction.None) return;
+            if (!currentConversant) return;
+
+            var triggers = currentConversant.GetComponents<DialogueTrigger>();
+            
+            foreach (var trigger in triggers)
+            {
+                trigger.Trigger(action);
+            }
         }
 
     }

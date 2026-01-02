@@ -22,6 +22,8 @@ MonoBehaviour:
     y: 65
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -47,6 +49,8 @@ MonoBehaviour:
     y: 242
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -73,6 +77,8 @@ MonoBehaviour:
     y: 299
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -96,9 +102,11 @@ MonoBehaviour:
   rect:
     serializedVersion: 2
     x: 330
-    y: 26
+    y: 27
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -125,6 +133,8 @@ MonoBehaviour:
     y: 373
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -149,6 +159,8 @@ MonoBehaviour:
     y: 70
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 1
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -175,6 +187,8 @@ MonoBehaviour:
     y: -5
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -200,6 +214,8 @@ MonoBehaviour:
     y: 217
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -254,6 +270,8 @@ MonoBehaviour:
     y: 495
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -274,10 +292,12 @@ MonoBehaviour:
   children: []
   rect:
     serializedVersion: 2
-    x: 1754
-    y: 421
+    x: 1774
+    y: 445
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 3
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -304,6 +324,8 @@ MonoBehaviour:
     y: 153
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []
@@ -330,6 +352,8 @@ MonoBehaviour:
     y: 93
     width: 200
     height: 150
+  onEnterAction: 0
+  onExitAction: 0
   onUndoRedoPerformed:
     m_PersistentCalls:
       m_Calls: []

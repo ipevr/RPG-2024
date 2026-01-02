@@ -94,12 +94,6 @@ namespace RPG.Combat
             target = combatTarget.GetComponent<Health>();
         }
 
-        private void UpdateWeapon()
-        {
-            var weaponConfig = playerEquipment.GetItem(EquipLocation.Weapon) as WeaponConfig;
-            Equip(!weaponConfig ? defaultWeaponConfig : weaponConfig);
-        }
-
         public void Equip(WeaponConfig weaponConfig)
         {
             if (weaponConfig.EquipLocation != EquipLocation.Weapon) return;
@@ -116,6 +110,12 @@ namespace RPG.Combat
         #endregion
 
         #region Private Methods
+
+        private void UpdateWeapon()
+        {
+            var weaponConfig = playerEquipment.GetItem(EquipLocation.Weapon) as WeaponConfig;
+            Equip(!weaponConfig ? defaultWeaponConfig : weaponConfig);
+        }
 
         private void AttachWeapon(WeaponConfig weaponConfig)
         {

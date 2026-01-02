@@ -12,11 +12,15 @@ namespace RPG.Dialogue
         [SerializeField] private string text;
         [SerializeField] private List<string> children = new();
         [SerializeField] private Rect rect = new (10, 10, 200, 150);
+        [SerializeField] private DialogueAction onEnterAction = DialogueAction.None;
+        [SerializeField] private DialogueAction onExitAction = DialogueAction.None;
 
         public Rect Rect => rect;
         public IEnumerable<string> Children => children;
         public string Text => text;
         public bool IsPlayerSpeaking => isPlayerSpeaking;
+        public DialogueAction OnEnterAction => onEnterAction;
+        public DialogueAction OnExitAction => onExitAction;
         
 #if UNITY_EDITOR        
         public UnityEvent onUndoRedoPerformed = new ();

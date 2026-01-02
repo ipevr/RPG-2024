@@ -12,6 +12,7 @@ namespace RPG.UI.Dialogue
         [SerializeField] private Transform aiResponse;
         [SerializeField] private Button nextButton;
         [SerializeField] private Button quitButton;
+        [SerializeField] private TextMeshProUGUI speakerText;
         [SerializeField] private TextMeshProUGUI aiText;
         
         private PlayerConversant playerConversant;
@@ -48,7 +49,8 @@ namespace RPG.UI.Dialogue
             {
                 return;
             }
-            
+
+            speakerText.text = playerConversant.GetSpeakerName();
             var isChoosing = playerConversant.IsChoosing;
             aiResponse.gameObject.SetActive(!isChoosing);
             choiceRoot.gameObject.SetActive(isChoosing);

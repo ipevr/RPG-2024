@@ -230,7 +230,6 @@ namespace RPG.Inventory
             }
             suppressEvents = false;
             
-            onInventoryChanged?.Invoke();
             StartCoroutine(InvokeChangedNextFrame());
         }
         
