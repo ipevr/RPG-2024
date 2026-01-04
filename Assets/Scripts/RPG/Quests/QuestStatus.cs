@@ -58,6 +58,8 @@ namespace RPG.Quests
         
         public void CompleteObjective(string reference)
         {
+            if (completedObjectives.Contains(reference)) return;
+            
             foreach (var questObjective in quest.Objectives)
             {
                 if (reference == questObjective.reference)

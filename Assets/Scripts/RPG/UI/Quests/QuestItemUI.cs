@@ -28,6 +28,7 @@ namespace RPG.UI.Quests
             DestroyQuestDetails(parentCanvas);
             var questDetailsUi = Instantiate(questDetailsPrefab, parentCanvas.transform);
             questDetailsUi.Setup(questStatus);
+            questDetailsUi.Redraw();
         }
 
         private void DestroyQuestDetails(Canvas canvas)
