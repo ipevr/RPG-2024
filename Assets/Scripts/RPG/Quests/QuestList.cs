@@ -20,6 +20,7 @@ namespace RPG.Quests
             
             var newStatus = new QuestStatus(quest);
             statuses.Add(newStatus);
+            newStatus.OnQuestProgressChanged += HandleQuestProgressChanged;
             
             onUpdated?.Invoke();
         }
@@ -37,11 +38,16 @@ namespace RPG.Quests
             onUpdated?.Invoke();
         }
 
-        private QuestStatus GetStatus(Quest quest)
+        public bool HasQuest(Quest quest)
+        {
+            return GetStatus(quest) != null;
+        }
+        
+        public QuestStatus GetStatus(Quest quest)
         {
             foreach (var status in statuses)
             {
-                if (status.Quest == quest)
+                if (status.GetQuest() == quest)
                 {
                     return status;
                 }
@@ -49,12 +55,12 @@ namespace RPG.Quests
 
             return null;
         }
-
-        private bool HasQuest(Quest quest)
-        {
-            return GetStatus(quest) != null;
-        }
         
+        private void HandleQuestProgressChanged(QuestProgress progress)
+        {
+            onUpdated?.Invoke();
+        }
+
         #region Interface Implementations
 
 
@@ -81,7 +87,9 @@ namespace RPG.Quests
             {
                 var questState = token.ToObject<QuestStatus.QuestState>();
 
-                statuses.Add(new QuestStatus(questState));
+                var status = new QuestStatus(questState);
+                statuses.Add(status);
+                status.OnQuestProgressChanged += HandleQuestProgressChanged;
             }
             
             onUpdated?.Invoke();

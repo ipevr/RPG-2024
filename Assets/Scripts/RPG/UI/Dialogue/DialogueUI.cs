@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using RPG.Dialogue;
+using RPG.Dialogues;
 
 namespace RPG.UI.Dialogue
 {

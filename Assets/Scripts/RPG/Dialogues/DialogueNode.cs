@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RPG.Dialogue
+namespace RPG.Dialogues
 {
     public class DialogueNode : ScriptableObject
     {

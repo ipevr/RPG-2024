@@ -1,16 +1,79 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using RPG.Dialogues;
+using RPG.Inventory;
 
 namespace RPG.Quests
 {
     public class QuestGiver : MonoBehaviour
     {
         [SerializeField] private Quest quest;
+        
+        private QuestList questList;
+        private QuestStatus questStatus;
+
+        private void Awake()
+        {
+            questList = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestList>();
+            questList.onUpdated.AddListener(HandleQuestListUpdated);
+        }
+
+        private void Start()
+        {
+            if (questStatus == null)
+            {
+                GetComponent<AIConversant>().SetDialogue(quest.QuestStartDialogue);
+            }
+        }
+
+        private void OnDisable()
+        {
+            questList.onUpdated.RemoveListener(HandleQuestListUpdated);
+        }
 
         public void GiveQuest()
         {
-            var questList = GameObject.FindGameObjectWithTag("Player").GetComponent<QuestList>();
-            
             questList.AddQuest(quest);
         }
+
+        public void RewardQuest()
+        {
+            var playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+            foreach (var reward in quest.Rewards)
+            {
+                playerInventory.AddToFirstAvailableSlot(reward.item, reward.amount);
+            }
+
+            questStatus.SetProgress(QuestProgress.Rewarded);
+        }
+        
+        private void HandleQuestProgressChanged(QuestProgress progress)
+        {
+            switch (progress)
+            {
+                case QuestProgress.Started:
+                    GetComponent<AIConversant>().SetDialogue(quest.QuestStartedDialogue);
+                    break;
+                case QuestProgress.Completed:
+                    GetComponent<AIConversant>().SetDialogue(quest.QuestCompletedDialogue);
+                    break;
+                case QuestProgress.Rewarded:
+                    GetComponent<AIConversant>().SetDialogue(quest.QuestRewardedDialogue);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(progress), progress, null);
+            }
+        }
+        
+        private void HandleQuestListUpdated()
+        {
+            if (questList.HasQuest(quest))
+            {
+                questStatus = questList.GetStatus(quest);
+                
+                HandleQuestProgressChanged(questStatus.GetProgress());
+            }
+        }
+
     }
 }

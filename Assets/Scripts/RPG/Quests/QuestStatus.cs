@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Events;
 
 namespace RPG.Quests
 {
@@ -11,49 +13,87 @@ namespace RPG.Quests
         {
             public string questId;
             public string[] completedObjectives;
+            public string progress;
         }
 
         public QuestStatus(Quest quest)
         {
-            Quest = quest;
+            this.quest = quest;
+            progress = QuestProgress.Started;
         }
 
         public QuestStatus(QuestState state)
         {
-            Quest = Quest.GetFromId(state.questId);
-            CompletedObjectives = state.completedObjectives.ToList();
+            quest = Quest.GetFromId(state.questId);
+            completedObjectives = state.completedObjectives.ToList();
+            progress = Enum.TryParse(state.progress, out QuestProgress result) ? result : QuestProgress.Started;
         }
 
-        public Quest Quest { get; }
-        public List<string> CompletedObjectives { get; } = new ();
+        private Quest quest;
+        private List<string> completedObjectives = new ();
+        private QuestProgress progress;
 
+        public event Action<QuestProgress> OnQuestProgressChanged;
+
+        public Quest GetQuest()
+        {
+            return quest;
+        }
+
+        public List<string> GetCompletedObjectives()
+        {
+            return completedObjectives;
+        }
+        
+        public QuestProgress GetProgress()
+        {
+            return progress;
+        }
+        
+        public void SetProgress(QuestProgress newProgress)
+        {
+            progress = newProgress;
+            OnQuestProgressChanged?.Invoke(progress);
+        }
+        
         public void CompleteObjective(string reference)
         {
-            foreach (var questObjective in Quest.Objectives)
+            foreach (var questObjective in quest.Objectives)
             {
                 if (reference == questObjective.reference)
                 {
-                    CompletedObjectives.Add(reference);
+                    completedObjectives.Add(reference);
                 }
+            }
+            
+            if (IsCompleted())
+            {
+                SetProgress(QuestProgress.Completed);
             }
         }
 
-        public int GetCompletedCount()
+        public int GetCompletedObjectivesCount()
         {
-            return CompletedObjectives.Count;
+            return completedObjectives.Count;
         }
 
         public bool IsObjectiveCompleted(string reference)
         {
-            return CompletedObjectives.Contains(reference);
+            return completedObjectives.Contains(reference);
+        }
+
+        public bool IsCompleted()
+        {
+            return GetCompletedObjectivesCount() == quest.GetObjectiveCount();
         }
 
         public QuestState CaptureState()
         {
             return new QuestState
             {
-                questId = Quest.ID,
-                completedObjectives = CompletedObjectives.ToArray()
+                questId = quest.ID,
+                completedObjectives = completedObjectives.ToArray(),
+                progress = progress.ToString()
             };
 
         }

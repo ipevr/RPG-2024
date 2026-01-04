@@ -35,6 +35,8 @@ namespace RPG.UI.Quests
             
             foreach (var questStatus in questList.Statuses)
             {
+                if (questStatus.GetProgress() == QuestProgress.Rewarded) continue;
+                
                 var questItem = Instantiate(questItemPrefab, transform);
                 questItem.Setup(questStatus);
             }

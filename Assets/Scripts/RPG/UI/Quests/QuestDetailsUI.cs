@@ -29,9 +29,9 @@ namespace RPG.UI.Quests
 
         public void Setup(QuestStatus status)
         {
-            title.text = status.Quest.Title;
+            title.text = status.GetQuest().Title;
 
-            foreach (var objective in status.Quest.Objectives)
+            foreach (var objective in status.GetQuest().Objectives)
             {
                 var isCompleted = status.IsObjectiveCompleted(objective.reference);
                 var objectivePrefab = isCompleted ? objectiveCompletedPrefab : objectiveOpenPrefab;
@@ -40,7 +40,7 @@ namespace RPG.UI.Quests
                 objectiveItem.GetComponentInChildren<TextMeshProUGUI>().text = objective.description;
             }
             
-            foreach (var reward in status.Quest.Rewards)
+            foreach (var reward in status.GetQuest().Rewards)
             {
                 var rewardUi = Instantiate(rewardPrefab, rewardsList);
                 rewardUi.Setup(reward.item);

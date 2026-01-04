@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RPG.Dialogue
+namespace RPG.Dialogues
 {
     [CreateAssetMenu(fileName = "New Dialogue", menuName = "RPG/New Dialogue", order = 0)]
     public class Dialogue : ScriptableObject

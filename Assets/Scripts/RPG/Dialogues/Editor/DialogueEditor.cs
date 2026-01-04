@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace RPG.Dialogue.Editor
+namespace RPG.Dialogues.Editor
 {
     public class DialogueEditor : EditorWindow
     {

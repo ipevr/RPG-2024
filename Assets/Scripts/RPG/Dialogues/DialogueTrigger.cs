@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RPG.Dialogue
+namespace RPG.Dialogues
 {
     public class DialogueTrigger : MonoBehaviour
     {

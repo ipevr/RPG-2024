@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace RPG.Dialogue
+namespace RPG.Dialogues
 {
     public class PlayerConversant : MonoBehaviour
     {
@@ -12,7 +12,7 @@ namespace RPG.Dialogue
         private Dialogue currentDialogue;
         private DialogueNode currentNode;
         private bool isChoosing;
-        private AIConversant currentConversant;
+        private IConversant currentConversant;
         private string currentConversantName;
 
         public DialogueNode CurrentNode => currentNode;
@@ -26,11 +26,11 @@ namespace RPG.Dialogue
             return player.GetComponent<PlayerConversant>();
         }
         
-        public void StartDialogue(AIConversant newConversant)
+        public void StartDialogue(IConversant newConversant)
         {
-            currentDialogue = newConversant.Dialogue;
+            currentDialogue = newConversant.GetDialogue();
             currentConversant = newConversant;
-            currentConversantName = newConversant.Name;
+            currentConversantName = newConversant.GetName();
             currentNode = currentDialogue.GetRootNode();
             TriggerEnterAction();
             isChoosing = currentNode.IsPlayerSpeaking;
@@ -60,7 +60,7 @@ namespace RPG.Dialogue
                 return playerName;
             }
             
-            return currentConversant ? currentConversantName : "";
+            return currentConversant != null ? currentConversantName : "";
         }
         
         public IEnumerable<DialogueNode> GetChoices()
@@ -128,9 +128,9 @@ namespace RPG.Dialogue
         private void TriggerAction(DialogueAction action)
         {
             if (!currentNode || action == DialogueAction.None) return;
-            if (!currentConversant) return;
+            if (currentConversant == null) return;
 
-            var triggers = currentConversant.GetComponents<DialogueTrigger>();
+            var triggers = currentConversant.GetGameObject().GetComponents<DialogueTrigger>();
             
             foreach (var trigger in triggers)
             {

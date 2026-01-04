@@ -1,4 +1,4 @@
-﻿namespace RPG.Dialogue
+﻿namespace RPG.Dialogues
 {
     public enum DialogueAction
     {
@@ -6,5 +6,7 @@
         Attack,
         GiveQuest,
         CompleteQuestObjective,
+        RewardQuest,
+        StartDialogue
     }
 }

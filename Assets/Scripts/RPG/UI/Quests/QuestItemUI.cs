@@ -17,8 +17,8 @@ namespace RPG.UI.Quests
         public void Setup(QuestStatus status)
         {
             questStatus = status;
-            title.text = status.Quest.Title;
-            progress.text = $"{status.GetCompletedCount()}/{status.Quest.GetObjectiveCount()}";
+            title.text = status.GetQuest().Title;
+            progress.text = $"{status.GetCompletedObjectivesCount()}/{status.GetQuest().GetObjectiveCount()}";
             detailsButton.onClick.AddListener(HandleDetailsButtonClicked);
         }
 

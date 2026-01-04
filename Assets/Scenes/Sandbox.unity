@@ -4679,7 +4679,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4856118502573211282, guid: 9d266619a51c280478a0601fa1e793cb, type: 3}
       propertyPath: m_Name
-      value: QuestNPC
+      value: Mr. Sock
       objectReference: {fileID: 0}
     - target: {fileID: 7340187193610437712, guid: 9d266619a51c280478a0601fa1e793cb, type: 3}
       propertyPath: m_LocalPosition.x
