@@ -6,7 +6,7 @@ namespace RPG.Core
     [System.Serializable]
     public class Condition
     {
-        [SerializeField] private string predicate;
+        [SerializeField] private Predicate predicate;
         [SerializeField] private bool not;
         [SerializeField] private string[] parameters;
         

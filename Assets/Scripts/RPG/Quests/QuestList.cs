@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using UnityEngine;
@@ -64,15 +65,13 @@ namespace RPG.Quests
 
         #region Interface Implementations
 
-        public bool? Evaluate(string predicate, string[] parameters)
+        public bool? Evaluate(Predicate predicate, string[] parameters)
         {
             switch (predicate)
             {
-                case "HasQuest":
+                case Predicate.HasQuest:
                     return HasQuest(Quest.GetFromId(parameters[0]));
-                case "HasNotQuest":
-                    return !HasQuest(Quest.GetFromId(parameters[0]));
-                case "HasQuestCompleted":
+                case Predicate.HasQuestCompleted:
                 {
                     var questStatus = GetStatus(Quest.GetFromId(parameters[0]));
 
@@ -83,7 +82,7 @@ namespace RPG.Quests
 
                     return false;
                 }
-                case "HasQuestRewarded":
+                case Predicate.HasQuestRewarded:
                 {
                     var questStatus = GetStatus(Quest.GetFromId(parameters[0]));
 
@@ -94,9 +93,9 @@ namespace RPG.Quests
 
                     return false;
                 }
+                default:
+                    return null;
             }
-
-            return null;
         }
 
         public JToken CaptureAsJToken()
