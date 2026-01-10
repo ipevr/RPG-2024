@@ -4815,6 +4815,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mr. Sock
       objectReference: {fileID: 0}
+    - target: {fileID: 4965240602693885466, guid: 9d266619a51c280478a0601fa1e793cb, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: e94577fa8d98eed468b49fbf92ba22ec, type: 2}
     - target: {fileID: 7340187193610437712, guid: 9d266619a51c280478a0601fa1e793cb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 33.164364
@@ -13183,6 +13187,22 @@ PrefabInstance:
     - target: {fileID: 5500807732331703, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20687544967030598, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 20687544967030598, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20687544967030598, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 20687544967030598, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: RPG.UI.ShowHideUI, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 34631522517185803, guid: 74cfa574f22d0ff44ba024c787760fff, type: 3}
       propertyPath: m_AnchorMax.y

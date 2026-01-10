@@ -18,14 +18,6 @@ namespace RPG.Quests
             questList.onUpdated.AddListener(HandleQuestListUpdated);
         }
 
-        private void Start()
-        {
-            if (questStatus == null)
-            {
-                GetComponent<AIConversant>().SetDialogue(quest.QuestStartDialogue);
-            }
-        }
-
         private void OnDisable()
         {
             questList.onUpdated.RemoveListener(HandleQuestListUpdated);
@@ -47,31 +39,11 @@ namespace RPG.Quests
             questStatus.SetProgress(QuestProgress.Rewarded);
         }
         
-        private void HandleQuestProgressChanged(QuestProgress progress)
-        {
-            switch (progress)
-            {
-                case QuestProgress.Started:
-                    GetComponent<AIConversant>().SetDialogue(quest.QuestStartedDialogue);
-                    break;
-                case QuestProgress.Completed:
-                    GetComponent<AIConversant>().SetDialogue(quest.QuestCompletedDialogue);
-                    break;
-                case QuestProgress.Rewarded:
-                    GetComponent<AIConversant>().SetDialogue(quest.QuestRewardedDialogue);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(progress), progress, null);
-            }
-        }
-        
         private void HandleQuestListUpdated()
         {
             if (questList.HasQuest(quest))
             {
                 questStatus = questList.GetStatus(quest);
-                
-                HandleQuestProgressChanged(questStatus.GetProgress());
             }
         }
 

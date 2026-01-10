@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.Events;
 using RPG.Saving;
 
 namespace RPG.Quests
 {
-    public class QuestList : MonoBehaviour, ISaveable
+    public class QuestList : MonoBehaviour, ISaveable, IPredicateEvaluator
     {
         private readonly List<QuestStatus> statuses = new ();
         
@@ -63,6 +64,40 @@ namespace RPG.Quests
 
         #region Interface Implementations
 
+        public bool? Evaluate(string predicate, string[] parameters)
+        {
+            switch (predicate)
+            {
+                case "HasQuest":
+                    return HasQuest(Quest.GetFromId(parameters[0]));
+                case "HasNotQuest":
+                    return !HasQuest(Quest.GetFromId(parameters[0]));
+                case "HasQuestCompleted":
+                {
+                    var questStatus = GetStatus(Quest.GetFromId(parameters[0]));
+
+                    if (questStatus != null)
+                    {
+                        return questStatus.GetProgress() == QuestProgress.Completed;
+                    }
+
+                    return false;
+                }
+                case "HasQuestRewarded":
+                {
+                    var questStatus = GetStatus(Quest.GetFromId(parameters[0]));
+
+                    if (questStatus != null)
+                    {
+                        return questStatus.GetProgress() == QuestProgress.Rewarded;
+                    }
+
+                    return false;
+                }
+            }
+
+            return null;
+        }
 
         public JToken CaptureAsJToken()
         {
@@ -96,5 +131,6 @@ namespace RPG.Quests
         }
         
         #endregion
+
     }
 }

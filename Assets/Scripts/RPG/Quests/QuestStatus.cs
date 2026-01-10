@@ -84,7 +84,7 @@ namespace RPG.Quests
             return completedObjectives.Contains(reference);
         }
 
-        public bool IsCompleted()
+        private bool IsCompleted()
         {
             return GetCompletedObjectivesCount() == quest.GetObjectiveCount();
         }

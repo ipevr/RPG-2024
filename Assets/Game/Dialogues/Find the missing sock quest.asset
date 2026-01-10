@@ -1,0 +1,423 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8747369116881863404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: d296bd1e-3a8d-47a6-9cdf-8700df2b51d6
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 0
+  text: Sunny or rainy, who knows?
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 806
+    y: 574
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-8285082514689403736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 947cbbc2-d9ff-4eb1-ae4b-1f89df818379
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: Fantastic, you're so lovely. Good luck finding it for me!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 839
+    y: 190
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 2
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-7651703724264787069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 9022c274-e6a1-481c-a780-d25bbae2d4dc
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 1
+  text: Can I have more information about the quest?
+  children:
+  - f5cc22a6-5445-445a-9df1-4708cf210fec
+  rect:
+    serializedVersion: 2
+    x: 555
+    y: 373
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-7185773666296648183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: fecadf30-ab8a-49bb-abfc-3e49dc7c8756
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 0
+  text: I have lost my sock in the church. Would you be so kind to find it for me?
+  children:
+  - 553f8646-5ad2-48ad-8737-88c7cabf42d3
+  - 93d73988-500d-496d-946c-d69293a7ea6a
+  rect:
+    serializedVersion: 2
+    x: 257
+    y: 117
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions:
+  - predicate: HasNotQuest
+    not: 0
+    parameters:
+    - bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-2877385052028592267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 9ce6ac35-e591-4b01-abf5-cc7663ef881e
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: Hey you!
+  children:
+  - fecadf30-ab8a-49bb-abfc-3e49dc7c8756
+  - a098a4fd-c6b7-45b5-a329-825a3295936d
+  - a128d9d3-5210-460f-aca8-c554fafd6149
+  - f4da5334-bfec-4051-bfa0-c9e7a2caa34c
+  rect:
+    serializedVersion: 2
+    x: 10
+    y: 10
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-2387432635973353930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: f4da5334-bfec-4051-bfa0-c9e7a2caa34c
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 0
+  text: I hope you have fun with the rewards. Have a nice day!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 284
+    y: 841
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions:
+  - predicate: HasQuestRewarded
+    not: 0
+    parameters:
+    - bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94baa3224d474c59ab347512319b3a66, type: 3}
+  m_Name: Find the missing sock quest
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.Dialogue
+  nodes:
+  - {fileID: -2877385052028592267}
+  - {fileID: 8007943347362989987}
+  - {fileID: 4727477606976866375}
+  - {fileID: -8285082514689403736}
+  - {fileID: 6524248690746982282}
+  - {fileID: -7185773666296648183}
+  - {fileID: 2644455760451755623}
+  - {fileID: -7651703724264787069}
+  - {fileID: 7896621817524486705}
+  - {fileID: 7021836320346768230}
+  - {fileID: -8747369116881863404}
+  - {fileID: 8396958178014217694}
+  - {fileID: -2387432635973353930}
+  newNodeOffset: {x: 250, y: 0}
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2644455760451755623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: a098a4fd-c6b7-45b5-a329-825a3295936d
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 0
+  text: Still not found my sock? I know it's so hard to find.
+  children:
+  - 9022c274-e6a1-481c-a780-d25bbae2d4dc
+  - 962dd9f3-de43-4f25-ba5d-6fb136464421
+  rect:
+    serializedVersion: 2
+    x: 282
+    y: 473
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions:
+  - predicate: HasQuest
+    not: 0
+    parameters:
+    - bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  - predicate: HasQuestCompleted
+    not: 1
+    parameters:
+    - bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  - predicate: HasQuestRewarded
+    not: 1
+    parameters:
+    - bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &4727477606976866375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 93d73988-500d-496d-946c-d69293a7ea6a
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: Sure, why not?
+  children:
+  - 947cbbc2-d9ff-4eb1-ae4b-1f89df818379
+  rect:
+    serializedVersion: 2
+    x: 551
+    y: 191
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6524248690746982282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: e003d8d8-3a46-4636-bfa9-e7ed16611c11
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 0
+  text: That's really sad.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 839
+    y: 7
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7021836320346768230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: f5cc22a6-5445-445a-9df1-4708cf210fec
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 0
+  text: No!
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 805
+    y: 373
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7896621817524486705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 962dd9f3-de43-4f25-ba5d-6fb136464421
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 1
+  text: How is the wether today?
+  children:
+  - d296bd1e-3a8d-47a6-9cdf-8700df2b51d6
+  rect:
+    serializedVersion: 2
+    x: 556
+    y: 574
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8007943347362989987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: 553f8646-5ad2-48ad-8737-88c7cabf42d3
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogue.DialogueNode
+  isPlayerSpeaking: 1
+  text: Do I look like a fucking sock finder?
+  children:
+  - e003d8d8-3a46-4636-bfa9-e7ed16611c11
+  rect:
+    serializedVersion: 2
+    x: 552
+    y: 7
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 0
+  conditions: []
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8396958178014217694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aaf5bb380a241f99b6085daa2123c44, type: 3}
+  m_Name: a128d9d3-5210-460f-aca8-c554fafd6149
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Dialogues.DialogueNode
+  isPlayerSpeaking: 0
+  text: Fantastic! You have found my sock. Here is your reward.
+  children: []
+  rect:
+    serializedVersion: 2
+    x: 286
+    y: 676
+    width: 200
+    height: 150
+  onEnterAction: 0
+  onExitAction: 4
+  conditions:
+  - predicate: HasQuestCompleted
+    not: 0
+    parameters:
+    - bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  - predicate: HasQuestRewarded
+    not: 1
+    parameters:
+    - bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  onUndoRedoPerformed:
+    m_PersistentCalls:
+      m_Calls: []

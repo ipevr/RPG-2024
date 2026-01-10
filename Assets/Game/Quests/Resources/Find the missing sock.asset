@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d77bb90dc94fbcaf11e9c0d88d3197, type: 3}
+  m_Name: Find the missing sock
+  m_EditorClassIdentifier: Assembly-CSharp::RPG.Quests.Quest
+  id: bebf9295-ef6a-4134-9c00-696f2b36c1c1
+  objectives:
+  - reference: guard
+    description: Talk to the guard at the bridge without aggregating him.
+  - reference: church
+    description: In the town, search for the church.
+  - reference: sock
+    description: Inside the church, find the sock.
+  rewards:
+  - amount: 1
+    item: {fileID: 11400000, guid: 24f77c08cc297da4abf2a949c37ed142, type: 2}
+  - amount: 1
+    item: {fileID: 11400000, guid: 0c9ce0753c574e144afe0a24910c053e, type: 2}
+  questStartDialogue: {fileID: 11400000, guid: e94577fa8d98eed468b49fbf92ba22ec, type: 2}
+  questStartedDialogue: {fileID: 11400000, guid: a5d2c2e7995616c4ab94c144ad6cc3ca, type: 2}
+  questCompletedDialogue: {fileID: 11400000, guid: 9a3c928833f617c47933aa9d42ea8085, type: 2}
+  questRewardedDialogue: {fileID: 11400000, guid: c1ca6febe128eee42933bf44e1aaa763, type: 2}

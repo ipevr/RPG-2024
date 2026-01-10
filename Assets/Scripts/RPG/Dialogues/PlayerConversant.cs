@@ -2,6 +2,8 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
+using RPG.Core;
+using UnityEditor.TerrainTools;
 
 namespace RPG.Dialogues
 {
@@ -65,7 +67,7 @@ namespace RPG.Dialogues
         
         public IEnumerable<DialogueNode> GetChoices()
         {
-            return currentDialogue.GetPlayerChildren(currentNode);
+            return FilterOnCondition(currentDialogue.GetPlayerChildren(currentNode));
         }
         
         public void SelectChoice(DialogueNode selectedChoice)
@@ -85,7 +87,7 @@ namespace RPG.Dialogues
                 return;
             }
 
-            var numPlayerResponses = currentDialogue.GetPlayerChildren(currentNode).Count();
+            var numPlayerResponses = FilterOnCondition(currentDialogue.GetPlayerChildren(currentNode)).Count();
 
             if (numPlayerResponses > 0)
             {
@@ -95,11 +97,15 @@ namespace RPG.Dialogues
                 return;
             }
             
-            var numAIResponses = currentDialogue.GetAIChildren(currentNode).Count();
+            var numAIResponses = FilterOnCondition(currentDialogue.GetAIChildren(currentNode)).Count();
             
             if (numAIResponses > 0)
             {
-                var aiResponses = currentDialogue.GetAIChildren(currentNode).ToArray();
+                var aiResponses = FilterOnCondition(currentDialogue.GetAIChildren(currentNode)).ToArray();
+                foreach (var response in aiResponses)
+                {
+                    Debug.Log($"A possible AI Response: {response.Text}");
+                }
                 TriggerExitAction();
                 currentNode = aiResponses[UnityEngine.Random.Range(0, aiResponses.Length)];
                 TriggerEnterAction();
@@ -112,7 +118,23 @@ namespace RPG.Dialogues
         public bool HasNext()
         {
             return currentDialogue && currentNode &&
-                   currentDialogue.GetAllChildren(currentNode).Any();
+                   FilterOnCondition(currentDialogue.GetAllChildren(currentNode)).Any();
+        }
+
+        private IEnumerable<DialogueNode> FilterOnCondition(IEnumerable<DialogueNode> inputNodes)
+        {
+            foreach (var node in inputNodes)
+            {
+                if (node.CheckConditions(GetEvaluators()))
+                {
+                    yield return node;
+                }
+            }
+        }
+
+        private IEnumerable<IPredicateEvaluator> GetEvaluators()
+        {
+            return GetComponents<IPredicateEvaluator>();
         }
 
         private void TriggerEnterAction()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using RPG.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,7 @@ namespace RPG.Dialogues
         [SerializeField] private Rect rect = new (10, 10, 200, 150);
         [SerializeField] private DialogueAction onEnterAction = DialogueAction.None;
         [SerializeField] private DialogueAction onExitAction = DialogueAction.None;
+        [SerializeField] private List<Condition> conditions;
 
         public Rect Rect => rect;
         public IEnumerable<string> Children => children;
@@ -22,6 +24,20 @@ namespace RPG.Dialogues
         public DialogueAction OnEnterAction => onEnterAction;
         public DialogueAction OnExitAction => onExitAction;
         
+        public bool CheckConditions(IEnumerable<IPredicateEvaluator> evaluators)
+        {
+            var evaluatorList = evaluators as IReadOnlyList<IPredicateEvaluator> ?? new List<IPredicateEvaluator>(evaluators);
+            foreach (var condition in conditions)
+            {
+                if (!condition.Check(evaluatorList))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
 #if UNITY_EDITOR        
         public UnityEvent onUndoRedoPerformed = new ();
         
@@ -82,6 +98,6 @@ namespace RPG.Dialogues
             onUndoRedoPerformed?.Invoke();
         }
 #endif
-        
+
     }
 } 

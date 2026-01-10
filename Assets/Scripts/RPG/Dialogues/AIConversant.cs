@@ -10,24 +10,9 @@ namespace RPG.Dialogues
         [SerializeField] private Dialogue dialogue;
         [SerializeField] private InputActionReference interactAction;
         
-        private Dialogue currentDialogue;
-
-        private void Start()
-        {
-            if (currentDialogue == null)
-            {
-                currentDialogue = dialogue;
-            }
-        }
-
         public Dialogue GetDialogue()
         {
-            return currentDialogue;
-        }
-
-        public void SetDialogue(Dialogue newDialogue)
-        {
-            currentDialogue = newDialogue;
+            return dialogue;
         }
 
         public string GetName()
@@ -43,7 +28,6 @@ namespace RPG.Dialogues
         public bool HandleRaycast(PlayerController player)
         {
             if (!enabled) return false;
-            if (!currentDialogue) return false;
             
             if (interactAction && interactAction.action.triggered)
             {

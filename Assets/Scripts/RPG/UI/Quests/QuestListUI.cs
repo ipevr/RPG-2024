@@ -17,6 +17,7 @@ namespace RPG.UI.Quests
         private void OnEnable()
         {
             questList.onUpdated.AddListener(Redraw);
+            Redraw();
         }
 
         private void OnDisable()

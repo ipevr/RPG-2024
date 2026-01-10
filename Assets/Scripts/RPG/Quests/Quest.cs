@@ -13,14 +13,6 @@ namespace RPG.Quests
         [Tooltip("The objectives to be completed for completing this quest.")]
         [SerializeField] private List<Objective> objectives = new();
         [SerializeField] private List<Reward> rewards = new();
-        [Tooltip("The dialogue to be played to start the quest.")]
-        [SerializeField] private Dialogue questStartDialogue;
-        [Tooltip("The dialogue to be played when the quest is not completed yet.")]
-        [SerializeField] private Dialogue questStartedDialogue;
-        [Tooltip("The dialogue to be played when the player delivers the completed quest to the quest giver.")]
-        [SerializeField] private Dialogue questCompletedDialogue;
-        [Tooltip("The dialogue to be played when the player has finished the quest and already got the quest rewards.")]
-        [SerializeField] private Dialogue questRewardedDialogue;
 
         [System.Serializable]
         public class Reward
@@ -40,10 +32,6 @@ namespace RPG.Quests
         public string Title => name;
         public IEnumerable<Objective> Objectives => objectives;
         public List<Reward> Rewards => rewards;
-        public Dialogue QuestStartDialogue => questStartDialogue;
-        public Dialogue QuestStartedDialogue => questStartedDialogue;
-        public Dialogue QuestCompletedDialogue => questCompletedDialogue;
-        public Dialogue QuestRewardedDialogue => questRewardedDialogue;
 
         public static Quest GetFromId(string questId)
         {
